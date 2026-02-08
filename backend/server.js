@@ -7,11 +7,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Rota para receber contato
 app.post('/api/contato', async (req, res) => {
     const { nome, email, mensagem } = req.body;
 
-    // Configuração do transportador de e-mail (Ex: Gmail)
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {

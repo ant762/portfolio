@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Portfolio | Dark Mode</title>
+    <title>ant762</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -34,6 +34,8 @@
                 <span class="capsule">C</span>
                 <span class="capsule">Bootstrap</span>
                 <span class="capsule">CSS</span>
+                <span class="capsule">MySQL</span>
+                <span class="capsule">Web-Design</span>
             </div>
 
             <div class="info-grid" data-aos="fade-up" data-aos-delay="200">
@@ -113,7 +115,7 @@
     
     <div id="detail-modal" class="modal-overlay">
         <div class="modal-card detail-card">
-            <button class="close-modal" onclick="closeDetail()">&times;</button>
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
             <div id="detail-content">
                 <img id="detail-img" src="" alt="Project Preview">
                 <h3 id="detail-title">Project Title</h3>
@@ -124,7 +126,7 @@
     
     <div id="contact-modal" class="modal-overlay">
         <div class="modal-card">
-            <button class="close-modal">&times;</button>
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
             <h3>Let's Connect</h3>
             <p>Choose your preferred platform to reach out.</p>
     
@@ -132,7 +134,7 @@
                 <a href="https://github.com/ant762" target="_blank" class="modal-link">
                     <i class="fab fa-github"></i> GitHub
                 </a>
-                <a href="https://discord.gg/rtSpxJsv2Y" target="_blank" class="modal-link">
+                <a href="https://discord.gg/EnuYKVdGru" target="_blank" class="modal-link">
                     <i class="fab fa-discord"></i> Discord
                 </a>
                 <a href="mailto:maik.antunes07@gmail.com" class="modal-link">
