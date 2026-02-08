@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ant762</title>
+    <link rel="icon" href="imagecontent/A2.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -14,10 +15,11 @@
     <nav id="navbar">
         <div class="logo">ant762<span class="sub-logo">.dev</span></div>
         <ul>
-            <li><a href="#home"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="#programming"><i class="fas fa-code"></i> Programming</a></li>
-            <li><a href="#terrain"><i class="fas fa-mountain"></i> Terrain</a></li>
-            <li><a href="javascript:void(0)" id="contact-trigger"><i class="fas fa-envelope"></i> Contact</a></li></a></li>
+            <li><a href="#home"><i class="fas fa-user"></i> <span>About</span></a></li>
+            <li><a href="#programming"><i class="fas fa-code"></i> <span>Programming</span></a></li>
+            <li><a href="#terrain"><i class="fas fa-mountain"></i> <span>Terrain</span></a></li>
+            <li><a href="javascript:void(0)" id="contact-trigger"><i class="fas fa-envelope"></i> <span>Contact</span></a>
+            </li>
         </ul>
     </nav>
 
@@ -30,6 +32,7 @@
             <div class="skills-capsules">
                 <span class="capsule">LuaU</span>
                 <span class="capsule">JavaScript</span>
+                <span class="capsule">NodeJS</span>
                 <span class="capsule">Python</span>
                 <span class="capsule">C</span>
                 <span class="capsule">Bootstrap</span>
@@ -163,16 +166,105 @@
     
     <section id="terrain" class="scroll-reveal">
         <h2 class="section-title">Environment</h2>
-        <div class="projects-grid">
+        <div class="projects-grid ">
+
             <div class="card"
-                onclick="openDetail('Alpine Highlands', 'Criação de terreno realista utilizando World Machine e Roblox Studio.', 'imagecontent/project1.png')">
-                <div class="card-img" style="background-image: url('imagecontent/project1.png')"></div>
+                onclick="openDetail('Caribbean Islands: Level Design', 'An expansive environment study inspired by the golden age of piracy and Assassin\'s Creed IV: Black Flag. This project focuses on realistic terrain generation, tropical vegetation distribution, and high-fidelity lighting setups. Developed using advanced heightmap techniques and custom texture painting to achieve an authentic Caribbean atmosphere.', 'imagecontent/terrain12.png')">
+                <div class="card-img" style="background-image: url('imagecontent/terrain11.png')"></div>
                 <div class="card-body">
-                    <h3>Alpine Highlands</h3>
-                    <p>Mapa de montanhas realistas.</p>
-                    <div class="tags"><span>Modeling</span><span>Studio</span></div>
+                    <h3>Caribbean Islands</h3>
+                    <p>Atmospheric Environment & Level Design.</p>
+                    <div class="tags">
+                        <span>Terrain</span>
+                        <span>Lighting</span>
+                        <span>Level Design</span>
+                    </div>
                 </div>
             </div>
+            
+        <div class="card"
+            onclick="openDetail('Southern Highlands: Realistic Environment', 'An environment study focused on the unique topography of Southern Brazil (Serra Gaúcha). This project explores the integration of sub-tropical highlands with cold-climate atmospheric effects. Key technical features include custom heightmap sculpting, advanced fog density orchestration to create depth, and procedural rock-to-grass material transitions. Designed with a focus on natural biomes and realistic sunlight scattering.', 'imagecontent/terrain22.png')">
+        
+            <div class="card-img" style="background-image: url('imagecontent/terrain21.png')"></div>
+        
+            <div class="card-body">
+                <h3>Southern Highlands</h3>
+                <p>Regional Environment & Material Study.</p>
+                <div class="tags">
+                    <span>Terrain</span>
+                    <span>Lighting</span>
+                    <span>Level Design</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card"
+            onclick="openDetail('Caribbean City: Historically Accurate', 'A historical reconstruction of a Caribbean port city circa 1715, emphasizing colonial architectural accuracy and urban layout. This project focuses on the juxtaposition of high-density Caribbean townships against lush coastal environments, utilizing modular building kits and custom-baked lighting to capture the sweltering, salt-worn atmosphere of the West Indies.', 'imagecontent/city2.png')">
+        
+            <div class="card-img" style="background-image: url('imagecontent/city1.png')"></div>
+        
+            <div class="card-body">
+                <h3>Caribbean City 1715</h3>
+                <p>Historical Urban Environment.</p>
+                <div class="tags">
+                    <span>Building</span>
+                    <span>Modeling</span>
+                    <span>Lighting</span>
+                    <span>Level Design</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card"
+            onclick="openDetail('Northeastern Brazil: Semi-Arid Biome', 'An environment study based on the unique landscapes of the Brazilian Sertão. This project focuses on the arid topography and native vegetation distribution characteristic of the Northeast region. The terrain was sculpted entirely from scratch, utilizing BrushTool for organic shaping and MeshVox for high-fidelity environmental optimization.', 'imagecontent/cat2.png')">
+        
+            <div class="card-img" style="background-image: url('imagecontent/cat1.png')"></div>
+        
+            <div class="card-body">
+                <h3>Northeastern Badlands</h3>
+                <p>Semi-Arid Terrain & Vegetation Study.</p>
+                <div class="tags">
+                    <span>Terrain Sculpting</span>
+                    <span>BrushTool</span>
+                    <span>MeshVox</span>
+                    <span>Environment Art</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card"
+            onclick="openDetail('Squid Games: Technical Replica', 'A high-precision recreation of the iconic environments from the Squid Game series. This project emphasizes architectural scale, vibrant color palettes, and clean geometric shapes to replicate the show\'s surreal atmosphere. The map features custom-built modular assets, realistic lighting for a naturalistic look, and large-scale level design.', 'imagecontent/beds.png')">
+        
+            <div class="card-img" style="background-image: url('imagecontent/stairs.png')"></div>
+        
+            <div class="card-body">
+                <h3>Squid Game Replica</h3>
+                <p>Architectural Geometry & Precision Design</p>
+                <div class="tags">
+                    <span>Building</span>
+                    <span>Modeling</span>
+                    <span>Level Design</span>
+                    <span>Environmental Art</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card"
+            onclick="openDetail('Undstread Local: Advanced Biome Study', 'A comprehensive environment project exploring the contrast between dense pine forests and rugged coastal shorelines. This study showcases custom-sculpted rock formations and intricate terrain painting. It features a heavy focus on atmospheric depth using layered fog and realistic sun-ray scattering (god rays) to create an immersive, cinematic experience.', 'imagecontent/undstread.png')">
+        
+            <div class="card-img" style="background-image: url('imagecontent/undstread.png')"></div>
+        
+            <div class="card-body">
+                <h3>Undstread Local</h3>
+                <p>Cinematic Environment & Biome Study</p>
+                <div class="tags">
+                    <span>Terrain</span>
+                    <span>Lighting</span>
+                    <span>Biome Design</span>
+                </div>
+            </div>
+        </div>
+
         </div>
     </section>
     
