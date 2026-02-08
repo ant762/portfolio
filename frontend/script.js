@@ -102,16 +102,26 @@ function closeDetail() {
     document.body.style.overflow = 'auto';
 }
 
-function openDetail(title, desc, img) {
+function openDetail(title, desc, img, githubLink = null) {
     const modal = document.getElementById('detail-modal');
     document.getElementById('detail-title').innerText = title;
     document.getElementById('detail-desc').innerText = desc;
     document.getElementById('detail-img').src = img;
+    
+    const footer = document.getElementById('modal-footer');
+    footer.innerHTML = ''; // Limpa botões anteriores
+
+    if (githubLink) {
+        const btn = document.createElement('a');
+        btn.href = githubLink;
+        btn.target = '_blank';
+        btn.className = 'github-modal-btn';
+        btn.innerHTML = '<i class="fa-solid fa-arrow-up"></i> See more';
+        footer.appendChild(btn);
+    }
 
     modal.style.display = 'flex';
-    setTimeout(() => {
-        modal.classList.add('open');
-    }, 10);
+    setTimeout(() => modal.classList.add('open'), 10);
     document.body.style.overflow = 'hidden';
 }
 
@@ -128,17 +138,16 @@ if(contactTrigger) {
 }
 
 function closeAllModals() {
-    const modals = document.querySelectorAll('.modal-overlay');
+    const modals = [document.getElementById('contact-modal'), document.getElementById('detail-modal')];
     
     modals.forEach(modal => {
-        if (modal.classList.contains('open')) {
+        if (modal) {
             modal.classList.remove('open');
             setTimeout(() => {
                 modal.style.display = 'none';
-            }, 500); // Tempo da transição CSS
+            }, 500);
         }
     });
-    
     document.body.style.overflow = 'auto';
 }
 

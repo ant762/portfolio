@@ -17,7 +17,7 @@ body {
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
-    background-color: #070707;
+    background-color: #ffffff;
 }
 
 .background-overlay {
@@ -312,16 +312,27 @@ body {
 
 .tags {
     display: flex;
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 6px;
     margin-top: 15px;
 }
 
 .tags span {
-    font-size: 0.7rem;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
     padding: 4px 10px;
-    border-radius: 4px;
-    color: #aaa;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.card:hover .tags span {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Estilo para o Modal de Detalhes Maior */
@@ -452,6 +463,32 @@ body {
     align-items: center;
     z-index: 3000;
     transition: background 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+#modal-footer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.github-modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.github-modal-btn:hover {
+    background: #cccccc;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
 }
 
 .modal-overlay.open {
