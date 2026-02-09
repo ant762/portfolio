@@ -46,7 +46,7 @@ body {
 
 .scroll-reveal {
     opacity: 0;
-    transform: translateY(30px) scale(0.98); /* Começa levemente menor */
+    transform: translateY(30px) scale(0.98);
     transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1), 
                 transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
     visibility: hidden;
@@ -59,7 +59,6 @@ body {
     visibility: visible;
 }
 
-/* Camada para escurecer a imagem e manter o tema Dark */
 .background-overlay::after {
     content: '';
     position: absolute;
@@ -139,9 +138,9 @@ body {
 }
 
 #navbar ul li:not(:last-child) a:hover {
-    background: rgba(255, 255, 255, 0.05); /* Fundo sutil */
-    border-color: rgba(255, 255, 255, 0.1); /* Borda fina */
-    transform: translateY(-2px); /* Leve subida */
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
     color: #ffffff;
 }
 #navbar ul li a:hover i {
@@ -149,7 +148,6 @@ body {
     color: #fff;
 }
 
-/* Corrigindo o ícone para não ficar desalinhado */
 #navbar ul li a i {
     font-size: 1rem;
     opacity: 0.8;
@@ -170,13 +168,12 @@ body {
 
 
 .sub-logo {
-    color: #666; /* Cinza escuro como na imagem */
+    color: #666;
     font-weight: 300;
     font-size: 1rem;
     margin-left: 2px;
 }
 
-/* Botão de contato destacado no Header */
 #navbar ul li:last-child a {
     background: #fff;
     color: #000 !important;
@@ -190,7 +187,7 @@ body {
 #navbar ul li:last-child a {
     background: #ffffff;
     color: #000000 !important;
-    padding: 8px 22px; /* Reduzi um pouco o padding para ficar elegante */
+    padding: 8px 22px;
     border-radius: 50px;
     font-weight: 700;
     margin-left: 10px;
@@ -218,11 +215,9 @@ body {
 
 .capsule {
     background: rgba(26, 27, 29, 0.5);
-    /* Fundo sutil */
     border: 1px solid rgba(63, 63, 63, 0.3);
     padding: 8px 20px;
     border-radius: 50px;
-    /* Efeito pilula */
     font-size: 0.85rem;
     color: #ffffff;
     cursor: default;
@@ -236,32 +231,29 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Ajuste do Hero para centralizar tudo */
 .hero {
-    padding: 160px 5% 60px 5% !important; 
-    min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: center; /* Alinhamento horizontal */
+    align-items: center;     /* Alinhamento vertical */
+    text-align: center;      /* Centraliza textos internos */
+    min-height: 100vh;
+    padding: 100px 20px;     /* Espaçamento interno lateral para mobile */
 }
 
-/* Hero Section */
 .hero {
     min-height: 100vh;
-    /* Mudamos de height para min-height */
     height: auto;
     padding: 120px 10% 60px 10%;
-    /* Espaço para o navbar e respiro embaixo */
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background: 
-        linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), /* Overlay escuro para ler o texto */
+        linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)),
         url('imagecontent/seu-background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Efeito Parallax simples */
+    background-attachment: fixed;
 }
 
 .hero h1 {
