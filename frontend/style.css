@@ -241,6 +241,10 @@ body {
 }
 
 .hero h1 {
+    display: flex;
+    justify-content: center; /* Alinhamento horizontal */
+    align-items: center;
+    text-align: center;
     font-size: 4rem;
     line-height: 1.1;
 }
