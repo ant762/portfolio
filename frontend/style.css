@@ -240,22 +240,6 @@ body {
     padding: 100px 20px;     /* Espaçamento interno lateral para mobile */
 }
 
-.hero {
-    min-height: 100vh;
-    height: auto;
-    padding: 120px 10% 60px 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: 
-        linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)),
-        url('imagecontent/seu-background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
 .hero h1 {
     font-size: 4rem;
     line-height: 1.1;
