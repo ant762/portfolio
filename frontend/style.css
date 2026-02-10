@@ -26,7 +26,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('imagecontent/project1.png'); /* Verifique se é .png ou .jpg */
+    background-image: url('imagecontent/project1.png');
     background-size: cover;
     background-position: center;
     z-index: -2; /* Fica atrás do Vanta */
@@ -608,23 +608,38 @@ body {
     }
 }
 
-/* --- AJUSTES DE FUNDO E HERO --- */
+.site-footer {
+    margin-top: 120px;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-footer .footer-sub {
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- hero and background stuff --- */
 @media (max-width: 768px) {
     body {
         background-color: var(--bg-dark); /* Garante que o branco do body não apareça */
     }
 
     .background-overlay {
-        transform: scale(1.2); /* Aumenta um pouco para evitar bordas brancas no scroll mobile */
-        background-attachment: scroll; /* Parallax fixo costuma bugar em navegadores mobile */
+        transform: scale(1.2);
+        background-attachment: scroll; 
     }
 
     .hero {
-        padding: 100px 5% 40px 5%; /* Reduz padding lateral no mobile */
+        padding: 100px 5% 40px 5%;
     }
 
     .hero h1 {
-        font-size: 2.5rem; /* Diminui o título para não quebrar linha bruscamente */
+        font-size: 2.5rem;
         margin-bottom: 15px;
     }
 
@@ -670,15 +685,14 @@ body {
     }
 
     .background-overlay {
-        background-attachment: scroll; /* Smoother on mobile browsers */
-        transform: scale(1); /* Remove scale to prevent overflow issues */
+        background-attachment: scroll;
+        transform: scale(1);
     }
 
     .info-header h3 {
         font-size: 1rem;
     }
 
-    /* Ajuste das Cápsulas de Skills */
     .skills-capsules {
         gap: 8px;
     }
@@ -694,8 +708,8 @@ body {
     .modal-card {
         padding: 1.5rem;
         width: 95%;
-        max-height: 90vh; /* Evita que o modal saia da tela */
-        overflow-y: auto; /* Permite scroll dentro do modal se o texto for longo */
+        max-height: 90vh; 
+        overflow-y: auto;
     }
 
     #detail-title {
@@ -709,10 +723,9 @@ body {
 
 @media (max-width: 1024px) {
     .info-grid {
-        grid-template-columns: repeat(2, 1fr); /* Fica em 2 colunas em vez de tentar espremer 3 */
+        grid-template-columns: repeat(2, 1fr);
     }
     
-    /* Faz o último card ocupar a largura total se houver apenas 3 */
     .info-grid .info-card:last-child {
         grid-column: span 2;
     }
@@ -720,16 +733,16 @@ body {
 
 @media (max-width: 992px) {
     #navbar {
-        padding: 0.8rem 3%; /* Diminui o recuo lateral */
+        padding: 0.8rem 3%;
     }
     #navbar ul {
-        gap: 10px; /* Diminui o espaço entre os itens do menu */
+        gap: 10px;
     }
 }
 
 @media (max-width: 400px) {
     #navbar ul li a span {
-        display: none; /* Only show icons for About, Prog, Terrain */
+        display: none; 
     }
     
     #navbar ul li a i {
@@ -738,7 +751,7 @@ body {
     }
 
     #navbar ul li:last-child a {
-        padding: 8px 12px; /* Keep contact button slightly larger */
+        padding: 8px 12px; 
     }
     
     .logo {
@@ -748,7 +761,7 @@ body {
 
 @media (max-width: 420px) {
     #navbar ul li a span {
-        display: none; /* Hides 'About', 'Programming', etc. but keeps icons */
+        display: none;
     }
     
     #navbar ul li a i {
@@ -756,44 +769,42 @@ body {
         margin: 0;
     }
 
-    /* Keep the Contact button visible as a button but smaller */
     #navbar ul li:last-child a {
         padding: 8px 15px;
         margin-left: 2px;
     }
     
     #navbar ul li:last-child a span {
-        display: inline; /* Keep 'Contact' text visible */
+        display: inline;
         font-size: 0.7rem;
     }
 }
 
 @media (max-width: 430px) {
     #navbar {
-        padding: 0.8rem 12px; /* Extra room on the edges */
+        padding: 0.8rem 12px;
     }
     
     .sub-logo {
-        display: none; /* Crucial: removes ".dev" to free up 30px of space */
+        display: none;
     }
 
     #navbar ul li a {
-        padding: 6px 8px; /* Tighter buttons */
+        padding: 6px 8px;
     }
 
-    /* If it's still tight on iPhone 12 Pro Max (428px wide) */
     #navbar ul li a span {
-        font-size: 0.5rem; /* Shrink text slightly before hiding it entirely */
+        font-size: 0.5rem;
     }
 }
 
 @media (max-width: 390px) {
     #navbar ul li a span {
-        display: none; /* Only show icons for the first 3 items */
+        display: none;
     }
     
     #navbar ul li:last-child a span {
-        display: inline; /* Keep "Contact" text visible */
+        display: inline;
     }
     
     #navbar ul li a i {
