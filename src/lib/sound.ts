@@ -15,7 +15,7 @@ const BPM = 96;
 const STEP = 60 / BPM / 4; // semicolcheia
 const LOOKAHEAD = 0.14;
 
-let state: SoundState = { music: false, sfx: false };
+let state: SoundState = { music: true, sfx: true };
 const listeners = new Set<() => void>();
 const SERVER_STATE: SoundState = { music: false, sfx: false };
 
@@ -44,7 +44,7 @@ export function initSound(): void {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return;
     const parsed = JSON.parse(raw) as Partial<SoundState>;
-    state = { music: parsed.music === true, sfx: parsed.sfx === true };
+    state = { music: parsed.music !== false, sfx: parsed.sfx !== false };
     listeners.forEach((l) => l());
   } catch {
     /* ignore */

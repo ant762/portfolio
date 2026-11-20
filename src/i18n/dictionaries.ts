@@ -23,7 +23,12 @@ const en = {
     effectsOff: 'Turn sound effects and clicks on',
     language: 'Language',
   },
-  preloader: { portfolio: 'ant762 — Portfolio', loading: 'Loading experience' },
+  preloader: {
+    portfolio: 'ant762 — Portfolio',
+    loading: 'Loading experience',
+    enter: 'Enter with sound',
+    mute: 'Enter without sound',
+  },
   hero: {
     role: 'Fullstack Developer',
     role2: 'Backend · IT Infrastructure · Game Dev',
@@ -200,7 +205,12 @@ const es: Dictionary = {
     effectsOff: 'Encender efectos de sonido y clics',
     language: 'Idioma',
   },
-  preloader: { portfolio: 'ant762 — Portafolio', loading: 'Cargando experiencia' },
+  preloader: {
+    portfolio: 'ant762 — Portafolio',
+    loading: 'Cargando experiencia',
+    enter: 'Entrar con sonido',
+    mute: 'Entrar sin sonido',
+  },
   hero: {
     role: 'Desarrollador Fullstack',
     role2: 'Backend · Infraestructura de TI · Game Dev',
@@ -377,7 +387,12 @@ const pt: Dictionary = {
     effectsOff: 'Ligar efeitos sonoros e cliques',
     language: 'Idioma',
   },
-  preloader: { portfolio: 'ant762 — Portfólio', loading: 'Carregando experiência' },
+  preloader: {
+    portfolio: 'ant762 — Portfólio',
+    loading: 'Carregando experiência',
+    enter: 'Entrar com som',
+    mute: 'Entrar sem som',
+  },
   hero: {
     role: 'Desenvolvedor Fullstack',
     role2: 'Backend · Infraestrutura de T.I. · Game Dev',

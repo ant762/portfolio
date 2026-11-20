@@ -51,6 +51,14 @@ export function Environments() {
       const rotate = gsap.quickTo(preview, 'rotation', { duration: 0.5, ease: 'power3' });
 
       let lastX = 0;
+      let pointer: { x: number; y: number } | null = null;
+      let active = -1;
+      const track = (event: PointerEvent) => {
+        if (event.pointerType !== 'mouse') return;
+        pointer = { x: event.clientX, y: event.clientY };
+      };
+      window.addEventListener('pointermove', track, { passive: true });
+
       const onMove = (event: MouseEvent) => {
         x(event.clientX);
         y(event.clientY);
@@ -59,6 +67,13 @@ export function Environments() {
       };
 
       const show = (index: number) => {
+        // Entrou por scroll (sem mousemove): ancora a prévia no cursor antes de mostrar.
+        if (active === -1 && pointer) {
+          gsap.set(preview, { x: pointer.x, y: pointer.y });
+          x(pointer.x);
+          y(pointer.y);
+        }
+        active = index;
         images.forEach((img, i) => {
           gsap.to(img, {
             autoAlpha: i === index ? 1 : 0,
@@ -79,6 +94,7 @@ export function Environments() {
       };
 
       const hide = () => {
+        active = -1;
         gsap.to(preview, {
           scale: 0,
           autoAlpha: 0,
@@ -103,11 +119,34 @@ export function Environments() {
       list.addEventListener('focusout', hide);
       list.addEventListener('mousemove', onMove);
 
+      // Scroll sem mover o mouse não dispara mouseenter/leave: reavalia sob o cursor.
+      let raf = 0;
+      const onScroll = () => {
+        if (raf || !pointer) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          if (!pointer) return;
+          const row = document
+            .elementFromPoint(pointer.x, pointer.y)
+            ?.closest<HTMLElement>('[data-env-row]');
+          const idx = row ? rows.indexOf(row) : -1;
+          if (idx === -1) {
+            if (active !== -1) hide();
+          } else if (idx !== active) {
+            show(idx);
+          }
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+
       return () => {
         cleanups.forEach((fn) => fn());
         list.removeEventListener('mouseleave', hide);
         list.removeEventListener('focusout', hide);
         list.removeEventListener('mousemove', onMove);
+        window.removeEventListener('pointermove', track);
+        window.removeEventListener('scroll', onScroll);
+        cancelAnimationFrame(raf);
       };
     },
     { scope: rootRef },

@@ -95,7 +95,7 @@ all locales share the same keys). Project copy: English in `src/data/projects.ts
 `src/lib/sound.ts` synthesises everything with Web Audio — no audio assets. Darkwave loop: 96 BPM,
 Am–F–C–E, sawtooth bass, detuned pads, delayed arpeggio, kick/snare/hats, convolver reverb and a compressor,
 driven by a look-ahead scheduler. SFX: click, hover, whoosh (route transitions), hit (menu), on/off.
-`SoundControls` exposes two independent switches (music; effects + clicks), both **off by default** and
+`SoundControls` exposes two independent switches (music; effects + clicks), both **on by default (started from the preloader "Enter" gesture)** and
 persisted in `localStorage` (`ant762:sound`). Browsers only allow audio after a gesture, so `SoundProvider`
 calls `unlockAudio()` on the first pointer/key event. Audio suspends while the tab is hidden.
 

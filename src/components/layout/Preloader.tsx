@@ -5,9 +5,10 @@ import { useI18n } from '@/i18n/useI18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 import { setSiteReady } from '@/lib/ready';
 import { lockScroll, unlockScroll } from '@/lib/scroll';
+import { setMusic, setSfx } from '@/lib/sound';
 import { padIndex } from '@/lib/utils';
 
-const MIN_DURATION = 2.2;
+const MIN_DURATION = 1.4;
 
 export function Preloader() {
   const { t } = useI18n();
@@ -23,61 +24,113 @@ export function Preloader() {
       if (!root || !counter || !bar) return;
 
       lockScroll('preloader');
+      const reduced = prefersReducedMotion();
+      const gate = root.querySelector<HTMLElement>('[data-pre-gate]');
+      const buttons = gsap.utils.toArray<HTMLButtonElement>('[data-pre-enter]', root);
+      gsap.set(gate, { autoAlpha: 0 });
+      gsap.set(bar, { scaleX: 0 });
 
       const finish = () => {
         gsap.set(root, { display: 'none' });
         unlockScroll('preloader');
       };
 
-      if (prefersReducedMotion()) {
-        setSiteReady(true);
-        gsap.to(root, { autoAlpha: 0, duration: 0.3, onComplete: finish });
-        return;
-      }
-
-      const progress = { value: 0 };
-      const fontsReady = document.fonts?.ready ?? Promise.resolve();
-
-      const tl = gsap.timeline({ paused: true, onComplete: finish });
-      tl.from('[data-pre-line]', {
-        yPercent: 110,
-        duration: 0.9,
-        ease: 'expo.out',
-        stagger: 0.08,
-      })
-        .to(
-          progress,
-          {
-            value: 100,
-            duration: MIN_DURATION,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              counter.textContent = padIndex(Math.round(progress.value), 3);
+      const outro = () => {
+        if (reduced) {
+          setSiteReady(true);
+          gsap.to(root, { autoAlpha: 0, duration: 0.3, onComplete: finish });
+          return;
+        }
+        gsap
+          .timeline({ onComplete: finish })
+          .to(gate, { autoAlpha: 0, duration: 0.3 })
+          .to('[data-pre-line]', { yPercent: -110, duration: 0.7, ease: 'expo.in', stagger: 0.05 })
+          .to(
+            root,
+            {
+              yPercent: -100,
+              borderBottomLeftRadius: '50% 16vh',
+              borderBottomRightRadius: '50% 16vh',
+              duration: 1.1,
+              ease: 'expo.inOut',
             },
-          },
-          0.1,
-        )
-        .to(bar, { scaleX: 1, duration: MIN_DURATION, ease: 'power2.inOut' }, 0.1)
-        .to('[data-pre-line]', {
-          yPercent: -110,
-          duration: 0.7,
-          ease: 'expo.in',
-          stagger: 0.05,
-        })
-        .to(
-          root,
-          {
-            yPercent: -100,
-            borderBottomLeftRadius: '50% 16vh',
-            borderBottomRightRadius: '50% 16vh',
-            duration: 1.1,
-            ease: 'expo.inOut',
-          },
-          '>-0.35',
-        )
-        .call(() => setSiteReady(true), [], '>-0.55');
+            '>-0.35',
+          )
+          .call(() => setSiteReady(true), [], '>-0.55');
+      };
 
-      void fontsReady.then(() => tl.play());
+      // Clique = gesto do usuário: libera o áudio e inicia a trilha (ou silencia).
+      const enter = (withSound: boolean) => {
+        buttons.forEach((b) => (b.disabled = true));
+        setSfx(withSound);
+        setMusic(withSound);
+        outro();
+      };
+      const cleanups = buttons.map((btn) => {
+        const handler = () => enter(btn.dataset.sound === 'on');
+        btn.addEventListener('click', handler);
+        return () => btn.removeEventListener('click', handler);
+      });
+
+      // Progresso real: fontes + window.load (imagens/CSS) + tempo mínimo p/ a animação.
+      const progress = { value: 0 };
+      const paint = () => {
+        counter.textContent = padIndex(Math.round(progress.value), 3);
+        gsap.set(bar, { scaleX: progress.value / 100 });
+      };
+      const to = (value: number, duration = 0.6) =>
+        gsap.to(progress, {
+          value,
+          duration,
+          ease: 'power2.out',
+          onUpdate: paint,
+          overwrite: true,
+        });
+
+      let fontsDone = false;
+      let loadDone = false;
+      let minDone = false;
+      const check = () => {
+        to(10 + (fontsDone ? 40 : 0) + (loadDone ? 50 : 0));
+        if (fontsDone && loadDone && minDone) {
+          gsap.delayedCall(0.7, () => {
+            gsap.to(gate, { autoAlpha: 1, duration: 0.5 });
+            buttons[0]?.focus({ preventScroll: true });
+          });
+        }
+      };
+
+      if (!reduced) {
+        gsap.from('[data-pre-line]', {
+          yPercent: 110,
+          duration: 0.9,
+          ease: 'expo.out',
+          stagger: 0.08,
+        });
+      }
+      void (document.fonts?.ready ?? Promise.resolve()).then(() => {
+        fontsDone = true;
+        check();
+      });
+      if (document.readyState === 'complete') {
+        loadDone = true;
+      } else {
+        window.addEventListener(
+          'load',
+          () => {
+            loadDone = true;
+            check();
+          },
+          { once: true },
+        );
+      }
+      gsap.delayedCall(MIN_DURATION, () => {
+        minDone = true;
+        check();
+      });
+      check();
+
+      return () => cleanups.forEach((fn) => fn());
     },
     { scope: rootRef },
   );
@@ -120,8 +173,30 @@ export function Preloader() {
         </div>
       </div>
 
+      <div
+        data-pre-gate
+        className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 flex-wrap items-center justify-center gap-4 px-6"
+      >
+        <button
+          type="button"
+          data-pre-enter
+          data-sound="on"
+          className="label-mono bg-accent text-on-accent hover:bg-paper hover:text-ink px-8 py-4 transition-colors"
+        >
+          {t.preloader.enter}
+        </button>
+        <button
+          type="button"
+          data-pre-enter
+          data-sound="off"
+          className="label-mono border-line text-muted hover:text-paper border px-8 py-4 transition-colors"
+        >
+          {t.preloader.mute}
+        </button>
+      </div>
+
       <div className="bg-line absolute inset-x-0 bottom-0 h-1">
-        <div ref={barRef} className="bg-accent h-full origin-left scale-x-0" />
+        <div ref={barRef} className="bg-accent h-full origin-left" />
       </div>
     </div>
   );

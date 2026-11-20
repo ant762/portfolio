@@ -8,6 +8,9 @@ import { setLenis } from '@/lib/scroll';
 /** Scroll inercial (Lenis) sincronizado com o ticker do GSAP e o ScrollTrigger. */
 export function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
+    // Sempre começa no topo (o navegador restauraria o scroll da visita anterior).
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
     if (prefersReducedMotion()) return;
 
     const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
@@ -17,6 +20,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
     setLenis(lenis);
+    lenis.scrollTo(0, { immediate: true, force: true });
 
     // Recalcula pins/medidas depois que fontes e imagens assentam.
     const refresh = () => ScrollTrigger.refresh();
