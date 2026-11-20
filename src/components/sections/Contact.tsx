@@ -83,14 +83,14 @@ export function Contact() {
           <div data-contact-fade className="mt-3 flex flex-wrap items-center gap-4">
             <a
               href={`mailto:${site.email}`}
-              className="decoration-line hover:decoration-accent text-[clamp(1.4rem,3.2vw,3rem)] font-semibold tracking-tight underline underline-offset-8 transition-colors"
+              className="decoration-line hover:decoration-spark text-[clamp(1.4rem,3.2vw,3rem)] font-semibold tracking-tight underline underline-offset-8 transition-colors"
             >
               {site.email}
             </a>
             <button
               type="button"
               onClick={copyEmail}
-              className="label-mono border-line hover:border-accent hover:text-accent rounded-full border px-4 py-2 transition-colors"
+              className="label-mono border-line hover:border-spark hover:text-spark rounded-full border px-4 py-2 transition-colors"
               aria-live="polite"
             >
               {copied ? t.contact.copied : t.contact.copy}
@@ -118,7 +118,7 @@ export function Contact() {
                     </span>
                     <span
                       aria-hidden="true"
-                      className="ease-expo group-hover:text-accent text-2xl transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
+                      className="ease-expo group-hover:text-spark text-2xl transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
                     >
                       ↗
                     </span>
@@ -128,12 +128,12 @@ export function Contact() {
           </ul>
         </div>
 
-        <div className="md:col-span-5 md:justify-self-end">
+        <div className="justify-self-center md:col-span-5 md:justify-self-end">
           <Magnetic strength={0.4}>
             <a
               data-cta
               href={`mailto:${site.email}`}
-              className="group bg-accent text-on-accent ease-expo flex size-[clamp(10rem,22vw,18rem)] flex-col items-center justify-center gap-2 rounded-full transition-transform duration-700 hover:scale-105"
+              className="group bg-accent text-on-accent ease-expo hover:bg-spark flex size-[clamp(10rem,22vw,18rem)] flex-col items-center justify-center gap-2 rounded-full transition-[transform,background-color] duration-700 hover:scale-105"
             >
               <span className="text-[clamp(1.2rem,2.2vw,2rem)] font-bold tracking-tight uppercase">
                 {t.contact.getInTouch}
@@ -154,7 +154,7 @@ export function Contact() {
         <button
           type="button"
           onClick={() => scrollToTarget(0, { duration: 2 })}
-          className="hover:text-accent text-right transition-colors"
+          className="hover:text-spark text-right transition-colors"
         >
           {t.contact.backToTop}
         </button>

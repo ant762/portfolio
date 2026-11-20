@@ -39,7 +39,7 @@ export function SoundControls({ className }: { className?: string }) {
   const { t } = useI18n();
 
   const base =
-    'flex items-center gap-2 py-1 transition-opacity [&[aria-pressed=false]]:opacity-55 hover:opacity-100';
+    'flex items-center gap-2 py-1 transition-colors [&[aria-pressed=false]]:opacity-55 hover:text-spark hover:opacity-100';
 
   return (
     <div className={cn('flex items-center gap-4', className)} role="group" aria-label={t.ui.music}>

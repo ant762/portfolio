@@ -165,7 +165,7 @@ export function Navbar() {
                   style={{ fontSize: 'clamp(3rem, 11vw, 10rem)', lineHeight: 0.95 }}
                 >
                   <span className="label-mono text-muted font-normal">{padIndex(i + 1)}</span>
-                  <span className="ease-expo group-hover:text-accent transition-all duration-500 group-hover:translate-x-4">
+                  <span className="ease-expo group-hover:text-spark transition-all duration-500 group-hover:translate-x-4">
                     {t.nav[link.key]}
                   </span>
                 </TransitionLink>
@@ -179,7 +179,7 @@ export function Navbar() {
             <p className="label-mono text-muted">{t.ui.getInTouch}</p>
             <a
               href={`mailto:${site.email}`}
-              className="text-xl tracking-tight underline-offset-4 hover:underline md:text-3xl"
+              className="hover:text-spark text-xl tracking-tight underline-offset-4 hover:underline md:text-3xl"
             >
               {site.email}
             </a>
@@ -193,7 +193,7 @@ export function Navbar() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-accent inline-flex items-center gap-2 transition-colors"
+                    className="hover:text-spark inline-flex items-center gap-2 transition-colors"
                   >
                     {social.label}
                     <span aria-hidden="true">↗</span>

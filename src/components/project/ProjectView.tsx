@@ -100,7 +100,7 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
           <TransitionLink
             href="/#work"
             label={t.nav.work}
-            className="hover:text-accent transition-colors"
+            className="hover:text-spark transition-colors"
           >
             {t.project.back}
           </TransitionLink>
@@ -124,7 +124,7 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
         <div className="px-gutter">
           <div
             data-cover
-            className="bg-ink-soft relative aspect-[16/9] overflow-hidden rounded-sm"
+            className="bg-ink-soft ring-line hover:ring-paper relative aspect-[16/9] overflow-hidden rounded-sm ring-1 transition-shadow duration-500"
             style={{ clipPath: 'inset(0% 0% 0% 0%)' }}
           >
             <div data-parallax-img className="absolute inset-0 scale-[1.2]">
@@ -181,12 +181,12 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
                       data-cursor={t.cursor.open}
                       className="group inline-flex items-center gap-3 text-xl font-semibold tracking-tight"
                     >
-                      <span className="decoration-line group-hover:decoration-accent underline underline-offset-6 transition-colors">
+                      <span className="decoration-line group-hover:decoration-spark underline underline-offset-6 transition-colors">
                         {link.label}
                       </span>
                       <span
                         aria-hidden="true"
-                        className="ease-expo group-hover:text-accent transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
+                        className="ease-expo group-hover:text-spark transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
                       >
                         ↗
                       </span>
@@ -204,7 +204,7 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
       {/* Imagem de detalhe */}
       {hasSecondImage ? (
         <div className="px-gutter pb-[clamp(5rem,12vw,12rem)]">
-          <div className="bg-ink-soft relative aspect-[16/10] overflow-hidden rounded-sm">
+          <div className="bg-ink-soft ring-line hover:ring-paper relative aspect-[16/10] overflow-hidden rounded-sm ring-1 transition-shadow duration-500">
             <div data-parallax-img className="absolute inset-0 scale-[1.2]">
               <Image
                 src={project.detail}

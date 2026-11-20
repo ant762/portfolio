@@ -12,7 +12,7 @@ import {
   WebGLRenderer,
 } from 'three';
 import { useEverReady } from '@/hooks/useSiteReady';
-import { gsap, prefersReducedMotion } from '@/lib/gsap';
+import { gsap, hasFinePointer, prefersReducedMotion } from '@/lib/gsap';
 
 const TRAIL = 14;
 const RIPPLES = 4;
@@ -38,6 +38,8 @@ const FRAGMENT = /* glsl */ `
   uniform float uTime;
   uniform float uScroll;
   uniform float uEnergy;
+  uniform float uSpin;
+  uniform float uPress;
   uniform vec2 uRes;
   uniform vec2 uMouse;
   uniform vec2 uTrail[${TRAIL}];
@@ -150,12 +152,12 @@ const FRAGMENT = /* glsl */ `
       float w = 1.0 - float(i) / float(${TRAIL});
       vec2 dv = p - uTrail[i];
       float d2 = dot(dv, dv);
-      p += dv * exp(-d2 * 70.0) * 0.018 * w;
-      trailGlow += exp(-d2 * 260.0) * w * w;
+      p += dv * exp(-d2 * 70.0) * 0.018 * w * uPress;
+      trailGlow += exp(-d2 * 260.0) * w * w * uPress;
     }
 
     float dm = length(p - uMouse);
-    float lit = exp(-dm * 2.6) * (0.45 + uEnergy * 0.9);
+    float lit = exp(-dm * 2.6) * (0.45 + uEnergy * 0.9) * uPress;
 
     // Névoa em duas camadas, empurrada pelo scroll.
     vec2 fq = p * 1.15 + vec2(0.0, uScroll * 0.12);
@@ -180,7 +182,7 @@ const FRAGMENT = /* glsl */ `
     // Rosácea: anéis, raios e pétalas ogivais, giro lento acelerado pelo cursor.
     vec2 rc = p - vec2(0.0, 0.04 - uScroll * 0.05);
     float rr = length(rc);
-    float ang = atan(rc.y, rc.x) + uTime * (0.025 + uEnergy * 0.2);
+    float ang = atan(rc.y, rc.x) + uSpin;
     float petal = abs(sin(ang * 6.0));
     float rose = stroke(abs(rr - (0.27 + 0.06 * petal)), px);
     rose += stroke(abs(rr - 0.42), px) * 0.8;
@@ -192,7 +194,7 @@ const FRAGMENT = /* glsl */ `
     float vignette = smoothstep(1.15, 0.15, length((vUv - 0.5) * vec2(1.2, 1.0)));
 
     vec3 col = uBg;
-    col += vec3(0.05, 0.045, 0.05) * fog * vignette;
+    col += vec3(0.05) * fog * vignette;
     col += uBlood * fog * fog * 0.22 * (0.3 + lit) * vignette;
     col += uPaper * (arches * 0.07 + deep * 0.05) * vignette;
     col = mix(col, uAccent, arches * lit * 0.85);
@@ -212,11 +214,11 @@ const FRAGMENT = /* glsl */ `
       float spark = smoothstep(0.07, 0.0, length(f - off)) * step(0.78, h);
       embers += spark * (0.6 + 0.4 * sin(uTime * 4.0 + h * 90.0)) / (1.0 + L * 0.5);
     }
-    col += mix(uAccent, vec3(1.0, 0.55, 0.3), 0.35) * embers * 0.9 * vignette;
+    col += mix(uAccent, vec3(1.0), 0.35) * embers * 0.9 * vignette;
 
     // Cursor e cliques.
     col += uAccent * trailGlow * 0.5;
-    col += uAccent * exp(-dm * dm * 14.0) * 0.1 * (0.5 + uEnergy);
+    col += uAccent * exp(-dm * dm * 14.0) * 0.1 * (0.5 + uEnergy) * uPress;
     col += uAccent * ringGlow * 0.35;
 
     col *= mix(0.55, 1.0, vignette);
@@ -250,14 +252,16 @@ export function Atmosphere() {
       uTime: { value: 0 },
       uScroll: { value: 0 },
       uEnergy: { value: 0 },
+      uSpin: { value: 0 },
+      uPress: { value: 1 },
       uRes: { value: new Vector2(1, 1) },
       uMouse: { value: new Vector2() },
       uTrail: { value: trail },
       uRipples: { value: ripples },
-      uBg: { value: new Vector3(0.035, 0.035, 0.039) },
-      uPaper: { value: new Vector3(0.894, 0.875, 0.863) },
-      uAccent: { value: new Vector3(0.863, 0.141, 0.188) },
-      uBlood: { value: new Vector3(0.18, 0.025, 0.04) },
+      uBg: { value: new Vector3(0, 0, 0) },
+      uPaper: { value: new Vector3(0.96, 0.96, 0.96) },
+      uAccent: { value: new Vector3(0.9, 0.9, 0.9) },
+      uBlood: { value: new Vector3(0.14, 0.14, 0.14) },
     };
     const material = new ShaderMaterial({
       vertexShader: VERTEX,
@@ -289,6 +293,10 @@ export function Atmosphere() {
     uniforms.uMouse.value.copy(target);
     trail.forEach((v) => v.copy(target));
 
+    // Celular (sem mouse): o brilho só aparece com o dedo na tela.
+    const touchOnly = !hasFinePointer();
+    let pressTarget = touchOnly ? 0 : 1;
+    let lastTime = 0;
     let energy = 0;
     let lastInput = -10;
     let rippleIndex = 0;
@@ -307,16 +315,27 @@ export function Atmosphere() {
       energy = 1;
       onMove(event);
     };
+    const onDownTouch = (event: PointerEvent) => {
+      if (touchOnly) pressTarget = 1;
+      onDown(event);
+    };
+    const onUp = () => {
+      if (touchOnly) pressTarget = 0;
+    };
     window.addEventListener('pointermove', onMove, { passive: true });
-    window.addEventListener('pointerdown', onDown, { passive: true });
+    window.addEventListener('pointerdown', onDownTouch, { passive: true });
+    window.addEventListener('pointerup', onUp, { passive: true });
+    window.addEventListener('pointercancel', onUp, { passive: true });
 
     let frame = 0;
     const render = (time: number) => {
       if (document.hidden) return;
       uniforms.uTime.value = time;
+      const dt = Math.min(time - lastTime, 0.1);
+      lastTime = time;
 
-      // Sem interação (ex.: celular), uma luz fantasma vaga pela tela.
-      if (time - lastInput > 2.5) {
+      // Sem interação (mouse parado), uma luz fantasma vaga pela tela; no celular, não.
+      if (!touchOnly && time - lastInput > 2.5) {
         toShader(
           window.innerWidth * (0.5 + 0.32 * Math.sin(time * 0.31)),
           window.innerHeight * (0.45 + 0.25 * Math.sin(time * 0.23 + 1.3)),
@@ -326,6 +345,9 @@ export function Atmosphere() {
 
       energy *= 0.93;
       uniforms.uEnergy.value += (energy - uniforms.uEnergy.value) * 0.1;
+      uniforms.uPress.value += (pressTarget - uniforms.uPress.value) * 0.15;
+      // Giro integrado: mudar a energia acelera/desacelera sem saltos de ângulo.
+      uniforms.uSpin.value += dt * (0.025 + uniforms.uEnergy.value * 0.2);
       smooth.lerp(target, 0.08);
       uniforms.uMouse.value.copy(smooth);
 
@@ -353,7 +375,9 @@ export function Atmosphere() {
       gsap.ticker.remove(render);
       window.removeEventListener('resize', resize);
       window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointerdown', onDownTouch);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
       geometry.dispose();
       material.dispose();
       renderer.dispose();
