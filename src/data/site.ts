@@ -10,7 +10,7 @@ export const site = {
   title: 'ant762 — Fullstack Developer',
   tagline: 'Backend engineering, IT infrastructure and game development.',
   description:
-    'Fullstack developer focused on backend engineering, IT infrastructure and game development (LuaU). Node.js, Python, MySQL, Linux and more.',
+    'Fullstack developer focused on backend engineering, IT infrastructure and game development (LuaU). Node.js, Python, MySQL and more.',
   location: 'Brazil',
   timezone: 'America/Sao_Paulo',
   email: 'maik.antunes07@gmail.com',
@@ -47,17 +47,13 @@ export const skillGroups: readonly { key: SkillGroupKey; items: readonly string[
       'Lenis',
     ],
   },
-  { key: 'game', items: ['LuaU'] },
+  { key: 'game', items: ['LuaU', 'Game Design'] },
   {
     key: 'infra',
     items: [
       'Virtual Machines',
       'Ubuntu Server',
-      'Linux',
-      'Kali Linux',
-      'Switch Configuration',
       'Network Devices',
-      'Wireless Antennas',
       'Network Protocols',
       'Cisco Networking Basics',
       'Wireshark',
