@@ -211,7 +211,7 @@ function TiltCard({ label }: { label: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const move = (e: React.PointerEvent) => {
     const el = ref.current;
-    if (!el || e.pointerType !== 'mouse') return;
+    if (!el) return;
     const r = el.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width;
     const py = (e.clientY - r.top) / r.height;
@@ -232,9 +232,12 @@ function TiltCard({ label }: { label: string }) {
   return (
     <div
       ref={ref}
+      onPointerDown={move}
       onPointerMove={move}
       onPointerLeave={leave}
-      className="border-accent/50 relative flex h-44 w-64 items-end overflow-hidden rounded-sm border p-4"
+      onPointerUp={leave}
+      onPointerCancel={leave}
+      className="border-accent/50 relative flex h-44 w-64 touch-pan-y items-end overflow-hidden rounded-sm border p-4"
       style={{
         background:
           'radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(220,36,48,0.55), rgba(9,9,10,0.9) 65%)',

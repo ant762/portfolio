@@ -71,6 +71,11 @@ html {
   background: var(--color-ink);
 }
 
+html {
+  /* evita reflow (texto reformatando) quando o scroll é travado e a barra some */
+  scrollbar-gutter: stable;
+}
+
 html.is-locked,
 html.is-locked body {
   overflow: hidden;

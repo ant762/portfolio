@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, type ReactNode } from 'react';
-import { gsap, hasFinePointer, useGSAP } from '@/lib/gsap';
+import { gsap, useGSAP } from '@/lib/gsap';
 import { cn } from '@/lib/utils';
 
 interface MagneticProps {
@@ -18,12 +18,12 @@ export function Magnetic({ children, strength = 0.35, className }: MagneticProps
   useGSAP(
     () => {
       const el = ref.current;
-      if (!el || !hasFinePointer()) return;
+      if (!el) return;
 
       const x = gsap.quickTo(el, 'x', { duration: 0.9, ease: 'elastic.out(1, 0.35)' });
       const y = gsap.quickTo(el, 'y', { duration: 0.9, ease: 'elastic.out(1, 0.35)' });
 
-      const onMove = (event: MouseEvent) => {
+      const onMove = (event: PointerEvent) => {
         const rect = el.getBoundingClientRect();
         x((event.clientX - (rect.left + rect.width / 2)) * strength);
         y((event.clientY - (rect.top + rect.height / 2)) * strength);
@@ -33,11 +33,18 @@ export function Magnetic({ children, strength = 0.35, className }: MagneticProps
         y(0);
       };
 
-      el.addEventListener('mousemove', onMove);
-      el.addEventListener('mouseleave', onLeave);
+      // Pointer events: mouse, toque e caneta (no toque, vale enquanto o dedo está pressionado).
+      el.addEventListener('pointerdown', onMove);
+      el.addEventListener('pointermove', onMove);
+      el.addEventListener('pointerleave', onLeave);
+      el.addEventListener('pointerup', onLeave);
+      el.addEventListener('pointercancel', onLeave);
       return () => {
-        el.removeEventListener('mousemove', onMove);
-        el.removeEventListener('mouseleave', onLeave);
+        el.removeEventListener('pointerdown', onMove);
+        el.removeEventListener('pointermove', onMove);
+        el.removeEventListener('pointerleave', onLeave);
+        el.removeEventListener('pointerup', onLeave);
+        el.removeEventListener('pointercancel', onLeave);
       };
     },
     { scope: ref },
