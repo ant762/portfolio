@@ -200,7 +200,7 @@ export function Preloader() {
       </div>
 
       <div className="bg-line absolute inset-x-0 bottom-0 h-1">
-        <div ref={barRef} className="bg-accent h-full origin-left" />
+        <div ref={barRef} className="bg-spark h-full origin-left" />
       </div>
     </div>
   );

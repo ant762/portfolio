@@ -194,7 +194,7 @@ const FRAGMENT = /* glsl */ `
     float vignette = smoothstep(1.15, 0.15, length((vUv - 0.5) * vec2(1.2, 1.0)));
 
     vec3 col = uBg;
-    col += vec3(0.05, 0.045, 0.05) * fog * vignette;
+    col += vec3(0.05) * fog * vignette;
     col += uBlood * fog * fog * 0.22 * (0.3 + lit) * vignette;
     col += uPaper * (arches * 0.07 + deep * 0.05) * vignette;
     col = mix(col, uAccent, arches * lit * 0.85);
@@ -214,7 +214,7 @@ const FRAGMENT = /* glsl */ `
       float spark = smoothstep(0.07, 0.0, length(f - off)) * step(0.78, h);
       embers += spark * (0.6 + 0.4 * sin(uTime * 4.0 + h * 90.0)) / (1.0 + L * 0.5);
     }
-    col += mix(uAccent, vec3(1.0, 0.55, 0.3), 0.35) * embers * 0.9 * vignette;
+    col += mix(uAccent, vec3(1.0), 0.35) * embers * 0.9 * vignette;
 
     // Cursor e cliques.
     col += uAccent * trailGlow * 0.5;
@@ -258,10 +258,10 @@ export function Atmosphere() {
       uMouse: { value: new Vector2() },
       uTrail: { value: trail },
       uRipples: { value: ripples },
-      uBg: { value: new Vector3(0.035, 0.035, 0.039) },
-      uPaper: { value: new Vector3(0.894, 0.875, 0.863) },
-      uAccent: { value: new Vector3(0.863, 0.141, 0.188) },
-      uBlood: { value: new Vector3(0.18, 0.025, 0.04) },
+      uBg: { value: new Vector3(0, 0, 0) },
+      uPaper: { value: new Vector3(0.96, 0.96, 0.96) },
+      uAccent: { value: new Vector3(0.9, 0.9, 0.9) },
+      uBlood: { value: new Vector3(0.14, 0.14, 0.14) },
     };
     const material = new ShaderMaterial({
       vertexShader: VERTEX,

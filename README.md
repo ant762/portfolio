@@ -11,7 +11,7 @@ inertial scrolling, scroll-driven GSAP animation and animated route transitions.
 ## Highlights
 
 - **Preloader** with progress counter and curved exit transition
-- **Gothic WebGL atmosphere** (red / black / grey) behind the whole site — fog, parallax pointed arches, a rotating rose window, rising embers, a blood-red cursor trail and click shockwaves
+- **Gothic WebGL atmosphere** (AMOLED black / white, one ice-blue spark) behind the whole site — fog, parallax pointed arches, a rotating rose window, rising embers, a blood-red cursor trail and click shockwaves
 - **Procedural darkwave soundtrack + sound effects** (Web Audio, no audio files). Music and effects/clicks have independent toggles; both default to off
 - **English, Spanish and Portuguese** (`EN / ES / PT`), detected from the browser and remembered
 - **Smooth scrolling** (Lenis) wired into GSAP's ticker and ScrollTrigger

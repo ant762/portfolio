@@ -7,8 +7,8 @@ import { gsap, prefersReducedMotion, reveal, useGSAP } from '@/lib/gsap';
 import { playSfx, type Sfx } from '@/lib/sound';
 import { cn } from '@/lib/utils';
 
-const ACCENT = '#dc2430';
-const PAPER = '#e4dfdc';
+const ACCENT = '#ffffff';
+const PAPER = '#f5f5f5';
 
 function Tile({ title, hint, children }: { title: string; hint: string; children: ReactNode }) {
   return (
@@ -129,7 +129,7 @@ function Spinner({ label }: { label: string }) {
             <line x1="0" y1="-6" x2="0" y2="-16" stroke={PAPER} strokeWidth="2" opacity="0.6" />
           </g>
         ))}
-        <circle r="10" fill="#09090a" stroke={PAPER} strokeWidth="2" />
+        <circle r="10" fill="#000000" stroke={PAPER} strokeWidth="2" />
         <circle r="3" fill={ACCENT} />
       </svg>
     </div>
@@ -240,7 +240,7 @@ function TiltCard({ label }: { label: string }) {
       className="border-accent/50 relative flex h-44 w-64 touch-pan-y items-end overflow-hidden rounded-sm border p-4"
       style={{
         background:
-          'radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(220,36,48,0.55), rgba(9,9,10,0.9) 65%)',
+          'radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(255,255,255,0.45), rgba(0,0,0,0.9) 65%)',
       }}
     >
       <span className="font-gothic text-4xl leading-none">{label}</span>
@@ -530,7 +530,7 @@ function Pads() {
       gsap.fromTo(
         el,
         { backgroundColor: ACCENT, scale: 0.92 },
-        { backgroundColor: 'rgba(220,36,48,0.12)', scale: 1, duration: 0.6, ease: 'power3.out' },
+        { backgroundColor: 'rgba(255,255,255,0.12)', scale: 1, duration: 0.6, ease: 'power3.out' },
       );
     }
   };
