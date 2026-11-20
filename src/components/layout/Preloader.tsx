@@ -157,20 +157,20 @@ export function Preloader() {
         </span>
       </div>
 
-      <div className="flex items-end justify-between">
-        <div className="overflow-hidden">
+      <div className="flex items-end justify-between gap-4">
+        <div className="min-w-0 overflow-hidden">
           <p data-pre-line className="label-mono text-muted max-w-48">
             {t.hero.role}
             <br />
             {t.hero.role2}
           </p>
         </div>
-        <div className="overflow-hidden">
+        <div className="shrink-0 overflow-hidden">
           <span
             ref={counterRef}
             data-pre-line
             className="block font-bold tracking-tighter tabular-nums"
-            style={{ fontSize: 'clamp(6rem, 24vw, 26rem)', lineHeight: 0.8 }}
+            style={{ fontSize: 'clamp(4rem, 22vw, 26rem)', lineHeight: 0.8 }}
           >
             000
           </span>
