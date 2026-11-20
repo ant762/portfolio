@@ -118,15 +118,16 @@ export function Navbar() {
           São Paulo, BRA — {time}
         </p>
 
-        <div className="flex items-center gap-6 md:gap-8">
-          <SoundControls className="hidden sm:flex" />
-          <LanguageSwitcher className="hidden sm:flex" />
+        <div className="flex items-center gap-3.5 sm:gap-6 md:gap-8">
+          <SoundControls className="gap-3 sm:gap-4" />
+          <LanguageSwitcher className="gap-2 sm:gap-3" />
           <Magnetic strength={0.25}>
             <button
               type="button"
               onClick={() => setMenu(!open)}
               aria-expanded={open}
               aria-controls="site-menu"
+              aria-label={open ? t.ui.close : t.ui.menu}
               className="flex items-center gap-3 py-1"
             >
               <span className="relative block h-3 w-6" aria-hidden="true">
@@ -139,7 +140,7 @@ export function Navbar() {
                   style={{ top: open ? '50%' : '100%', rotate: open ? '-45deg' : '0deg' }}
                 />
               </span>
-              {open ? t.ui.close : t.ui.menu}
+              <span className="hidden sm:inline">{open ? t.ui.close : t.ui.menu}</span>
             </button>
           </Magnetic>
         </div>
@@ -182,13 +183,6 @@ export function Navbar() {
             >
               {site.email}
             </a>
-          </div>
-          <div
-            data-menu-fade
-            className="label-mono flex flex-wrap items-center gap-x-8 gap-y-3 sm:hidden"
-          >
-            <SoundControls />
-            <LanguageSwitcher />
           </div>
           <ul data-menu-fade className="label-mono flex flex-wrap gap-x-8 gap-y-3">
             {socials
