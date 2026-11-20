@@ -37,13 +37,11 @@ export function Hero() {
       if (!ready) {
         gsap.set(chars, { yPercent: 115 });
         gsap.set(fades, { autoAlpha: 0, y: 24 });
-        gsap.set('[data-hero-canvas]', { autoAlpha: 0, scale: 1.08 });
         return;
       }
 
       gsap
         .timeline({ defaults: { ease: 'expo.out' } })
-        .to('[data-hero-canvas]', { autoAlpha: 1, scale: 1, duration: 2.2 }, 0)
         .to(chars, { yPercent: 0, duration: 1.4, stagger: 0.045 }, 0.1)
         .to(fades, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08 }, 0.8);
 
@@ -75,11 +73,6 @@ export function Hero() {
       id="top"
       className="px-gutter relative flex min-h-svh flex-col justify-between overflow-hidden pt-28 pb-8"
     >
-      <div
-        data-hero-canvas
-        className="from-ink to-ink/50 pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t via-transparent"
-      />
-
       <div data-hero-meta className="label-mono flex items-start justify-between gap-6">
         <p data-hero-fade className="text-muted max-w-xs">
           {t.hero.role}
