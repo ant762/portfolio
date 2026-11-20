@@ -46,3 +46,22 @@ describe('socials', () => {
     expect(linkedin?.href).toContain('linkedin.com/in/maik-antunes');
   });
 });
+
+describe('skills e redes (fonte: README do GitHub)', () => {
+  it('grupos de skills não têm itens vazios nem repetidos dentro do grupo', async () => {
+    const { skillGroups } = await import('@/data/site');
+    expect(skillGroups.length).toBe(5);
+    for (const group of skillGroups) {
+      expect(group.items.length).toBeGreaterThan(0);
+      expect(new Set(group.items).size).toBe(group.items.length);
+      for (const item of group.items) expect(item.trim()).not.toBe('');
+    }
+  });
+
+  it('links sociais são https e incluem GitHub, LinkedIn e Discord do README', () => {
+    const hrefs = socials.map((s) => s.href);
+    expect(hrefs).toContain('https://github.com/ant762');
+    expect(hrefs.some((h) => h.includes('linkedin.com/in/maik-antunes'))).toBe(true);
+    expect(hrefs).toContain('https://discord.com/invite/8RWXPGsjcj');
+  });
+});

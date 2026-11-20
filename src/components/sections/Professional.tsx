@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import pkg from '../../../package.json';
-import { skills } from '@/data/site';
+import { skillGroups } from '@/data/site';
 import { useI18n } from '@/i18n/useI18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
@@ -10,10 +10,12 @@ import { padIndex } from '@/lib/utils';
 const GITHUB = 'https://github.com/ant762';
 const REPOS = ['portfolio', 'sistemainventario', 'jsnode', 'sqlestudos'] as const;
 
-const stack = Object.entries(pkg.dependencies).map(([name, version]) => ({
-  name,
-  version: version.replace(/^[^\d]*/, ''),
-}));
+const toEntries = (deps: Record<string, string>) =>
+  Object.entries(deps)
+    .filter(([name]) => !name.startsWith('@types/') && name !== 'eslint-config-next')
+    .map(([name, version]) => ({ name, version: version.replace(/^[^\d]*/, '') }));
+
+const stack = [...toEntries(pkg.dependencies), ...toEntries(pkg.devDependencies)];
 
 export function Professional() {
   const rootRef = useRef<HTMLElement>(null);
@@ -46,13 +48,6 @@ export function Professional() {
     { scope: rootRef, dependencies: [t] },
   );
 
-  const kindLabel: Record<string, string> = {
-    experience: p.experience,
-    education: p.education,
-    certification: p.certifications,
-    languages: p.languages,
-  };
-
   return (
     <section
       ref={rootRef}
@@ -70,7 +65,7 @@ export function Professional() {
       {/* Linha do tempo */}
       <ul>
         {p.timeline.map((item, i) => (
-          <li key={`${item.kind}-${item.title}`} data-row className="group relative">
+          <li key={`${item.period}-${item.title}`} data-row className="group relative">
             <span data-line className="bg-line absolute inset-x-0 top-0 h-px" />
             <span
               aria-hidden="true"
@@ -87,7 +82,10 @@ export function Professional() {
               </span>
               <span className="overflow-hidden">
                 <span data-row-text className="label-mono block">
-                  {kindLabel[item.kind]}
+                  {p.kinds[item.kind as keyof typeof p.kinds]}
+                  <span className="text-muted group-hover:text-on-accent/70 mt-1 block">
+                    {item.period}
+                  </span>
                 </span>
               </span>
               <span className="col-span-2 overflow-hidden md:col-span-1">
@@ -95,11 +93,14 @@ export function Professional() {
                   <span className="ease-expo block text-[clamp(1.4rem,3vw,2.75rem)] leading-tight font-semibold tracking-tight transition-transform duration-500 group-hover:translate-x-3">
                     {item.title}
                   </span>
-                  {item.org || item.detail ? (
-                    <span className="label-mono text-muted group-hover:text-on-accent/70 mt-2 block normal-case">
-                      {[item.org, item.detail].filter(Boolean).join(' — ')}
-                    </span>
+                  {item.org ? (
+                    <span className="label-mono mt-2 block normal-case">{item.org}</span>
                   ) : null}
+                  <span className="label-mono text-muted group-hover:text-on-accent/70 mt-3 flex flex-wrap gap-x-5 gap-y-1 normal-case">
+                    {item.bullets.map((bullet) => (
+                      <span key={bullet}>— {bullet}</span>
+                    ))}
+                  </span>
                 </span>
               </span>
             </div>
@@ -108,19 +109,41 @@ export function Professional() {
         <li className="bg-line h-px" aria-hidden="true" />
       </ul>
 
+      {/* Skills (README do GitHub) */}
+      <div className="mt-[clamp(5rem,10vw,10rem)] grid gap-10 md:grid-cols-12">
+        <div data-reveal className="md:col-span-4">
+          <p className="label-mono text-muted">{p.skillsLabel}</p>
+          <h3 className="text-display-md mt-4 font-bold uppercase">{p.skillsTitle}</h3>
+        </div>
+        <dl className="md:col-span-8">
+          {skillGroups.map((group) => (
+            <div
+              key={group.key}
+              data-reveal
+              className="border-line grid gap-3 border-t py-5 md:grid-cols-[14rem_1fr]"
+            >
+              <dt className="label-mono text-muted">{p.groups[group.key]}</dt>
+              <dd>
+                <ul className="label-mono flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="border-line rounded-full border px-3 py-1.5">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))}
+          <div className="bg-line h-px" aria-hidden="true" />
+        </dl>
+      </div>
+
       {/* GitHub */}
       <div className="mt-[clamp(5rem,10vw,10rem)] grid gap-10 md:grid-cols-12">
         <div data-reveal className="md:col-span-4">
           <p className="label-mono text-muted">{p.githubLabel}</p>
           <h3 className="text-display-md mt-4 font-bold uppercase">{p.githubTitle}</h3>
           <p className="text-paper/70 mt-6 max-w-sm text-lg leading-snug">{p.githubBlurb}</p>
-          <ul className="label-mono mt-8 flex flex-wrap gap-2" aria-label="Skills">
-            {skills.map((skill) => (
-              <li key={skill} className="border-line rounded-full border px-3 py-1.5">
-                {skill}
-              </li>
-            ))}
-          </ul>
           <a
             href={GITHUB}
             target="_blank"
@@ -153,7 +176,9 @@ export function Professional() {
                       ↗
                     </span>
                   </span>
-                  <span className="text-muted mt-2 block">{p.repoDescriptions[repo]}</span>
+                  {p.repoDescriptions[repo] ? (
+                    <span className="text-muted mt-2 block">{p.repoDescriptions[repo]}</span>
+                  ) : null}
                 </span>
               </a>
             </li>

@@ -81,7 +81,7 @@ export function Hero() {
       />
 
       <div data-hero-meta className="label-mono flex items-start justify-between gap-6">
-        <p data-hero-fade className="text-muted max-w-56">
+        <p data-hero-fade className="text-muted max-w-xs">
           {t.hero.role}
           <br />
           {t.hero.role2}

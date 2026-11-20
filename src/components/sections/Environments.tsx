@@ -130,7 +130,7 @@ export function Environments() {
           </h2>
         </div>
         <p className="text-paper/70 max-w-sm text-lg leading-snug md:col-span-4 md:justify-self-end">
-          {t.environments.blurb.replace('{n}', padIndex(environments.length))}
+          {t.environments.blurb.replace('{n}', String(environments.length))}
         </p>
       </div>
 

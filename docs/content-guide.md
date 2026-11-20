@@ -26,5 +26,7 @@
 
 ## Edit site info
 
-`src/data/site.ts` holds name, tagline, about text, email, social links (including LinkedIn), skills.
-Interface text (all languages) lives in `src/i18n/dictionaries.ts`; career/certification entries are in its `professional.timeline`.
+`src/data/site.ts` holds name, tagline, about text, email, social links (including LinkedIn), skill groups (`skillGroups`).
+Interface text (all languages) lives in `src/i18n/dictionaries.ts`; career entries are in its `professional.timeline`.
+
+**Source of truth for profile data:** the README of github.com/ant762 (skills, experience, education, social links). Do not add certifications, languages or roles that are not published there. Roblox projects and level-design studies are kept as extras.

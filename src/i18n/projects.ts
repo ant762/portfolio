@@ -51,7 +51,7 @@ export const projectCopy: Record<Exclude<Locale, 'en'>, Record<string, ProjectCo
       headline: 'Portafolio Dev Moderno',
       summary: 'El propio sitio que estás viendo ahora.',
       description:
-        'Portafolio full-stack reconstruido con Next.js y TypeScript. Incluye un shader WebGL, scroll suave con inercia, animaciones GSAP guiadas por el scroll, transiciones de ruta y una capa de contenido tipada.',
+        'Portafolio full-stack reconstruido con Next.js y TypeScript. Incluye un fondo WebGL en todo el sitio, scroll suave con inercia, animaciones GSAP guiadas por el scroll, transiciones de ruta y una capa de contenido tipada.',
     },
     'facial-expressions': {
       headline: 'Sistema de Expresiones Faciales',
@@ -137,7 +137,7 @@ export const projectCopy: Record<Exclude<Locale, 'en'>, Record<string, ProjectCo
       headline: 'Portfólio Dev Moderno',
       summary: 'O próprio site que você está vendo agora.',
       description:
-        'Portfólio full-stack reconstruído com Next.js e TypeScript. Possui um shader WebGL, rolagem suave com inércia, animações GSAP guiadas pelo scroll, transições de rota e uma camada de conteúdo tipada.',
+        'Portfólio full-stack reconstruído com Next.js e TypeScript. Possui um fundo WebGL em todo o site, rolagem suave com inércia, animações GSAP guiadas pelo scroll, transições de rota e uma camada de conteúdo tipada.',
     },
     'facial-expressions': {
       headline: 'Sistema de Expressões Faciais',

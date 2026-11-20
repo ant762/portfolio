@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { SplitWords } from '@/components/ui/SplitWords';
 import { getProjectsByCategory } from '@/data/projects';
+import { allSkillsCount } from '@/data/site';
 import { useI18n } from '@/i18n/useI18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
@@ -12,12 +13,11 @@ const envCount = getProjectsByCategory('environment').length;
 
 export function About() {
   const { t } = useI18n();
-  const certs = t.professional.timeline.filter((i) => i.kind === 'certification').length;
   const stats = [
     { value: codeCount, label: t.about.statCode },
     { value: envCount, label: t.about.statEnv },
-    { value: 3, label: t.about.statLanguages },
-    { value: certs, label: t.about.statCerts },
+    { value: allSkillsCount, label: t.about.statSkills },
+    { value: 3, label: t.about.statFocus },
   ];
   const rootRef = useRef<HTMLElement>(null);
 

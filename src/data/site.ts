@@ -7,16 +7,13 @@ export const site = {
   firstName: 'Maik',
   handle: 'ant762',
   role: 'Fullstack Developer',
-  title: 'ant762 — Fullstack Developer & Level Designer',
-  tagline: 'Transforming your ideas into high-impact experiences.',
+  title: 'ant762 — Fullstack Developer',
+  tagline: 'Backend engineering, security infrastructure and game development.',
   description:
-    'Systems Development Technician focused on robust, logical and complex solutions with intuitive interfaces. Specialist in Luau, JavaScript, Node.js and Level Design.',
-  about:
-    'Systems Development Technician focused on creating robust, logical and complex solutions with intuitive interfaces. I turn technical requirements into high-performance digital experiences with modern design — from gameplay systems in Luau to full-stack platforms and cinematic environments.',
+    'Fullstack developer focused on backend engineering, security infrastructure and game development (Roblox / LuaU). Node.js, Python, MySQL, Linux and more.',
   location: 'Brazil',
   timezone: 'America/Sao_Paulo',
   email: 'maik.antunes07@gmail.com',
-  availability: 'Available for new challenges',
   ogImage: '/images/A2.webp',
 } as const;
 
@@ -27,22 +24,31 @@ export const socials: readonly SocialLink[] = [
     handle: 'Connect on LinkedIn',
   },
   { label: 'GitHub', href: 'https://github.com/ant762', handle: '@ant762' },
-  { label: 'Discord', href: 'https://discord.gg/EnuYKVdGru', handle: 'Join the server' },
+  { label: 'Discord', href: 'https://discord.com/invite/8RWXPGsjcj', handle: 'Join the server' },
+  { label: 'Instagram', href: 'https://instagram.com/ant762_', handle: '@ant762_' },
   { label: 'Email', href: `mailto:${site.email}`, handle: site.email },
 ];
 
-export const skills = [
-  'Luau',
-  'JavaScript',
-  'TypeScript',
-  'Node.js',
-  'Python',
-  'C',
-  'MySQL',
-  'CSS',
-  'Web Design',
-  'Level Design',
-] as const;
+export type SkillGroupKey = 'backend' | 'frontend' | 'game' | 'security' | 'tools';
+
+/** Fonte: README do perfil github.com/ant762 ("How I Work"). */
+export const skillGroups: readonly { key: SkillGroupKey; items: readonly string[] }[] = [
+  { key: 'backend', items: ['Node.js', 'Python', 'MySQL', 'C', 'C++', 'C#', 'PHP', 'Lua'] },
+  { key: 'frontend', items: ['JavaScript', 'HTML', 'CSS'] },
+  { key: 'game', items: ['Roblox Studio', 'LuaU'] },
+  { key: 'security', items: ['Cloudflare', 'Linux', 'Kali Linux', 'Wireshark'] },
+  {
+    key: 'tools',
+    items: ['Git', 'Photoshop', 'Premiere', 'Notion', 'Figma', 'VS Code', 'GitHub', 'Red Hat'],
+  },
+];
+
+/** Tecnologias principais (tudo exceto "tools") — usadas no marquee. */
+export const skills: readonly string[] = skillGroups
+  .filter((g) => g.key !== 'tools')
+  .flatMap((g) => g.items);
+
+export const allSkillsCount = new Set(skillGroups.flatMap((g) => g.items)).size;
 
 export const navLinks = [
   { key: 'work', href: '/#work' },

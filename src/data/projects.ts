@@ -86,7 +86,7 @@ export const projects: readonly Project[] = [
     headline: 'Modern Dev Portfolio',
     summary: 'The very website you are browsing right now.',
     description:
-      'Full-stack portfolio rebuilt with Next.js and TypeScript. Features a WebGL hero, smooth inertial scrolling, scroll-driven GSAP animations, route transitions and a typed content layer.',
+      'Full-stack portfolio rebuilt with Next.js and TypeScript. Features a site-wide WebGL background, smooth inertial scrolling, scroll-driven GSAP animations, route transitions and a typed content layer.',
     tags: ['Next.js', 'TypeScript', 'GSAP', 'WebGL'],
     cover: '/images/webs.webp',
     detail: '/images/webs2.webp',
