@@ -24,8 +24,6 @@ export const socials: readonly SocialLink[] = [
     handle: 'Connect on LinkedIn',
   },
   { label: 'GitHub', href: 'https://github.com/ant762', handle: '@ant762' },
-  { label: 'Discord', href: 'https://discord.com/invite/8RWXPGsjcj', handle: 'Join the server' },
-  { label: 'Instagram', href: 'https://instagram.com/ant762_', handle: '@ant762_' },
   { label: 'Email', href: `mailto:${site.email}`, handle: site.email },
 ];
 
@@ -50,7 +48,22 @@ export const skillGroups: readonly { key: SkillGroupKey; items: readonly string[
     ],
   },
   { key: 'game', items: ['Roblox Studio', 'LuaU'] },
-  { key: 'infra', items: ['Cloudflare', 'Linux', 'Kali Linux', 'Wireshark'] },
+  {
+    key: 'infra',
+    items: [
+      'Virtual Machines',
+      'Ubuntu Server',
+      'Linux',
+      'Kali Linux',
+      'Switch Configuration',
+      'Network Devices',
+      'Wireless Antennas',
+      'Network Protocols',
+      'Cisco Networking Basics',
+      'Wireshark',
+      'Cloudflare',
+    ],
+  },
   {
     key: 'tools',
     items: [

@@ -13,7 +13,7 @@ export function Contact() {
   const [copied, setCopied] = useState(false);
   const { t } = useI18n();
   const socialHandle = (label: string, fallback: string) =>
-    label === 'LinkedIn' ? t.socials.linkedin : label === 'Discord' ? t.socials.discord : fallback;
+    label === 'LinkedIn' ? t.socials.linkedin : fallback;
 
   useGSAP(
     () => {

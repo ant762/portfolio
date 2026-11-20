@@ -6,7 +6,7 @@ inertial scrolling, scroll-driven GSAP animation and animated route transitions.
 
 [![CI](https://github.com/ant762/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/ant762/portfolio/actions/workflows/ci.yml)
 
-**Links:** [GitHub](https://github.com/ant762) · [LinkedIn](https://www.linkedin.com/in/maik-antunes-6062aa355/) · [Discord](https://discord.gg/EnuYKVdGru) · [Email](mailto:maik.antunes07@gmail.com)
+**Links:** [GitHub](https://github.com/ant762) · [LinkedIn](https://www.linkedin.com/in/maik-antunes-6062aa355/) · [Email](mailto:maik.antunes07@gmail.com)
 
 ## Highlights
 

@@ -159,7 +159,7 @@ const en = {
     getInTouch: 'Get in touch',
     backToTop: 'Back to top ↑',
   },
-  socials: { linkedin: 'Connect on LinkedIn', github: '@ant762', discord: 'Join the server' },
+  socials: { linkedin: 'Connect on LinkedIn', github: '@ant762' },
   project: {
     back: '← All projects',
     code: 'Code & Systems',
@@ -343,7 +343,7 @@ const es: Dictionary = {
     getInTouch: 'Contacto',
     backToTop: 'Volver arriba ↑',
   },
-  socials: { linkedin: 'Conéctate en LinkedIn', github: '@ant762', discord: 'Únete al servidor' },
+  socials: { linkedin: 'Conéctate en LinkedIn', github: '@ant762' },
   project: {
     back: '← Todos los proyectos',
     code: 'Código y Sistemas',
@@ -524,7 +524,7 @@ const pt: Dictionary = {
     getInTouch: 'Fale comigo',
     backToTop: 'Voltar ao topo ↑',
   },
-  socials: { linkedin: 'Conecte-se no LinkedIn', github: '@ant762', discord: 'Entre no servidor' },
+  socials: { linkedin: 'Conecte-se no LinkedIn', github: '@ant762' },
   project: {
     back: '← Todos os projetos',
     code: 'Código e Sistemas',

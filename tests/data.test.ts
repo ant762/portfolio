@@ -58,11 +58,11 @@ describe('skills e redes (fonte: README do GitHub)', () => {
     }
   });
 
-  it('links sociais são https e incluem GitHub, LinkedIn e Discord do README', () => {
+  it('links sociais são https e incluem GitHub e LinkedIn (sem Discord/Instagram)', () => {
     const hrefs = socials.map((s) => s.href);
     expect(hrefs).toContain('https://github.com/ant762');
     expect(hrefs.some((h) => h.includes('linkedin.com/in/maik-antunes'))).toBe(true);
-    expect(hrefs).toContain('https://discord.com/invite/8RWXPGsjcj');
+    expect(hrefs.some((h) => /discord|instagram/.test(h))).toBe(false);
   });
 
   it('não lista PHP e inclui a stack usada neste site', async () => {
