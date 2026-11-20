@@ -14,7 +14,7 @@ export default function NotFound() {
       <TransitionLink
         href="/"
         label={t.ui.home}
-        className="label-mono bg-accent text-on-accent rounded-full px-6 py-3 transition-transform hover:scale-105"
+        className="label-mono bg-accent text-on-accent hover:bg-spark rounded-full px-6 py-3 transition-[transform,background-color] hover:scale-105"
       >
         {t.notFound.back}
       </TransitionLink>

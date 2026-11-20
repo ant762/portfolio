@@ -129,7 +129,7 @@ export function Work() {
             data-cursor={t.cursor.view}
             className="group block shrink-0 md:w-[min(58vw,820px)]"
           >
-            <div className="bg-ink-soft relative aspect-[16/10] overflow-hidden rounded-sm">
+            <div className="bg-ink-soft ring-line group-hover:ring-paper relative aspect-[16/10] overflow-hidden rounded-sm ring-1 transition-shadow duration-500">
               <div data-parallax className="absolute inset-0 scale-[1.22]">
                 <Image
                   src={project.cover}

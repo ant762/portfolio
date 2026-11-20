@@ -174,7 +174,7 @@ function Bubbles({ reset }: { reset: string }) {
               'size-11 rounded-full border transition-colors duration-300',
               isPopped
                 ? 'border-line bg-transparent'
-                : 'border-accent/60 bg-accent/25 hover:bg-accent/40 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.5),inset_3px_3px_6px_rgba(255,255,255,0.12)]',
+                : 'border-accent/60 bg-accent/25 hover:bg-accent/60 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.5),inset_3px_3px_6px_rgba(255,255,255,0.12)]',
             )}
           />
         ))}
@@ -183,7 +183,7 @@ function Bubbles({ reset }: { reset: string }) {
         type="button"
         onClick={again}
         disabled={!all}
-        className="label-mono border-line enabled:hover:border-accent enabled:hover:text-accent rounded-full border px-4 py-2 transition-colors disabled:opacity-40"
+        className="label-mono border-line enabled:hover:border-spark enabled:hover:text-spark rounded-full border px-4 py-2 transition-colors disabled:opacity-40"
       >
         {reset}
       </button>
@@ -318,7 +318,7 @@ function Scramble({ text }: { text: string }) {
       type="button"
       onPointerEnter={run}
       onFocus={run}
-      className="font-display hover:text-accent text-[clamp(2rem,4.5vw,3.5rem)] font-bold tracking-tight uppercase transition-colors"
+      className="font-display hover:text-spark text-[clamp(2rem,4.5vw,3.5rem)] font-bold tracking-tight uppercase transition-colors"
       aria-label={text}
     >
       <span aria-hidden="true">{out}</span>
@@ -511,7 +511,7 @@ function Gravity({ clear, countLabel }: { clear: string; countLabel: string }) {
         <span className="tabular-nums">
           {count} {countLabel}
         </span>
-        <button type="button" onClick={wipe} className="hover:text-accent transition-colors">
+        <button type="button" onClick={wipe} className="hover:text-spark transition-colors">
           {clear}
         </button>
       </div>

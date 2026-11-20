@@ -21,7 +21,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
           aria-pressed={locale === code}
           aria-label={localeNames[code]}
           onClick={() => setLocale(code)}
-          className="py-1 uppercase transition-opacity hover:opacity-100 aria-[pressed=false]:opacity-55"
+          className="hover:text-spark py-1 uppercase transition-colors hover:opacity-100 aria-[pressed=false]:opacity-55"
         >
           {code}
         </button>

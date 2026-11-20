@@ -185,7 +185,7 @@ export function Preloader() {
           type="button"
           data-pre-enter
           data-sound="on"
-          className="label-mono bg-accent text-on-accent hover:bg-paper hover:text-ink px-8 py-4 transition-colors"
+          className="label-mono border-paper bg-paper text-ink hover:bg-ink hover:text-paper border px-8 py-4 transition-colors duration-300"
         >
           {t.preloader.enter}
         </button>
@@ -193,7 +193,7 @@ export function Preloader() {
           type="button"
           data-pre-enter
           data-sound="off"
-          className="label-mono border-line text-muted hover:text-paper border px-8 py-4 transition-colors"
+          className="label-mono border-line text-muted hover:border-paper hover:text-paper border px-8 py-4 transition-colors duration-300"
         >
           {t.preloader.mute}
         </button>
