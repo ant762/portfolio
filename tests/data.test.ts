@@ -25,12 +25,10 @@ describe('projects', () => {
     },
   );
 
-  it('separa programação e ambientes', () => {
-    expect(getProjectsByCategory('programming').length).toBeGreaterThan(0);
-    expect(getProjectsByCategory('environment').length).toBeGreaterThan(0);
-    expect(
-      getProjectsByCategory('programming').length + getProjectsByCategory('environment').length,
-    ).toBe(projects.length);
+  it('mantém só o projeto deste site com a seção playground', () => {
+    expect(projects.map((p) => p.slug)).toEqual(['personal-portfolio']);
+    expect(getProject('personal-portfolio')?.playground).toBe(true);
+    expect(getProjectsByCategory('programming')).toHaveLength(1);
   });
 
   it('getProject e getNextProject funcionam de forma circular', () => {

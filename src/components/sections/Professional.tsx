@@ -104,7 +104,7 @@ export function Professional() {
                   {item.org ? (
                     <span className="label-mono mt-2 block normal-case">{item.org}</span>
                   ) : null}
-                  <span className="label-mono text-muted group-hover:text-on-accent/70 mt-3 flex flex-wrap gap-x-5 gap-y-1 normal-case">
+                  <span className="label-mono text-muted group-hover:text-on-accent/70 mt-3 flex flex-wrap gap-x-5 gap-y-1 normal-case empty:hidden">
                     {item.bullets.map((bullet) => (
                       <span key={bullet}>— {bullet}</span>
                     ))}

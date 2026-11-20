@@ -9,7 +9,7 @@
 ```ts
 {
   slug: 'my-project',                 // lowercase-kebab, unique, becomes /projects/my-project
-  category: 'programming',            // 'programming' → horizontal showcase, 'environment' → list
+  category: 'programming',            // 'programming' → Work section; add playground: true for the fidgets page
   title: 'My Project',                // short title (cards/lists)
   headline: 'My Project: Long Title', // page title
   summary: 'One line.',

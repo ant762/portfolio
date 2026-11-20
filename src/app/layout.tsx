@@ -24,16 +24,7 @@ export const metadata: Metadata = {
   applicationName: `${site.handle}.dev`,
   authors: [{ name: site.name, url: SITE_URL }],
   creator: site.name,
-  keywords: [
-    'Fullstack Developer',
-    'Luau',
-    'Roblox',
-    'JavaScript',
-    'TypeScript',
-    'Next.js',
-    'Level Design',
-    'Portfolio',
-  ],
+  keywords: ['Fullstack Developer', 'Luau', 'JavaScript', 'TypeScript', 'Next.js', 'Portfolio'],
   alternates: { canonical: '/' },
   icons: { icon: site.ogImage, apple: site.ogImage },
   openGraph: {

@@ -16,7 +16,6 @@ inertial scrolling, scroll-driven GSAP animation and animated route transitions.
 - **English, Spanish and Portuguese** (`EN / ES / PT`), detected from the browser and remembered
 - **Smooth scrolling** (Lenis) wired into GSAP's ticker and ScrollTrigger
 - **Pinned horizontal showcase** for code projects, with per-card image parallax
-- **Editorial environment list** with a cursor-following, velocity-tilted preview
 - **Route transitions** — staggered bars cover the screen while Next.js swaps the page
 - **Custom cursor** with contextual labels (`data-cursor="View"`), magnetic buttons, scroll-velocity marquee
 - Statically generated project pages (`/projects/[slug]`), typed content layer, SEO (metadata, Open Graph, JSON-LD, sitemap, robots)
@@ -64,7 +63,7 @@ src/
 ├── components/
 │   ├── layout/           # Preloader, Navbar (+ fullscreen menu)
 │   ├── providers/        # SmoothScroll (Lenis), TransitionProvider, LocaleSync, SoundProvider
-│   ├── sections/         # Hero, Marquee, Work, Environments, About, Professional, Contact
+│   ├── sections/         # Hero, Marquee, Work, About, Professional, Contact
 │   ├── project/          # Project page view
 │   ├── ui/               # Cursor, Magnetic, SplitWords, TransitionLink, SoundControls, LanguageSwitcher
 │   └── webgl/            # Atmosphere (three.js shader, site-wide background)

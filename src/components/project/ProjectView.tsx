@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRef } from 'react';
+import { Playground } from '@/components/project/Playground';
 import { TransitionLink } from '@/components/ui/TransitionLink';
 import { SplitWords } from '@/components/ui/SplitWords';
 import { useSiteReady } from '@/hooks/useSiteReady';
@@ -114,7 +115,7 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
 
         <p data-fade className="label-mono text-accent mt-8 flex items-center gap-3">
           <span className="bg-accent size-2 rounded-full" aria-hidden="true" />
-          {project.category === 'programming' ? t.project.code : t.project.environment}
+          {t.project.code}
         </p>
       </header>
 
@@ -196,6 +197,8 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
         </div>
       </section>
 
+      {project.playground ? <Playground /> : null}
+
       {/* Imagem de detalhe */}
       {hasSecondImage ? (
         <div className="px-gutter pb-[clamp(5rem,12vw,12rem)]">
@@ -213,24 +216,26 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
         </div>
       ) : null}
 
-      {/* Próximo projeto */}
-      <TransitionLink
-        href={`/projects/${next.slug}`}
-        label={next.title}
-        data-cursor={t.cursor.next}
-        className="group border-line px-gutter relative block overflow-hidden border-t py-[clamp(5rem,12vw,11rem)]"
-      >
-        <span
-          aria-hidden="true"
-          className="bg-accent ease-expo absolute inset-0 origin-bottom scale-y-0 transition-transform duration-700 group-hover:scale-y-100"
-        />
-        <span className="group-hover:text-on-accent relative block transition-colors duration-500">
-          <span className="label-mono text-muted group-hover:text-on-accent/70 transition-colors duration-500">
-            {t.project.next}
+      {/* Próximo projeto (só quando há mais de um) */}
+      {total > 1 ? (
+        <TransitionLink
+          href={`/projects/${next.slug}`}
+          label={next.title}
+          data-cursor={t.cursor.next}
+          className="group border-line px-gutter relative block overflow-hidden border-t py-[clamp(5rem,12vw,11rem)]"
+        >
+          <span
+            aria-hidden="true"
+            className="bg-accent ease-expo absolute inset-0 origin-bottom scale-y-0 transition-transform duration-700 group-hover:scale-y-100"
+          />
+          <span className="group-hover:text-on-accent relative block transition-colors duration-500">
+            <span className="label-mono text-muted group-hover:text-on-accent/70 transition-colors duration-500">
+              {t.project.next}
+            </span>
+            <span className="text-display-lg mt-6 block font-bold uppercase">{next.title}</span>
           </span>
-          <span className="text-display-lg mt-6 block font-bold uppercase">{next.title}</span>
-        </span>
-      </TransitionLink>
+        </TransitionLink>
+      ) : null}
     </article>
   );
 }

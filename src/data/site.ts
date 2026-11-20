@@ -10,7 +10,7 @@ export const site = {
   title: 'ant762 — Fullstack Developer',
   tagline: 'Backend engineering, IT infrastructure and game development.',
   description:
-    'Fullstack developer focused on backend engineering, IT infrastructure and game development (Roblox / LuaU). Node.js, Python, MySQL, Linux and more.',
+    'Fullstack developer focused on backend engineering, IT infrastructure and game development (LuaU). Node.js, Python, MySQL, Linux and more.',
   location: 'Brazil',
   timezone: 'America/Sao_Paulo',
   email: 'maik.antunes07@gmail.com',
@@ -47,7 +47,7 @@ export const skillGroups: readonly { key: SkillGroupKey; items: readonly string[
       'Lenis',
     ],
   },
-  { key: 'game', items: ['Roblox Studio', 'LuaU'] },
+  { key: 'game', items: ['LuaU'] },
   {
     key: 'infra',
     items: [
@@ -91,7 +91,6 @@ export const allSkillsCount = new Set(skillGroups.flatMap((g) => g.items)).size;
 
 export const navLinks = [
   { key: 'work', href: '/#work' },
-  { key: 'environments', href: '/#environments' },
   { key: 'about', href: '/#about' },
   { key: 'professional', href: '/#professional' },
   { key: 'contact', href: '/#contact' },

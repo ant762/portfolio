@@ -27,7 +27,6 @@ describe('i18n', () => {
       const t = dictionaries[locale];
       expect(t.hero.tagline.length).toBeGreaterThan(0);
       expect(t.about.text.length).toBeGreaterThan(0);
-      expect(t.environments.blurb).toContain('{n}');
     }
   });
 

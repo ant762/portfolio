@@ -3,7 +3,6 @@ import type { Locale } from './config';
 const en = {
   nav: {
     work: 'Work',
-    environments: 'Environments',
     about: 'About',
     professional: 'Professional',
     contact: 'Contact',
@@ -40,27 +39,67 @@ const en = {
   cursor: { view: 'View', open: 'Open', next: 'Next' },
   work: {
     label: '(01) Selected work',
-    titleA: 'Code &',
-    titleB: 'Systems',
-    blurb: 'Gameplay engines, tooling and data platforms — built to be robust, readable and fast.',
-    scroll: 'Scroll to explore',
-    more: 'More on GitHub',
-    seeAll: 'See all',
-    repositories: 'repositories',
+    titleA: 'Website',
+    titleB: 'Playground',
+    blurb: 'The website itself, built as a live test bench for web-development capabilities.',
+    soon: 'More systems will be added here soon.',
     technologies: 'Technologies',
   },
-  environments: {
-    label: '(02) Environments',
-    titleA: 'Worlds &',
-    titleB: 'Terrain',
-    blurb:
-      'Terrain sculpting, atmosphere and lighting — {n} level design studies built from scratch.',
+  playground: {
+    label: 'How it works',
+    title: 'A test bench for the web',
+    intro:
+      'This website is the project. Its goal is to test web-development capabilities: rendering, animation, audio, performance and architecture, all working together in one place.',
+    later:
+      'More projects and systems will be added to this page later. For now it explains how the site works and lets you play with it.',
+    featuresTitle: 'What is inside',
+    features: [
+      {
+        title: 'WebGL atmosphere',
+        text: 'A three.js fragment shader runs behind the whole site: fog, gothic arches, embers, a light that follows your cursor and ripples on every click.',
+      },
+      {
+        title: 'Scroll and motion',
+        text: 'Lenis inertial scroll feeds GSAP ScrollTrigger. Text reveals, a pinned showcase, route transitions and a custom cursor are all scroll-aware.',
+      },
+      {
+        title: 'Procedural audio',
+        text: 'The darkwave soundtrack and every click are synthesized live with the Web Audio API. No audio files. Music and effects have separate switches.',
+      },
+      {
+        title: 'Three languages',
+        text: 'English, Spanish and Portuguese from typed dictionaries, picked from your browser and switchable at any time without a reload.',
+      },
+      {
+        title: 'Typed content layer',
+        text: 'Next.js App Router with strict TypeScript. Content lives in data files, separate from the UI, checked by Vitest tests and CI.',
+      },
+      {
+        title: 'Accessible by default',
+        text: 'Reduced-motion support, skip link, visible focus, semantic landmarks and statically generated pages.',
+      },
+    ],
+    fidgetsLabel: 'Fidgets',
+    fidgetsTitle: 'Play with it',
+    fidgetsHint: 'Small interactive experiments. Turn effects on in the header to hear them.',
+    fidgets: {
+      spinner: { title: 'Spinner', hint: 'Drag and flick it' },
+      bubbles: { title: 'Bubble wrap', hint: 'Pop them all' },
+      magnet: { title: 'Magnetic', hint: 'Chase the button' },
+      tilt: { title: 'Tilt', hint: 'Move over the card' },
+      burst: { title: 'Burst', hint: 'Click anywhere' },
+      scramble: { title: 'Scramble', hint: 'Hover the text' },
+      switches: { title: 'Switches', hint: 'Flip them' },
+      combo: { title: 'Combo', hint: 'Keep clicking' },
+      gravity: { title: 'Gravity', hint: 'Click to drop balls' },
+      pads: { title: 'Sound pads', hint: 'Tap the pads' },
+    },
+    ui: { reset: 'Reset', clear: 'Clear', combo: 'combo', hit: 'tap', balls: 'balls' },
   },
   about: {
     label: '(03) About',
-    text: 'A developer driven by logic, complex systems and the challenge of building scalable server-side architectures. My core focus is backend engineering and data management, with a growing passion for AI-driven solutions. I design efficient database schemas and robust Node.js environments, enjoy crafting high-performance minimalist frontends, and build experiences inside Roblox Studio with LuaU.',
+    text: 'A developer driven by logic, complex systems and the challenge of building scalable server-side architectures. My core focus is backend engineering and data management, with a growing passion for AI-driven solutions. I design efficient database schemas and robust Node.js environments, enjoy crafting high-performance minimalist frontends, and build games with LuaU.',
     statCode: 'Systems & code projects',
-    statEnv: 'Environment studies',
     statSkills: 'Technologies',
     statFocus: 'Focus areas',
   },
@@ -100,12 +139,9 @@ const en = {
       {
         kind: 'extra',
         period: 'Since 2015',
-        title: 'Roblox / LuaU Developer',
+        title: 'Game Developer / LuaU',
         org: 'Roblox Studio',
-        bullets: [
-          'Gameplay systems, tactical AI, vehicles and open-world economy',
-          'Level design and environment studies',
-        ],
+        bullets: [],
       },
     ],
     skillsLabel: 'Skills',
@@ -163,7 +199,6 @@ const en = {
   project: {
     back: '← All projects',
     code: 'Code & Systems',
-    environment: 'Environment',
     overview: 'Overview',
     stack: 'Stack & focus',
     links: 'Links',
@@ -185,7 +220,6 @@ export type Dictionary = typeof en;
 const es: Dictionary = {
   nav: {
     work: 'Trabajo',
-    environments: 'Entornos',
     about: 'Sobre mí',
     professional: 'Profesional',
     contact: 'Contacto',
@@ -222,28 +256,69 @@ const es: Dictionary = {
   cursor: { view: 'Ver', open: 'Abrir', next: 'Siguiente' },
   work: {
     label: '(01) Trabajo seleccionado',
-    titleA: 'Código y',
-    titleB: 'Sistemas',
+    titleA: 'Sitio web',
+    titleB: 'Playground',
     blurb:
-      'Motores de gameplay, herramientas y plataformas de datos — hechos para ser robustos, legibles y rápidos.',
-    scroll: 'Desliza para explorar',
-    more: 'Más en GitHub',
-    seeAll: 'Ver todos',
-    repositories: 'los repositorios',
+      'El propio sitio web, creado como un banco de pruebas vivo de capacidades de desarrollo web.',
+    soon: 'Pronto se añadirán más sistemas aquí.',
     technologies: 'Tecnologías',
   },
-  environments: {
-    label: '(02) Entornos',
-    titleA: 'Mundos y',
-    titleB: 'Terreno',
-    blurb:
-      'Escultura de terreno, atmósfera e iluminación — {n} estudios de level design hechos desde cero.',
+  playground: {
+    label: 'Cómo funciona',
+    title: 'Un banco de pruebas para la web',
+    intro:
+      'Este sitio web es el proyecto. Su objetivo es probar capacidades de desarrollo web: renderizado, animación, audio, rendimiento y arquitectura, todo funcionando junto en un solo lugar.',
+    later:
+      'Más proyectos y sistemas se añadirán a esta página más adelante. Por ahora explica cómo funciona el sitio y te deja jugar con él.',
+    featuresTitle: 'Qué hay dentro',
+    features: [
+      {
+        title: 'Atmósfera WebGL',
+        text: 'Un fragment shader de three.js corre detrás de todo el sitio: niebla, arcos góticos, brasas, una luz que sigue el cursor y ondas en cada clic.',
+      },
+      {
+        title: 'Scroll y movimiento',
+        text: 'El scroll inercial de Lenis alimenta GSAP ScrollTrigger. Revelado de textos, una galería fijada, transiciones de ruta y un cursor propio reaccionan al scroll.',
+      },
+      {
+        title: 'Audio procedural',
+        text: 'La banda sonora darkwave y cada clic se sintetizan en vivo con la Web Audio API. Sin archivos de audio. Música y efectos tienen interruptores separados.',
+      },
+      {
+        title: 'Tres idiomas',
+        text: 'Inglés, español y portugués desde diccionarios tipados, elegidos según tu navegador y cambiables en cualquier momento sin recargar.',
+      },
+      {
+        title: 'Capa de contenido tipada',
+        text: 'Next.js App Router con TypeScript estricto. El contenido vive en archivos de datos, separado de la interfaz, verificado con tests de Vitest y CI.',
+      },
+      {
+        title: 'Accesible por defecto',
+        text: 'Soporte de movimiento reducido, enlace de salto, foco visible, landmarks semánticos y páginas generadas estáticamente.',
+      },
+    ],
+    fidgetsLabel: 'Fidgets',
+    fidgetsTitle: 'Juega con él',
+    fidgetsHint:
+      'Pequeños experimentos interactivos. Activa los efectos en el encabezado para oírlos.',
+    fidgets: {
+      spinner: { title: 'Spinner', hint: 'Arrástralo y lánzalo' },
+      bubbles: { title: 'Plástico de burbujas', hint: 'Revienta todas' },
+      magnet: { title: 'Magnético', hint: 'Persigue el botón' },
+      tilt: { title: 'Inclinación', hint: 'Mueve el cursor sobre la tarjeta' },
+      burst: { title: 'Explosión', hint: 'Haz clic en cualquier lugar' },
+      scramble: { title: 'Scramble', hint: 'Pasa el cursor por el texto' },
+      switches: { title: 'Interruptores', hint: 'Cámbialos' },
+      combo: { title: 'Combo', hint: 'Sigue haciendo clic' },
+      gravity: { title: 'Gravedad', hint: 'Clic para soltar bolas' },
+      pads: { title: 'Pads de sonido', hint: 'Toca los pads' },
+    },
+    ui: { reset: 'Reiniciar', clear: 'Limpiar', combo: 'combo', hit: 'toque', balls: 'bolas' },
   },
   about: {
     label: '(03) Sobre mí',
-    text: 'Un desarrollador movido por la lógica, los sistemas complejos y el reto de construir arquitecturas de servidor escalables. Mi foco principal es la ingeniería backend y la gestión de datos, con una pasión creciente por las soluciones basadas en IA. Diseño esquemas de base de datos eficientes y entornos Node.js robustos, disfruto crear frontends minimalistas de alto rendimiento y construyo experiencias en Roblox Studio con LuaU.',
+    text: 'Un desarrollador movido por la lógica, los sistemas complejos y el reto de construir arquitecturas de servidor escalables. Mi foco principal es la ingeniería backend y la gestión de datos, con una pasión creciente por las soluciones basadas en IA. Diseño esquemas de base de datos eficientes y entornos Node.js robustos, disfruto crear frontends minimalistas de alto rendimiento y construyo juegos con LuaU.',
     statCode: 'Proyectos de sistemas y código',
-    statEnv: 'Estudios de entornos',
     statSkills: 'Tecnologías',
     statFocus: 'Áreas de enfoque',
   },
@@ -283,12 +358,9 @@ const es: Dictionary = {
       {
         kind: 'extra',
         period: 'Desde 2015',
-        title: 'Desarrollador Roblox / LuaU',
+        title: 'Desarrollador de Juegos / LuaU',
         org: 'Roblox Studio',
-        bullets: [
-          'Sistemas de gameplay, IA táctica, vehículos y economía de mundo abierto',
-          'Level design y estudios de entornos',
-        ],
+        bullets: [],
       },
     ],
     skillsLabel: 'Habilidades',
@@ -347,7 +419,6 @@ const es: Dictionary = {
   project: {
     back: '← Todos los proyectos',
     code: 'Código y Sistemas',
-    environment: 'Entorno',
     overview: 'Resumen',
     stack: 'Stack y enfoque',
     links: 'Enlaces',
@@ -367,7 +438,6 @@ const es: Dictionary = {
 const pt: Dictionary = {
   nav: {
     work: 'Trabalhos',
-    environments: 'Ambientes',
     about: 'Sobre',
     professional: 'Profissional',
     contact: 'Contato',
@@ -404,28 +474,68 @@ const pt: Dictionary = {
   cursor: { view: 'Ver', open: 'Abrir', next: 'Próximo' },
   work: {
     label: '(01) Trabalhos selecionados',
-    titleA: 'Código e',
-    titleB: 'Sistemas',
+    titleA: 'Site',
+    titleB: 'Playground',
     blurb:
-      'Engines de gameplay, ferramentas e plataformas de dados — feitos para serem robustos, legíveis e rápidos.',
-    scroll: 'Role para explorar',
-    more: 'Mais no GitHub',
-    seeAll: 'Ver todos os',
-    repositories: 'repositórios',
+      'O próprio site, criado como uma bancada viva de testes das capacidades de desenvolvimento web.',
+    soon: 'Mais sistemas serão adicionados aqui em breve.',
     technologies: 'Tecnologias',
   },
-  environments: {
-    label: '(02) Ambientes',
-    titleA: 'Mundos e',
-    titleB: 'Terreno',
-    blurb:
-      'Escultura de terreno, atmosfera e iluminação — {n} estudos de level design feitos do zero.',
+  playground: {
+    label: 'Como funciona',
+    title: 'Uma bancada de testes para a web',
+    intro:
+      'Este site é o projeto. O objetivo é testar capacidades de desenvolvimento web: renderização, animação, áudio, desempenho e arquitetura, tudo funcionando junto em um só lugar.',
+    later:
+      'Mais projetos e sistemas serão adicionados a esta página depois. Por enquanto ela explica como o site funciona e deixa você brincar com ele.',
+    featuresTitle: 'O que tem dentro',
+    features: [
+      {
+        title: 'Atmosfera WebGL',
+        text: 'Um fragment shader do three.js roda atrás de todo o site: névoa, arcos góticos, brasas, uma luz que segue o cursor e ondas a cada clique.',
+      },
+      {
+        title: 'Scroll e movimento',
+        text: 'A rolagem inercial do Lenis alimenta o GSAP ScrollTrigger. Revelação de textos, uma galeria fixada, transições de rota e um cursor próprio reagem ao scroll.',
+      },
+      {
+        title: 'Áudio procedural',
+        text: 'A trilha darkwave e cada clique são sintetizados ao vivo com a Web Audio API. Sem arquivos de áudio. Música e efeitos têm chaves separadas.',
+      },
+      {
+        title: 'Três idiomas',
+        text: 'Inglês, espanhol e português a partir de dicionários tipados, escolhidos pelo navegador e alternáveis a qualquer momento sem recarregar.',
+      },
+      {
+        title: 'Camada de conteúdo tipada',
+        text: 'Next.js App Router com TypeScript estrito. O conteúdo fica em arquivos de dados, separado da interface, verificado por testes Vitest e CI.',
+      },
+      {
+        title: 'Acessível por padrão',
+        text: 'Suporte a movimento reduzido, link de pular, foco visível, landmarks semânticos e páginas geradas estaticamente.',
+      },
+    ],
+    fidgetsLabel: 'Fidgets',
+    fidgetsTitle: 'Brinque com ele',
+    fidgetsHint: 'Pequenos experimentos interativos. Ative os efeitos no cabeçalho para ouvi-los.',
+    fidgets: {
+      spinner: { title: 'Spinner', hint: 'Arraste e lance' },
+      bubbles: { title: 'Plástico bolha', hint: 'Estoure todas' },
+      magnet: { title: 'Magnético', hint: 'Persiga o botão' },
+      tilt: { title: 'Inclinação', hint: 'Passe o cursor no cartão' },
+      burst: { title: 'Explosão', hint: 'Clique em qualquer lugar' },
+      scramble: { title: 'Scramble', hint: 'Passe o cursor no texto' },
+      switches: { title: 'Interruptores', hint: 'Vire todos' },
+      combo: { title: 'Combo', hint: 'Continue clicando' },
+      gravity: { title: 'Gravidade', hint: 'Clique para soltar bolas' },
+      pads: { title: 'Pads de som', hint: 'Toque nos pads' },
+    },
+    ui: { reset: 'Reiniciar', clear: 'Limpar', combo: 'combo', hit: 'toque', balls: 'bolas' },
   },
   about: {
     label: '(03) Sobre',
-    text: 'Um desenvolvedor movido por lógica, sistemas complexos e pelo desafio de construir arquiteturas de servidor escaláveis. Meu foco principal é engenharia backend e gestão de dados, com uma paixão crescente por soluções baseadas em IA. Projeto esquemas de banco de dados eficientes e ambientes Node.js robustos, gosto de criar frontends minimalistas de alta performance e construo experiências no Roblox Studio com LuaU.',
+    text: 'Um desenvolvedor movido por lógica, sistemas complexos e pelo desafio de construir arquiteturas de servidor escaláveis. Meu foco principal é engenharia backend e gestão de dados, com uma paixão crescente por soluções baseadas em IA. Projeto esquemas de banco de dados eficientes e ambientes Node.js robustos, gosto de criar frontends minimalistas de alta performance e construo jogos com LuaU.',
     statCode: 'Projetos de sistemas e código',
-    statEnv: 'Estudos de ambientes',
     statSkills: 'Tecnologias',
     statFocus: 'Áreas de foco',
   },
@@ -465,12 +575,9 @@ const pt: Dictionary = {
       {
         kind: 'extra',
         period: 'Desde 2015',
-        title: 'Desenvolvedor Roblox / LuaU',
+        title: 'Desenvolvedor de Jogos / LuaU',
         org: 'Roblox Studio',
-        bullets: [
-          'Sistemas de gameplay, IA tática, veículos e economia de mundo aberto',
-          'Level design e estudos de ambientes',
-        ],
+        bullets: [],
       },
     ],
     skillsLabel: 'Habilidades',
@@ -528,7 +635,6 @@ const pt: Dictionary = {
   project: {
     back: '← Todos os projetos',
     code: 'Código e Sistemas',
-    environment: 'Ambiente',
     overview: 'Visão geral',
     stack: 'Stack e foco',
     links: 'Links',

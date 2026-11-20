@@ -9,13 +9,11 @@ import { gsap, prefersReducedMotion, useGSAP, reveal } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
 
 const codeCount = getProjectsByCategory('programming').length;
-const envCount = getProjectsByCategory('environment').length;
 
 export function About() {
   const { t } = useI18n();
   const stats = [
     { value: codeCount, label: t.about.statCode },
-    { value: envCount, label: t.about.statEnv },
     { value: allSkillsCount, label: t.about.statSkills },
     { value: 3, label: t.about.statFocus },
   ];
@@ -84,7 +82,7 @@ export function About() {
         </div>
       </div>
 
-      <dl data-stats className="mt-[clamp(4rem,9vw,9rem)] grid grid-cols-2 gap-y-12 md:grid-cols-4">
+      <dl data-stats className="mt-[clamp(4rem,9vw,9rem)] grid grid-cols-2 gap-y-12 md:grid-cols-3">
         {stats.map((stat) => (
           <div key={stat.label} data-stat className="border-line border-t pt-5 pr-6">
             <dt className="label-mono text-muted order-2 mt-4">{stat.label}</dt>

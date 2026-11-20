@@ -67,7 +67,6 @@ after hydration never causes a visible flash.
 | `Hero`         | Char-by-char reveal, scrubbed exit parallax over the site-wide `Atmosphere`                   |
 | `Marquee`      | Two infinite rows; ScrollTrigger velocity changes `timeScale` and direction                   |
 | `Work`         | `pin` + `scrub` horizontal track; per-card parallax via `containerAnimation`; mobile fallback |
-| `Environments` | Row reveals; cursor-following preview with `quickTo` + velocity tilt; touch thumbnails        |
 | `About`        | Word-by-word opacity scrub, count-up stats                                                    |
 | `Professional` | Timeline rows, GitHub block, stack list read from `package.json`, practices                   |
 | `Contact`      | Word reveal, elastic CTA, magnetic button, copy-to-clipboard                                  |
