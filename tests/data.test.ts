@@ -64,4 +64,13 @@ describe('skills e redes (fonte: README do GitHub)', () => {
     expect(hrefs.some((h) => h.includes('linkedin.com/in/maik-antunes'))).toBe(true);
     expect(hrefs).toContain('https://discord.com/invite/8RWXPGsjcj');
   });
+
+  it('não lista PHP e inclui a stack usada neste site', async () => {
+    const { skillGroups } = await import('@/data/site');
+    const all = skillGroups.flatMap((g) => g.items);
+    expect(all).not.toContain('PHP');
+    for (const tech of ['Next.js', 'TypeScript', 'Tailwind CSS', 'React', 'GSAP', 'Three.js']) {
+      expect(all).toContain(tech);
+    }
+  });
 });

@@ -7,9 +7,6 @@ import { useI18n } from '@/i18n/useI18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
 
-const GITHUB = 'https://github.com/ant762';
-const REPOS = ['portfolio', 'sistemainventario', 'jsnode', 'sqlestudos'] as const;
-
 const toEntries = (deps: Record<string, string>) =>
   Object.entries(deps)
     .filter(([name]) => !name.startsWith('@types/') && name !== 'eslint-config-next')
@@ -136,54 +133,6 @@ export function Professional() {
           ))}
           <div className="bg-line h-px" aria-hidden="true" />
         </dl>
-      </div>
-
-      {/* GitHub */}
-      <div className="mt-[clamp(5rem,10vw,10rem)] grid gap-10 md:grid-cols-12">
-        <div data-reveal className="md:col-span-4">
-          <p className="label-mono text-muted">{p.githubLabel}</p>
-          <h3 className="text-display-md mt-4 font-bold uppercase">{p.githubTitle}</h3>
-          <p className="text-paper/70 mt-6 max-w-sm text-lg leading-snug">{p.githubBlurb}</p>
-          <a
-            href={GITHUB}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor={t.cursor.open}
-            className="label-mono hover:text-accent mt-8 inline-flex items-center gap-2 transition-colors"
-          >
-            {p.githubProfile} <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-
-        <ul className="grid gap-px md:col-span-8 md:grid-cols-2">
-          {REPOS.map((repo) => (
-            <li key={repo} data-reveal>
-              <a
-                href={`${GITHUB}/${repo}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor={t.cursor.open}
-                className="group border-line hover:border-accent flex h-full flex-col justify-between gap-10 rounded-sm border p-6 transition-colors"
-              >
-                <span className="label-mono text-muted">ant762 /</span>
-                <span>
-                  <span className="ease-expo group-hover:text-accent block text-2xl font-semibold tracking-tight transition-colors">
-                    {repo}
-                    <span
-                      aria-hidden="true"
-                      className="ease-expo ml-2 inline-block transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
-                    >
-                      ↗
-                    </span>
-                  </span>
-                  {p.repoDescriptions[repo] ? (
-                    <span className="text-muted mt-2 block">{p.repoDescriptions[repo]}</span>
-                  ) : null}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
 
       {/* Stack & práticas — lido do package.json deste projeto */}

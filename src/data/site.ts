@@ -8,9 +8,9 @@ export const site = {
   handle: 'ant762',
   role: 'Fullstack Developer',
   title: 'ant762 — Fullstack Developer',
-  tagline: 'Backend engineering, security infrastructure and game development.',
+  tagline: 'Backend engineering, IT infrastructure and game development.',
   description:
-    'Fullstack developer focused on backend engineering, security infrastructure and game development (Roblox / LuaU). Node.js, Python, MySQL, Linux and more.',
+    'Fullstack developer focused on backend engineering, IT infrastructure and game development (Roblox / LuaU). Node.js, Python, MySQL, Linux and more.',
   location: 'Brazil',
   timezone: 'America/Sao_Paulo',
   email: 'maik.antunes07@gmail.com',
@@ -29,17 +29,43 @@ export const socials: readonly SocialLink[] = [
   { label: 'Email', href: `mailto:${site.email}`, handle: site.email },
 ];
 
-export type SkillGroupKey = 'backend' | 'frontend' | 'game' | 'security' | 'tools';
+export type SkillGroupKey = 'backend' | 'frontend' | 'game' | 'infra' | 'tools';
 
-/** Fonte: README do perfil github.com/ant762 ("How I Work"). */
+/** Fonte: README do perfil github.com/ant762 + as tecnologias usadas neste site (frontend/tools). */
 export const skillGroups: readonly { key: SkillGroupKey; items: readonly string[] }[] = [
-  { key: 'backend', items: ['Node.js', 'Python', 'MySQL', 'C', 'C++', 'C#', 'PHP', 'Lua'] },
-  { key: 'frontend', items: ['JavaScript', 'HTML', 'CSS'] },
+  { key: 'backend', items: ['Node.js', 'Python', 'MySQL', 'C', 'C++', 'C#', 'Lua'] },
+  {
+    key: 'frontend',
+    items: [
+      'JavaScript',
+      'TypeScript',
+      'HTML',
+      'CSS',
+      'Next.js',
+      'React',
+      'Tailwind CSS',
+      'GSAP',
+      'Three.js',
+      'Lenis',
+    ],
+  },
   { key: 'game', items: ['Roblox Studio', 'LuaU'] },
-  { key: 'security', items: ['Cloudflare', 'Linux', 'Kali Linux', 'Wireshark'] },
+  { key: 'infra', items: ['Cloudflare', 'Linux', 'Kali Linux', 'Wireshark'] },
   {
     key: 'tools',
-    items: ['Git', 'Photoshop', 'Premiere', 'Notion', 'Figma', 'VS Code', 'GitHub', 'Red Hat'],
+    items: [
+      'Git',
+      'Photoshop',
+      'Premiere',
+      'Notion',
+      'Figma',
+      'VS Code',
+      'GitHub',
+      'Red Hat',
+      'ESLint',
+      'Prettier',
+      'Vitest',
+    ],
   },
 ];
 
