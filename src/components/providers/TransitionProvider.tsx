@@ -123,7 +123,6 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
 
       busy.current = true;
       pendingHash.current = url.hash;
-      setSiteReady(false);
       lockScroll('transition');
       labelEl.textContent = label;
       playSfx('whoosh');
@@ -131,7 +130,11 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
       // Se por algum motivo a rota não trocar, não deixa a tela presa.
       safetyTimer.current = window.setTimeout(reveal, SAFETY_TIMEOUT_MS);
 
-      const go = () => router.push(`${url.pathname}${url.search}`);
+      // O "palco" só é escondido quando as barras já cobriram a tela inteira.
+      const go = () => {
+        setSiteReady(false);
+        router.push(`${url.pathname}${url.search}`);
+      };
 
       if (prefersReducedMotion()) {
         go();

@@ -8,7 +8,8 @@ import { lockScroll, unlockScroll } from '@/lib/scroll';
 import { setMusic, setSfx } from '@/lib/sound';
 import { padIndex } from '@/lib/utils';
 
-const MIN_DURATION = 1.4;
+const MIN_DURATION = 2.4; // tempo mínimo de carregamento visível (s)
+const FULL_RUN = 3; // segundos para o contador ir de 0 a 100 (proporcional)
 
 export function Preloader() {
   const { t } = useI18n();
@@ -78,11 +79,13 @@ export function Preloader() {
         counter.textContent = padIndex(Math.round(progress.value), 3);
         gsap.set(bar, { scaleX: progress.value / 100 });
       };
-      const to = (value: number, duration = 0.6) =>
+      // O contador sobe de forma contínua (nunca salta) e só chega perto de 100 quando
+      // fontes e recursos realmente terminaram de carregar.
+      const to = (value: number) =>
         gsap.to(progress, {
           value,
-          duration,
-          ease: 'power2.out',
+          duration: Math.max(0.5, ((value - progress.value) / 100) * FULL_RUN),
+          ease: 'power1.inOut',
           onUpdate: paint,
           overwrite: true,
         });
@@ -91,9 +94,10 @@ export function Preloader() {
       let loadDone = false;
       let minDone = false;
       const check = () => {
-        to(10 + (fontsDone ? 40 : 0) + (loadDone ? 50 : 0));
+        to(15 + (fontsDone ? 35 : 0) + (loadDone ? 35 : 0) + (minDone ? 15 : 0));
         if (fontsDone && loadDone && minDone) {
-          gsap.delayedCall(0.7, () => {
+          // Mostra o botão só depois que o contador terminou de chegar em 100.
+          gsap.delayedCall(Math.max(0.2, ((100 - progress.value) / 100) * FULL_RUN) + 0.4, () => {
             gsap.to(gate, { autoAlpha: 1, duration: 0.5 });
             buttons[0]?.focus({ preventScroll: true });
           });

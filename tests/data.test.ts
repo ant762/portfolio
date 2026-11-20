@@ -72,3 +72,25 @@ describe('skills e redes (fonte: README do GitHub)', () => {
     }
   });
 });
+
+describe('segurança', () => {
+  it('next.config e public/_headers aplicam CSP restritiva e anti-clickjacking', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { securityHeaders } = await import('../next.config');
+    const names = securityHeaders.map((h) => h.key);
+    for (const key of [
+      'Content-Security-Policy',
+      'X-Content-Type-Options',
+      'Strict-Transport-Security',
+      'Permissions-Policy',
+    ]) {
+      expect(names).toContain(key);
+    }
+    const csp = securityHeaders.find((h) => h.key === 'Content-Security-Policy')?.value ?? '';
+    expect(csp).toContain("object-src 'none'");
+    expect(csp).toContain("frame-ancestors 'none'");
+    expect(csp).not.toMatch(/https?:\/\/\*|\s\*[;\s]/);
+    const file = readFileSync(join(process.cwd(), 'public/_headers'), 'utf8');
+    expect(file).toContain("frame-ancestors 'none'");
+  });
+});

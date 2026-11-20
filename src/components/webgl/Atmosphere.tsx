@@ -11,7 +11,7 @@ import {
   Vector3,
   WebGLRenderer,
 } from 'three';
-import { useSiteReady } from '@/hooks/useSiteReady';
+import { useEverReady } from '@/hooks/useSiteReady';
 import { gsap, prefersReducedMotion } from '@/lib/gsap';
 
 const TRAIL = 14;
@@ -228,7 +228,7 @@ const FRAGMENT = /* glsl */ `
 
 export function Atmosphere() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const ready = useSiteReady();
+  const ready = useEverReady();
 
   useEffect(() => {
     const canvas = canvasRef.current;

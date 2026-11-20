@@ -70,7 +70,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </noscript>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, '\\u003c'),
+          }}
         />
         <SkipLink />
 
