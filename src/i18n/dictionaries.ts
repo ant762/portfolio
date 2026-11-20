@@ -71,16 +71,16 @@ const en = {
     timeline: [
       {
         kind: 'experience',
-        period: 'Ongoing',
+        period: 'Since 2025',
         title: 'Fullstack Developer',
-        org: 'AnivoxWorks Studios',
+        org: '',
         bullets: ['Fullstack development', 'Backend architecture & APIs'],
       },
       {
         kind: 'experience',
-        period: '2026 — 2027',
+        period: 'Jan 2026 — Nov 2026',
         title: 'Internship — IT Infrastructure',
-        org: '',
+        org: 'Grupo Malwee · Apprentice · Jaraguá do Sul, SC',
         bullets: ['Network monitoring'],
       },
       {
@@ -99,7 +99,7 @@ const en = {
       },
       {
         kind: 'extra',
-        period: 'Ongoing',
+        period: 'Since 2015',
         title: 'Roblox / LuaU Developer',
         org: 'Roblox Studio',
         bullets: [
@@ -254,16 +254,16 @@ const es: Dictionary = {
     timeline: [
       {
         kind: 'experience',
-        period: 'Actual',
+        period: 'Desde 2025',
         title: 'Fullstack Developer',
-        org: 'AnivoxWorks Studios',
+        org: '',
         bullets: ['Desarrollo fullstack', 'Arquitectura backend y APIs'],
       },
       {
         kind: 'experience',
-        period: '2026 — 2027',
+        period: 'Ene 2026 — Nov 2026',
         title: 'Pasantía — Infraestructura de TI',
-        org: '',
+        org: 'Grupo Malwee · Aprendiz · Jaraguá do Sul, SC',
         bullets: ['Monitoreo de red'],
       },
       {
@@ -282,7 +282,7 @@ const es: Dictionary = {
       },
       {
         kind: 'extra',
-        period: 'Actual',
+        period: 'Desde 2015',
         title: 'Desarrollador Roblox / LuaU',
         org: 'Roblox Studio',
         bullets: [
@@ -436,16 +436,16 @@ const pt: Dictionary = {
     timeline: [
       {
         kind: 'experience',
-        period: 'Atual',
+        period: 'Desde 2025',
         title: 'Fullstack Developer',
-        org: 'AnivoxWorks Studios',
+        org: '',
         bullets: ['Desenvolvimento fullstack', 'Arquitetura backend e APIs'],
       },
       {
         kind: 'experience',
-        period: '2026 — 2027',
+        period: 'Jan 2026 — Nov 2026',
         title: 'Estágio — Infraestrutura de T.I.',
-        org: '',
+        org: 'Grupo Malwee · Aprendiz · Jaraguá do Sul, SC',
         bullets: ['Monitoramento de rede'],
       },
       {
@@ -464,7 +464,7 @@ const pt: Dictionary = {
       },
       {
         kind: 'extra',
-        period: 'Atual',
+        period: 'Desde 2015',
         title: 'Desenvolvedor Roblox / LuaU',
         org: 'Roblox Studio',
         bullets: [
