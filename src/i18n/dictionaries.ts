@@ -39,11 +39,21 @@ const en = {
   cursor: { view: 'View', open: 'Open', next: 'Next' },
   work: {
     label: '(01) Selected work',
-    titleA: 'Website',
-    titleB: 'Playground',
-    blurb: 'The website itself, built as a live test bench for web-development capabilities.',
+    titleA: 'Code &',
+    titleB: 'Systems',
+    blurb:
+      'Each project opens in its own format. The first one is this website; the others are locked for now.',
+    scroll: 'Scroll to explore',
     soon: 'More systems will be added here soon.',
     technologies: 'Technologies',
+    locked: 'Locked',
+    planned: 'Planned layout',
+    lockedTitle: 'Project',
+    layouts: [
+      'Newspaper style with video player',
+      'Interactive system diagram',
+      'Timeline with live code',
+    ],
   },
   playground: {
     label: 'How it works',
@@ -256,12 +266,21 @@ const es: Dictionary = {
   cursor: { view: 'Ver', open: 'Abrir', next: 'Siguiente' },
   work: {
     label: '(01) Trabajo seleccionado',
-    titleA: 'Sitio web',
-    titleB: 'Playground',
+    titleA: 'Código y',
+    titleB: 'Sistemas',
     blurb:
-      'El propio sitio web, creado como un banco de pruebas vivo de capacidades de desarrollo web.',
+      'Cada proyecto se abre en su propio formato. El primero es este sitio web; los demás están bloqueados por ahora.',
+    scroll: 'Desliza para explorar',
     soon: 'Pronto se añadirán más sistemas aquí.',
     technologies: 'Tecnologías',
+    locked: 'Bloqueado',
+    planned: 'Formato previsto',
+    lockedTitle: 'Proyecto',
+    layouts: [
+      'Estilo periódico con reproductor de video',
+      'Diagrama interactivo del sistema',
+      'Línea de tiempo con código en vivo',
+    ],
   },
   playground: {
     label: 'Cómo funciona',
@@ -474,12 +493,21 @@ const pt: Dictionary = {
   cursor: { view: 'Ver', open: 'Abrir', next: 'Próximo' },
   work: {
     label: '(01) Trabalhos selecionados',
-    titleA: 'Site',
-    titleB: 'Playground',
+    titleA: 'Código e',
+    titleB: 'Sistemas',
     blurb:
-      'O próprio site, criado como uma bancada viva de testes das capacidades de desenvolvimento web.',
+      'Cada projeto abre no seu próprio formato. O primeiro é este site; os outros estão bloqueados por enquanto.',
+    scroll: 'Role para explorar',
     soon: 'Mais sistemas serão adicionados aqui em breve.',
     technologies: 'Tecnologias',
+    locked: 'Bloqueado',
+    planned: 'Formato previsto',
+    lockedTitle: 'Projeto',
+    layouts: [
+      'Estilo jornal com player de vídeo',
+      'Diagrama interativo do sistema',
+      'Linha do tempo com código ao vivo',
+    ],
   },
   playground: {
     label: 'Como funciona',

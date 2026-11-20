@@ -119,25 +119,27 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
         </p>
       </header>
 
-      {/* Capa */}
-      <div className="px-gutter">
-        <div
-          data-cover
-          className="bg-ink-soft relative aspect-[16/9] overflow-hidden rounded-sm"
-          style={{ clipPath: 'inset(0% 0% 0% 0%)' }}
-        >
-          <div data-parallax-img className="absolute inset-0 scale-[1.2]">
-            <Image
-              src={project.cover}
-              alt={`${project.headline} — cover`}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
+      {/* Capa (projetos com layout próprio, como o playground, dispensam imagem) */}
+      {project.playground ? null : (
+        <div className="px-gutter">
+          <div
+            data-cover
+            className="bg-ink-soft relative aspect-[16/9] overflow-hidden rounded-sm"
+            style={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+          >
+            <div data-parallax-img className="absolute inset-0 scale-[1.2]">
+              <Image
+                src={project.cover}
+                alt={`${project.headline} — cover`}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Visão geral */}
       <section className="px-gutter grid gap-12 py-[clamp(5rem,12vw,12rem)] md:grid-cols-12">
