@@ -95,10 +95,11 @@ export function Hero() {
       <h1
         data-hero-title
         className="text-display-xl font-bold uppercase will-change-transform"
-        aria-label={site.name}
+        style={{ fontSize: 'clamp(4rem, 26vw, 28rem)' }}
+        aria-label={site.firstName}
       >
-        <span aria-hidden="true" className="block">
-          <Chars text="ANT762" />
+        <span aria-hidden="true" className={ready ? 'glitch block' : 'block'}>
+          <Chars text={site.firstName.toUpperCase()} />
         </span>
       </h1>
 

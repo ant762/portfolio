@@ -210,3 +210,55 @@ html.has-cursor [data-cursor] {
     height: 8px;
   }
 }
+
+/* Glitch do título principal: rajada curta a cada ~5s e ao passar o mouse/tocar. */
+@keyframes glitch-burst {
+  0%,
+  86%,
+  100% {
+    transform: none;
+    text-shadow: none;
+    clip-path: none;
+  }
+  88% {
+    transform: translate(-0.02em, 0.01em) skewX(-6deg);
+    text-shadow:
+      0.04em 0 var(--color-accent),
+      -0.04em 0 var(--color-paper);
+    clip-path: inset(10% 0 55% 0);
+  }
+  90% {
+    transform: translate(0.03em, -0.01em) skewX(5deg);
+    text-shadow:
+      -0.05em 0 var(--color-accent),
+      0.04em 0 var(--color-paper);
+    clip-path: inset(55% 0 8% 0);
+  }
+  92% {
+    transform: translate(-0.015em, 0) skewX(-3deg);
+    text-shadow:
+      0.03em 0.01em var(--color-accent),
+      -0.03em -0.01em var(--color-paper);
+    clip-path: inset(25% 0 30% 0);
+  }
+  94% {
+    transform: translate(0.02em, 0.01em);
+    text-shadow: -0.03em 0 var(--color-accent);
+    clip-path: none;
+  }
+}
+
+.glitch {
+  animation: glitch-burst 5s steps(1, end) infinite;
+}
+
+.glitch:hover,
+.glitch:active {
+  animation-duration: 0.9s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch {
+    animation: none;
+  }
+}
