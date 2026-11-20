@@ -5,7 +5,7 @@ import { SplitWords } from '@/components/ui/SplitWords';
 import { getProjectsByCategory } from '@/data/projects';
 import { allSkillsCount } from '@/data/site';
 import { useI18n } from '@/i18n/useI18n';
-import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
+import { gsap, prefersReducedMotion, useGSAP, reveal } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
 
 const codeCount = getProjectsByCategory('programming').length;
@@ -40,14 +40,16 @@ export function About() {
         },
       });
 
-      gsap.from('[data-stat]', {
-        y: 48,
-        autoAlpha: 0,
-        duration: 1,
-        ease: 'expo.out',
-        stagger: 0.1,
-        scrollTrigger: { trigger: '[data-stats]', start: 'top 85%' },
-      });
+      reveal(
+        '[data-stat]',
+        { y: 48, autoAlpha: 0 },
+        {
+          duration: 1,
+          ease: 'expo.out',
+          stagger: 0.1,
+          scrollTrigger: { trigger: '[data-stats]', start: 'top 85%' },
+        },
+      );
 
       gsap.utils.toArray<HTMLElement>('[data-count]').forEach((el) => {
         const target = Number(el.dataset.count);

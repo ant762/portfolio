@@ -5,7 +5,7 @@ import { Magnetic } from '@/components/ui/Magnetic';
 import { SplitWords } from '@/components/ui/SplitWords';
 import { site, socials } from '@/data/site';
 import { useI18n } from '@/i18n/useI18n';
-import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
+import { prefersReducedMotion, reveal, useGSAP } from '@/lib/gsap';
 import { scrollToTarget } from '@/lib/scroll';
 
 export function Contact() {
@@ -19,27 +19,35 @@ export function Contact() {
     () => {
       if (prefersReducedMotion()) return;
 
-      gsap.from('[data-word]', {
-        yPercent: 115,
-        duration: 1.3,
-        ease: 'expo.out',
-        stagger: 0.06,
-        scrollTrigger: { trigger: '[data-contact-title]', start: 'top 80%' },
-      });
-      gsap.from('[data-contact-fade]', {
-        y: 40,
-        autoAlpha: 0,
-        duration: 1,
-        ease: 'expo.out',
-        stagger: 0.08,
-        scrollTrigger: { trigger: '[data-contact-body]', start: 'top 85%' },
-      });
-      gsap.from('[data-cta]', {
-        scale: 0,
-        duration: 1.4,
-        ease: 'elastic.out(1, 0.5)',
-        scrollTrigger: { trigger: '[data-cta]', start: 'top 90%' },
-      });
+      reveal(
+        '[data-word]',
+        { yPercent: 115 },
+        {
+          duration: 1.3,
+          ease: 'expo.out',
+          stagger: 0.06,
+          scrollTrigger: { trigger: '[data-contact-title]', start: 'top 80%' },
+        },
+      );
+      reveal(
+        '[data-contact-fade]',
+        { y: 40, autoAlpha: 0 },
+        {
+          duration: 1,
+          ease: 'expo.out',
+          stagger: 0.08,
+          scrollTrigger: { trigger: '[data-contact-body]', start: 'top 85%' },
+        },
+      );
+      reveal(
+        '[data-cta]',
+        { scale: 0 },
+        {
+          duration: 1.4,
+          ease: 'elastic.out(1, 0.5)',
+          scrollTrigger: { trigger: '[data-cta]', start: 'top 90%' },
+        },
+      );
     },
     { scope: rootRef, dependencies: [t] },
   );

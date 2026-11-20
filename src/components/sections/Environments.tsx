@@ -31,8 +31,17 @@ export function Environments() {
           const parts = row.querySelectorAll('[data-row-text]');
           gsap
             .timeline({ scrollTrigger: { trigger: row, start: 'top 92%' } })
-            .from(line, { scaleX: 0, transformOrigin: 'left', duration: 1.3, ease: 'expo.inOut' })
-            .from(parts, { yPercent: 110, duration: 1, ease: 'expo.out', stagger: 0.06 }, '-=0.9');
+            .fromTo(
+              line,
+              { scaleX: 0 },
+              { scaleX: 1, transformOrigin: 'left', duration: 1.3, ease: 'expo.inOut' },
+            )
+            .fromTo(
+              parts,
+              { yPercent: 110 },
+              { yPercent: 0, duration: 1, ease: 'expo.out', stagger: 0.06 },
+              '-=0.9',
+            );
         });
       }
 

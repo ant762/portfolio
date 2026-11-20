@@ -7,7 +7,7 @@ import { SplitWords } from '@/components/ui/SplitWords';
 import { useSiteReady } from '@/hooks/useSiteReady';
 import { localizeProject } from '@/i18n/projects';
 import { useI18n } from '@/i18n/useI18n';
-import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
+import { gsap, prefersReducedMotion, useGSAP, reveal } from '@/lib/gsap';
 import { isExternal, padIndex } from '@/lib/utils';
 import type { Project } from '@/types';
 
@@ -67,21 +67,26 @@ export function ProjectView({ project: base, next: baseNext, position, total }: 
         );
       });
 
-      gsap.from('[data-overview] [data-word]', {
-        yPercent: 115,
-        duration: 1.2,
-        ease: 'expo.out',
-        stagger: 0.015,
-        scrollTrigger: { trigger: '[data-overview]', start: 'top 80%' },
-      });
-      gsap.from('[data-meta]', {
-        y: 36,
-        autoAlpha: 0,
-        duration: 1,
-        ease: 'expo.out',
-        stagger: 0.08,
-        scrollTrigger: { trigger: '[data-meta]', start: 'top 90%' },
-      });
+      reveal(
+        '[data-overview] [data-word]',
+        { yPercent: 115 },
+        {
+          duration: 1.2,
+          ease: 'expo.out',
+          stagger: 0.015,
+          scrollTrigger: { trigger: '[data-overview]', start: 'top 80%' },
+        },
+      );
+      reveal(
+        '[data-meta]',
+        { y: 36, autoAlpha: 0 },
+        {
+          duration: 1,
+          ease: 'expo.out',
+          stagger: 0.08,
+          scrollTrigger: { trigger: '[data-meta]', start: 'top 90%' },
+        },
+      );
     },
     { scope: rootRef, dependencies: [ready, locale] },
   );

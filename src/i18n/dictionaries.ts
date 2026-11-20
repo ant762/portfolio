@@ -73,7 +73,7 @@ const en = {
         kind: 'experience',
         period: 'Since 2025',
         title: 'Fullstack Developer',
-        org: '',
+        org: 'Apprenticeship at SENAI · Jaraguá do Sul, SC',
         bullets: ['Fullstack development', 'Backend architecture & APIs'],
       },
       {
@@ -256,7 +256,7 @@ const es: Dictionary = {
         kind: 'experience',
         period: 'Desde 2025',
         title: 'Fullstack Developer',
-        org: '',
+        org: 'Aprendizaje en SENAI · Jaraguá do Sul, SC',
         bullets: ['Desarrollo fullstack', 'Arquitectura backend y APIs'],
       },
       {
@@ -438,7 +438,7 @@ const pt: Dictionary = {
         kind: 'experience',
         period: 'Desde 2025',
         title: 'Fullstack Developer',
-        org: '',
+        org: 'Aprendizado no SENAI de Jaraguá do Sul, SC',
         bullets: ['Desenvolvimento fullstack', 'Arquitetura backend e APIs'],
       },
       {

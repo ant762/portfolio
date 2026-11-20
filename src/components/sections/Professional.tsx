@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import pkg from '../../../package.json';
 import { skillGroups } from '@/data/site';
 import { useI18n } from '@/i18n/useI18n';
-import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
+import { gsap, prefersReducedMotion, useGSAP, reveal } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
 
 const toEntries = (deps: Record<string, string>) =>
@@ -28,18 +28,29 @@ export function Professional() {
         const text = row.querySelectorAll('[data-row-text]');
         gsap
           .timeline({ scrollTrigger: { trigger: row, start: 'top 90%' } })
-          .from(line, { scaleX: 0, transformOrigin: 'left', duration: 1.4, ease: 'expo.inOut' })
-          .from(text, { yPercent: 110, duration: 1, ease: 'expo.out', stagger: 0.08 }, '-=1');
+          .fromTo(
+            line,
+            { scaleX: 0 },
+            { scaleX: 1, transformOrigin: 'left', duration: 1.4, ease: 'expo.inOut' },
+          )
+          .fromTo(
+            text,
+            { yPercent: 110 },
+            { yPercent: 0, duration: 1, ease: 'expo.out', stagger: 0.08 },
+            '-=1',
+          );
       });
 
       gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
-        gsap.from(el, {
-          y: 40,
-          autoAlpha: 0,
-          duration: 1,
-          ease: 'expo.out',
-          scrollTrigger: { trigger: el, start: 'top 90%' },
-        });
+        reveal(
+          el,
+          { y: 40, autoAlpha: 0 },
+          {
+            duration: 1,
+            ease: 'expo.out',
+            scrollTrigger: { trigger: el, start: 'top 90%' },
+          },
+        );
       });
     },
     { scope: rootRef, dependencies: [t] },

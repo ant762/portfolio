@@ -7,7 +7,7 @@ import { getProjectsByCategory } from '@/data/projects';
 import { socials } from '@/data/site';
 import { useI18n } from '@/i18n/useI18n';
 import { localizeProject } from '@/i18n/projects';
-import { gsap, useGSAP } from '@/lib/gsap';
+import { gsap, useGSAP, reveal } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
 
 const baseWorks = getProjectsByCategory('programming');
@@ -81,13 +81,15 @@ export function Work() {
 
       mm.add('(max-width: 767px), (prefers-reduced-motion: reduce)', () => {
         gsap.utils.toArray<HTMLElement>('[data-card]').forEach((card) => {
-          gsap.from(card, {
-            y: 60,
-            autoAlpha: 0,
-            duration: 1,
-            ease: 'expo.out',
-            scrollTrigger: { trigger: card, start: 'top 88%' },
-          });
+          reveal(
+            card,
+            { y: 60, autoAlpha: 0 },
+            {
+              duration: 1,
+              ease: 'expo.out',
+              scrollTrigger: { trigger: card, start: 'top 88%' },
+            },
+          );
         });
       });
     },
