@@ -21,8 +21,10 @@
 }
 ```
 
-3. `npm test` validates slugs, links and image paths. `npm run dev` to preview.
+3. Add its Spanish and Portuguese copy (headline, summary, description) under the same slug in `src/i18n/projects.ts`.
+4. `npm test` validates slugs, links, image paths and that every project is translated. `npm run dev` to preview.
 
 ## Edit site info
 
-`src/data/site.ts` holds name, tagline, about text, email, social links (including LinkedIn), skills and credentials.
+`src/data/site.ts` holds name, tagline, about text, email, social links (including LinkedIn), skills.
+Interface text (all languages) lives in `src/i18n/dictionaries.ts`; career/certification entries are in its `professional.timeline`.

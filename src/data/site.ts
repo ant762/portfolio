@@ -1,4 +1,4 @@
-import type { Credential, SocialLink } from '@/types';
+import type { SocialLink } from '@/types';
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ant762.page.gd';
 
@@ -44,17 +44,10 @@ export const skills = [
   'Level Design',
 ] as const;
 
-export const credentials: readonly Credential[] = [
-  { label: 'Education', detail: 'Technical Degree in Systems Development' },
-  { label: 'Experience', detail: 'Security Infrastructure Intern' },
-  { label: 'Certification', detail: 'Scrum Certified' },
-  { label: 'Certification', detail: 'ITIL 4 Foundation' },
-  { label: 'Languages', detail: 'English, Spanish and Portuguese' },
-];
-
 export const navLinks = [
-  { label: 'Work', href: '/#work' },
-  { label: 'Environments', href: '/#environments' },
-  { label: 'About', href: '/#about' },
-  { label: 'Contact', href: '/#contact' },
+  { key: 'work', href: '/#work' },
+  { key: 'environments', href: '/#environments' },
+  { key: 'about', href: '/#about' },
+  { key: 'professional', href: '/#professional' },
+  { key: 'contact', href: '/#contact' },
 ] as const;

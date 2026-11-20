@@ -12,6 +12,7 @@ import {
 } from 'react';
 import { gsap, prefersReducedMotion, ScrollTrigger } from '@/lib/gsap';
 import { setSiteReady } from '@/lib/ready';
+import { playSfx } from '@/lib/sound';
 import { getLenis, lockScroll, scrollToTarget, unlockScroll } from '@/lib/scroll';
 
 interface NavigateOptions {
@@ -125,6 +126,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
       setSiteReady(false);
       lockScroll('transition');
       labelEl.textContent = label;
+      playSfx('whoosh');
 
       // Se por algum motivo a rota não trocar, não deixa a tela presa.
       safetyTimer.current = window.setTimeout(reveal, SAFETY_TIMEOUT_MS);

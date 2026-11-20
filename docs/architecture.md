@@ -64,20 +64,40 @@ after hydration never causes a visible flash.
 
 | Section        | Technique                                                                                     |
 | -------------- | --------------------------------------------------------------------------------------------- |
-| `Hero`         | Char-by-char reveal, avatar pill growth, scrubbed exit parallax, `HeroCanvas` shader          |
+| `Hero`         | Char-by-char reveal, scrubbed exit parallax over the site-wide `Atmosphere`                   |
 | `Marquee`      | Two infinite rows; ScrollTrigger velocity changes `timeScale` and direction                   |
 | `Work`         | `pin` + `scrub` horizontal track; per-card parallax via `containerAnimation`; mobile fallback |
 | `Environments` | Row reveals; cursor-following preview with `quickTo` + velocity tilt; touch thumbnails        |
 | `About`        | Word-by-word opacity scrub, count-up stats                                                    |
-| `Credentials`  | Line-draw + text mask reveals, hover fill                                                     |
+| `Professional` | Timeline rows, GitHub block, stack list read from `package.json`, practices                   |
 | `Contact`      | Word reveal, elastic CTA, magnetic button, copy-to-clipboard                                  |
 
-## WebGL hero
+## WebGL atmosphere
 
-`src/components/webgl/HeroCanvas.tsx` renders one full-screen triangle-pair with a fragment shader:
-simplex noise → height field → anti-aliased contour lines (`fwidth`). Uniforms: time, pointer (lerped),
-pointer "energy" (speed), hero scroll progress. It pauses when off-screen or when the tab is hidden,
-caps pixel ratio at 1.5 and renders a single static frame under `prefers-reduced-motion`.
+`src/components/webgl/Atmosphere.tsx` is a fixed full-screen canvas (`-z-20`) rendered by one fragment
+shader: fbm fog, two parallax layers of pointed arches, a rotating rose window, rising embers. Interaction
+is fed through uniforms: a 14-point cursor trail (`uTrail`), up to 4 click shockwaves (`uRipples`), pointer
+"energy" and page scroll. With no input (touch devices) a ghost light wanders on its own. It fades in on
+`useSiteReady()`, pauses when the tab is hidden, caps pixel ratio at 1 and renders one static frame under
+`prefers-reduced-motion`. Do not give `body` a background — it would cover the canvas.
+
+## Internationalisation
+
+Client-side i18n (no per-language URLs): `src/i18n/store.ts` is a module store read with
+`useSyncExternalStore` (server snapshot is always `en`, so hydration never mismatches). `LocaleSync` applies
+the saved/browser language after hydration, keeps `<html lang>` in sync and calls `ScrollTrigger.refresh()`.
+UI strings live in `src/i18n/dictionaries.ts` (the `en` object defines the type; `tests/i18n.test.ts` asserts
+all locales share the same keys). Project copy: English in `src/data/projects.ts`, `es`/`pt` in
+`src/i18n/projects.ts`, merged by `localizeProject`. Trade-off: crawlers only see English.
+
+## Sound
+
+`src/lib/sound.ts` synthesises everything with Web Audio — no audio assets. Darkwave loop: 96 BPM,
+Am–F–C–E, sawtooth bass, detuned pads, delayed arpeggio, kick/snare/hats, convolver reverb and a compressor,
+driven by a look-ahead scheduler. SFX: click, hover, whoosh (route transitions), hit (menu), on/off.
+`SoundControls` exposes two independent switches (music; effects + clicks), both **off by default** and
+persisted in `localStorage` (`ant762:sound`). Browsers only allow audio after a gesture, so `SoundProvider`
+calls `unlockAudio()` on the first pointer/key event. Audio suspends while the tab is hidden.
 
 ## Content layer
 

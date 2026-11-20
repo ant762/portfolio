@@ -11,7 +11,10 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Preloader } from '@/components/layout/Preloader';
 import { SmoothScroll } from '@/components/providers/SmoothScroll';
 import { TransitionProvider } from '@/components/providers/TransitionProvider';
+import { LocaleSync } from '@/components/providers/LocaleSync';
+import { SoundProvider } from '@/components/providers/SoundProvider';
 import { Cursor } from '@/components/ui/Cursor';
+import { SkipLink } from '@/components/ui/SkipLink';
 import { SITE_URL, site, socials } from '@/data/site';
 
 export const metadata: Metadata = {
@@ -78,13 +81,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <a
-          href="#main"
-          className="label-mono bg-accent text-on-accent fixed top-3 left-3 z-[300] -translate-y-20 rounded-full px-4 py-2 focus:translate-y-0"
-        >
-          Skip to content
-        </a>
+        <SkipLink />
 
+        <LocaleSync />
+        <SoundProvider />
         <AtmosphereLoader />
         <SmoothScroll>
           <TransitionProvider>

@@ -5,6 +5,8 @@ import { useRef } from 'react';
 import { TransitionLink } from '@/components/ui/TransitionLink';
 import { SplitWords } from '@/components/ui/SplitWords';
 import { useSiteReady } from '@/hooks/useSiteReady';
+import { localizeProject } from '@/i18n/projects';
+import { useI18n } from '@/i18n/useI18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 import { isExternal, padIndex } from '@/lib/utils';
 import type { Project } from '@/types';
@@ -16,7 +18,10 @@ interface ProjectViewProps {
   total: number;
 }
 
-export function ProjectView({ project, next, position, total }: ProjectViewProps) {
+export function ProjectView({ project: base, next: baseNext, position, total }: ProjectViewProps) {
+  const { t, locale } = useI18n();
+  const project = localizeProject(base, locale);
+  const next = localizeProject(baseNext, locale);
   const rootRef = useRef<HTMLElement>(null);
   const ready = useSiteReady();
   const hasSecondImage = project.detail !== project.cover;
@@ -78,7 +83,7 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
         scrollTrigger: { trigger: '[data-meta]', start: 'top 90%' },
       });
     },
-    { scope: rootRef, dependencies: [ready] },
+    { scope: rootRef, dependencies: [ready, locale] },
   );
 
   return (
@@ -88,10 +93,10 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
         <div data-fade className="label-mono text-muted flex items-center justify-between">
           <TransitionLink
             href="/#work"
-            label="Work"
+            label={t.nav.work}
             className="hover:text-accent transition-colors"
           >
-            ← All projects
+            {t.project.back}
           </TransitionLink>
           <span className="tabular-nums">
             {padIndex(position)} / {padIndex(total)}
@@ -104,7 +109,7 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
 
         <p data-fade className="label-mono text-accent mt-8 flex items-center gap-3">
           <span className="bg-accent size-2 rounded-full" aria-hidden="true" />
-          {project.category === 'programming' ? 'Code & Systems' : 'Environment'}
+          {project.category === 'programming' ? t.project.code : t.project.environment}
         </p>
       </header>
 
@@ -130,7 +135,7 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
 
       {/* Visão geral */}
       <section className="px-gutter grid gap-12 py-[clamp(5rem,12vw,12rem)] md:grid-cols-12">
-        <p className="label-mono text-muted md:col-span-3">Overview</p>
+        <p className="label-mono text-muted md:col-span-3">{t.project.overview}</p>
         <div className="md:col-span-9">
           <p
             data-overview
@@ -141,7 +146,7 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
 
           <dl className="mt-16 grid gap-10 sm:grid-cols-2">
             <div data-meta className="border-line border-t pt-5">
-              <dt className="label-mono text-muted">Stack &amp; focus</dt>
+              <dt className="label-mono text-muted">{t.project.stack}</dt>
               <dd className="mt-4 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
@@ -154,10 +159,10 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
               </dd>
             </div>
             <div data-meta className="border-line border-t pt-5">
-              <dt className="label-mono text-muted">Links</dt>
+              <dt className="label-mono text-muted">{t.project.links}</dt>
               <dd className="mt-4 flex flex-col items-start gap-2">
                 {project.links.length === 0 ? (
-                  <span className="text-muted">Private / not publicly available</span>
+                  <span className="text-muted">{t.project.private}</span>
                 ) : (
                   project.links.map((link) => (
                     <a
@@ -165,7 +170,7 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
                       href={link.href}
                       target={isExternal(link.href) ? '_blank' : undefined}
                       rel="noopener noreferrer"
-                      data-cursor="Open"
+                      data-cursor={t.cursor.open}
                       className="group inline-flex items-center gap-3 text-xl font-semibold tracking-tight"
                     >
                       <span className="decoration-line group-hover:decoration-accent underline underline-offset-6 transition-colors">
@@ -207,7 +212,7 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
       <TransitionLink
         href={`/projects/${next.slug}`}
         label={next.title}
-        data-cursor="Next"
+        data-cursor={t.cursor.next}
         className="group border-line px-gutter relative block overflow-hidden border-t py-[clamp(5rem,12vw,11rem)]"
       >
         <span
@@ -216,7 +221,7 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
         />
         <span className="group-hover:text-on-accent relative block transition-colors duration-500">
           <span className="label-mono text-muted group-hover:text-on-accent/70 transition-colors duration-500">
-            Next project
+            {t.project.next}
           </span>
           <span className="text-display-lg mt-6 block font-bold uppercase">{next.title}</span>
         </span>

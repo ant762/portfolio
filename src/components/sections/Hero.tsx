@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useLocalTime } from '@/hooks/useLocalTime';
 import { useSiteReady } from '@/hooks/useSiteReady';
 import { site } from '@/data/site';
+import { useI18n } from '@/i18n/useI18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 
 function Chars({ text }: { text: string }) {
@@ -23,6 +24,7 @@ function Chars({ text }: { text: string }) {
 export function Hero() {
   const rootRef = useRef<HTMLElement>(null);
   const ready = useSiteReady();
+  const { t } = useI18n();
   const time = useLocalTime(site.timezone);
 
   useGSAP(
@@ -80,13 +82,13 @@ export function Hero() {
 
       <div data-hero-meta className="label-mono flex items-start justify-between gap-6">
         <p data-hero-fade className="text-muted max-w-56">
-          {site.role}
+          {t.hero.role}
           <br />
-          &amp; Level Designer
+          {t.hero.role2}
         </p>
         <p data-hero-fade className="flex items-center gap-3">
           <span className="pulse-dot bg-accent size-2 rounded-full" aria-hidden="true" />
-          {site.availability}
+          {t.hero.availability}
         </p>
       </div>
 
@@ -105,14 +107,17 @@ export function Hero() {
         className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
       >
         <p data-hero-fade className="text-paper/80 max-w-sm text-lg leading-snug md:text-xl">
-          <span className="text-paper">Hi, I&apos;m {site.firstName}.</span> {site.tagline}
+          <span className="text-paper">
+            {t.hero.greeting} {site.firstName}.
+          </span>{' '}
+          {t.hero.tagline}
         </p>
 
         <div data-hero-fade className="label-mono text-muted flex items-center gap-4">
           <span className="bg-line relative block h-12 w-px overflow-hidden" aria-hidden="true">
             <span className="scroll-line bg-accent absolute inset-0" />
           </span>
-          Scroll
+          {t.hero.scroll}
         </div>
 
         <p data-hero-fade className="label-mono text-muted text-right">

@@ -3,18 +3,22 @@
 import { useRef } from 'react';
 import { SplitWords } from '@/components/ui/SplitWords';
 import { getProjectsByCategory } from '@/data/projects';
-import { credentials, site } from '@/data/site';
+import { useI18n } from '@/i18n/useI18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
 
-const stats = [
-  { value: getProjectsByCategory('programming').length, label: 'Systems & code projects' },
-  { value: getProjectsByCategory('environment').length, label: 'Environment studies' },
-  { value: 3, label: 'Spoken languages' },
-  { value: credentials.filter((c) => c.label === 'Certification').length, label: 'Certifications' },
-] as const;
+const codeCount = getProjectsByCategory('programming').length;
+const envCount = getProjectsByCategory('environment').length;
 
 export function About() {
+  const { t } = useI18n();
+  const certs = t.professional.timeline.filter((i) => i.kind === 'certification').length;
+  const stats = [
+    { value: codeCount, label: t.about.statCode },
+    { value: envCount, label: t.about.statEnv },
+    { value: 3, label: t.about.statLanguages },
+    { value: certs, label: t.about.statCerts },
+  ];
   const rootRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -60,20 +64,20 @@ export function About() {
         });
       });
     },
-    { scope: rootRef },
+    { scope: rootRef, dependencies: [t] },
   );
 
   return (
     <section ref={rootRef} id="about" className="px-gutter py-[clamp(6rem,14vw,14rem)]">
       <div className="grid gap-10 md:grid-cols-12">
-        <p className="label-mono text-muted md:col-span-3">(03) About</p>
+        <p className="label-mono text-muted md:col-span-3">{t.about.label}</p>
 
         <div className="md:col-span-9">
           <p
             data-about-text
             className="text-[clamp(1.75rem,4.1vw,4.25rem)] leading-[1.1] font-medium tracking-tight"
           >
-            <SplitWords text={site.about} mask={false} attr="data-scrub-word" />
+            <SplitWords text={t.about.text} mask={false} attr="data-scrub-word" />
           </p>
         </div>
       </div>

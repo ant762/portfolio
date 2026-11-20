@@ -11,7 +11,9 @@ inertial scrolling, scroll-driven GSAP animation and animated route transitions.
 ## Highlights
 
 - **Preloader** with progress counter and curved exit transition
-- **WebGL hero** — a procedural topographic map (GLSL simplex noise + contour lines) that reacts to the cursor and scroll
+- **Gothic WebGL atmosphere** (red / black / grey) behind the whole site — fog, parallax pointed arches, a rotating rose window, rising embers, a blood-red cursor trail and click shockwaves
+- **Procedural darkwave soundtrack + sound effects** (Web Audio, no audio files). Music and effects/clicks have independent toggles; both default to off
+- **English, Spanish and Portuguese** (`EN / ES / PT`), detected from the browser and remembered
 - **Smooth scrolling** (Lenis) wired into GSAP's ticker and ScrollTrigger
 - **Pinned horizontal showcase** for code projects, with per-card image parallax
 - **Editorial environment list** with a cursor-following, velocity-tilted preview
@@ -61,14 +63,15 @@ src/
 │   └── projects/[slug]/  # Statically generated project pages
 ├── components/
 │   ├── layout/           # Preloader, Navbar (+ fullscreen menu)
-│   ├── providers/        # SmoothScroll (Lenis), TransitionProvider
-│   ├── sections/         # Hero, Marquee, Work, Environments, About, Credentials, Contact
+│   ├── providers/        # SmoothScroll (Lenis), TransitionProvider, LocaleSync, SoundProvider
+│   ├── sections/         # Hero, Marquee, Work, Environments, About, Professional, Contact
 │   ├── project/          # Project page view
-│   ├── ui/               # Cursor, Magnetic, SplitWords, TransitionLink
-│   └── webgl/            # HeroCanvas (three.js shader)
+│   ├── ui/               # Cursor, Magnetic, SplitWords, TransitionLink, SoundControls, LanguageSwitcher
+│   └── webgl/            # Atmosphere (three.js shader, site-wide background)
 ├── data/                 # Typed content: site.ts, projects.ts
-├── hooks/                # useSiteReady, useLocalTime
-├── lib/                  # gsap setup, scroll lock/Lenis bridge, ready store, utils
+├── hooks/                # useSiteReady, useLocalTime, useSound
+├── i18n/                 # Locale store, dictionaries (en/es/pt), localized project copy
+├── lib/                  # gsap setup, scroll lock/Lenis bridge, ready store, sound engine, utils
 └── types/                # Shared domain types
 tests/                    # Vitest suites
 docs/                     # Architecture & animation notes

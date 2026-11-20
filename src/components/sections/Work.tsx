@@ -1,14 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { TransitionLink } from '@/components/ui/TransitionLink';
 import { getProjectsByCategory } from '@/data/projects';
 import { socials } from '@/data/site';
+import { useI18n } from '@/i18n/useI18n';
+import { localizeProject } from '@/i18n/projects';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
 
-const works = getProjectsByCategory('programming');
+const baseWorks = getProjectsByCategory('programming');
 const github = socials.find((s) => s.label === 'GitHub');
 
 /**
@@ -16,6 +18,8 @@ const github = socials.find((s) => s.label === 'GitHub');
  * lateralmente. Em telas pequenas (ou movimento reduzido) vira uma lista vertical.
  */
 export function Work() {
+  const { t, locale } = useI18n();
+  const works = useMemo(() => baseWorks.map((p) => localizeProject(p, locale)), [locale]);
   const rootRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -102,17 +106,15 @@ export function Work() {
         className="md:px-gutter flex flex-col gap-14 will-change-transform md:w-max md:flex-row md:items-center md:gap-[5vw]"
       >
         <header className="shrink-0 md:w-[44vw]">
-          <p className="label-mono text-muted">(01) Selected work</p>
+          <p className="label-mono text-muted">{t.work.label}</p>
           <h2 id="work-title" className="text-display-lg mt-6 font-bold uppercase">
-            Code &amp;
+            {t.work.titleA}
             <br />
-            Systems
+            {t.work.titleB}
           </h2>
-          <p className="text-paper/70 mt-8 max-w-sm text-lg leading-snug">
-            Gameplay engines, tooling and data platforms — built to be robust, readable and fast.
-          </p>
+          <p className="text-paper/70 mt-8 max-w-sm text-lg leading-snug">{t.work.blurb}</p>
           <p className="label-mono text-accent mt-10 hidden items-center gap-3 md:flex">
-            Scroll to explore <span aria-hidden="true">→</span>
+            {t.work.scroll} <span aria-hidden="true">→</span>
           </p>
         </header>
 
@@ -122,7 +124,7 @@ export function Work() {
             href={`/projects/${project.slug}`}
             label={project.title}
             data-card
-            data-cursor="View"
+            data-cursor={t.cursor.view}
             className="group block shrink-0 md:w-[min(58vw,820px)]"
           >
             <div className="bg-ink-soft relative aspect-[16/10] overflow-hidden rounded-sm">
@@ -148,7 +150,10 @@ export function Work() {
                 </h3>
                 <p className="text-muted mt-2">{project.summary}</p>
               </div>
-              <ul className="label-mono flex flex-wrap justify-end gap-2" aria-label="Technologies">
+              <ul
+                className="label-mono flex flex-wrap justify-end gap-2"
+                aria-label={t.work.technologies}
+              >
                 {project.tags.map((tag) => (
                   <li key={tag} className="border-line rounded-full border px-3 py-1">
                     {tag}
@@ -164,16 +169,16 @@ export function Work() {
             href={github.href}
             target="_blank"
             rel="noopener noreferrer"
-            data-cursor="Open"
+            data-cursor={t.cursor.open}
             className="group border-line hover:bg-accent hover:text-on-accent flex shrink-0 flex-col justify-between gap-16 rounded-sm border p-8 transition-colors duration-500 md:h-[62svh] md:w-[28vw]"
           >
             <span className="label-mono text-muted group-hover:text-on-accent/70">
-              More on GitHub
+              {t.work.more}
             </span>
             <span className="text-display-md font-bold uppercase">
-              See all
+              {t.work.seeAll}
               <br />
-              repositories
+              {t.work.repositories}
               <span className="ease-expo ml-2 inline-block transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2">
                 ↗
               </span>

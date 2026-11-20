@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import { useI18n } from '@/i18n/useI18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 import { setSiteReady } from '@/lib/ready';
 import { lockScroll, unlockScroll } from '@/lib/scroll';
@@ -9,6 +10,7 @@ import { padIndex } from '@/lib/utils';
 const MIN_DURATION = 2.2;
 
 export function Preloader() {
+  const { t } = useI18n();
   const rootRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -88,12 +90,12 @@ export function Preloader() {
       <div className="label-mono flex items-start justify-between">
         <span className="overflow-hidden">
           <span data-pre-line className="block">
-            ant762 — Portfolio
+            {t.preloader.portfolio}
           </span>
         </span>
         <span className="overflow-hidden">
           <span data-pre-line className="text-muted block">
-            Loading experience
+            {t.preloader.loading}
           </span>
         </span>
       </div>
@@ -101,9 +103,9 @@ export function Preloader() {
       <div className="flex items-end justify-between">
         <div className="overflow-hidden">
           <p data-pre-line className="label-mono text-muted max-w-48">
-            Fullstack Developer
+            {t.hero.role}
             <br />
-            Level Designer
+            {t.hero.role2}
           </p>
         </div>
         <div className="overflow-hidden">

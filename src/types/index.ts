@@ -30,8 +30,3 @@ export interface SocialLink {
   href: string;
   handle: string;
 }
-
-export interface Credential {
-  label: string;
-  detail: string;
-}

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRef } from 'react';
 import { TransitionLink } from '@/components/ui/TransitionLink';
 import { getProjectsByCategory } from '@/data/projects';
+import { useI18n } from '@/i18n/useI18n';
 import { gsap, hasFinePointer, prefersReducedMotion, useGSAP } from '@/lib/gsap';
 import { padIndex } from '@/lib/utils';
 
@@ -14,6 +15,7 @@ const environments = getProjectsByCategory('environment');
  * (com inclinação proporcional à velocidade) e as demais linhas escurecem.
  */
 export function Environments() {
+  const { t } = useI18n();
   const rootRef = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
 
@@ -120,16 +122,15 @@ export function Environments() {
     >
       <div className="mb-16 grid gap-8 md:grid-cols-12 md:items-end">
         <div className="md:col-span-8">
-          <p className="label-mono text-muted">(02) Environments</p>
+          <p className="label-mono text-muted">{t.environments.label}</p>
           <h2 id="env-title" className="text-display-lg mt-6 font-bold uppercase">
-            Worlds &amp;
+            {t.environments.titleA}
             <br />
-            Terrain
+            {t.environments.titleB}
           </h2>
         </div>
         <p className="text-paper/70 max-w-sm text-lg leading-snug md:col-span-4 md:justify-self-end">
-          Terrain sculpting, atmosphere and lighting — {padIndex(environments.length)} level design
-          studies built from scratch.
+          {t.environments.blurb.replace('{n}', padIndex(environments.length))}
         </p>
       </div>
 
