@@ -18,7 +18,7 @@ function Group({ outline }: { outline?: boolean }) {
           >
             {skill}
           </span>
-          <span className="text-accent">✦</span>
+          <span className="text-accent">✠</span>
         </span>
       ))}
     </div>

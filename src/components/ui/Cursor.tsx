@@ -46,8 +46,8 @@ export function Cursor() {
       gsap.to(ring, {
         width: labelled ? RING_SIZE_LABEL : linked ? RING_SIZE_LINK : RING_SIZE,
         height: labelled ? RING_SIZE_LABEL : linked ? RING_SIZE_LINK : RING_SIZE,
-        backgroundColor: labelled ? '#d7ff3f' : 'rgba(215,255,63,0)',
-        borderColor: labelled ? 'rgba(215,255,63,1)' : 'rgba(240,238,232,0.55)',
+        backgroundColor: labelled ? '#dc2430' : 'rgba(220,36,48,0)',
+        borderColor: labelled ? 'rgba(220,36,48,1)' : 'rgba(228,223,220,0.55)',
         duration: 0.5,
         ease: 'expo.out',
       });
@@ -102,14 +102,14 @@ export function Cursor() {
         style={{
           width: RING_SIZE,
           height: RING_SIZE,
-          borderColor: 'rgba(240,238,232,0.55)',
+          borderColor: 'rgba(228,223,220,0.55)',
           opacity: 0,
           visibility: 'hidden',
         }}
       >
         <span
           ref={labelRef}
-          className="label-mono text-ink font-medium whitespace-nowrap opacity-0"
+          className="label-mono text-on-accent font-medium whitespace-nowrap opacity-0"
         />
       </div>
       <div

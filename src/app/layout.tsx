@@ -1,7 +1,10 @@
 import '@fontsource-variable/bricolage-grotesque';
 import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/cinzel';
+import '@fontsource/unifrakturcook/700.css';
 import './globals.css';
 
+import { AtmosphereLoader } from '@/components/webgl/AtmosphereLoader';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
@@ -48,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0b0c',
+  themeColor: '#09090a',
   colorScheme: 'dark',
 };
 
@@ -77,11 +80,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <a
           href="#main"
-          className="label-mono bg-accent text-ink fixed top-3 left-3 z-[300] -translate-y-20 rounded-full px-4 py-2 focus:translate-y-0"
+          className="label-mono bg-accent text-on-accent fixed top-3 left-3 z-[300] -translate-y-20 rounded-full px-4 py-2 focus:translate-y-0"
         >
           Skip to content
         </a>
 
+        <AtmosphereLoader />
         <SmoothScroll>
           <TransitionProvider>
             <Preloader />

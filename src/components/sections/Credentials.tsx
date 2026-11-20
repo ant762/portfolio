@@ -49,9 +49,12 @@ export function Credentials() {
               aria-hidden="true"
               className="bg-accent ease-expo absolute inset-0 origin-bottom scale-y-0 transition-transform duration-500 group-hover:scale-y-100"
             />
-            <div className="group-hover:text-ink relative grid grid-cols-[3rem_1fr] items-baseline gap-x-4 gap-y-1 py-6 transition-colors duration-500 md:grid-cols-[4rem_14rem_1fr] md:py-8">
+            <div className="group-hover:text-on-accent relative grid grid-cols-[3rem_1fr] items-baseline gap-x-4 gap-y-1 py-6 transition-colors duration-500 md:grid-cols-[4rem_14rem_1fr] md:py-8">
               <span className="overflow-hidden">
-                <span data-row-text className="label-mono text-muted group-hover:text-ink/60 block">
+                <span
+                  data-row-text
+                  className="label-mono text-muted group-hover:text-on-accent/70 block"
+                >
                   {padIndex(i + 1)}
                 </span>
               </span>

@@ -1,19 +1,10 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { useRef } from 'react';
 import { useLocalTime } from '@/hooks/useLocalTime';
 import { useSiteReady } from '@/hooks/useSiteReady';
 import { site } from '@/data/site';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/gsap';
-
-const HeroCanvas = dynamic(
-  () => import('@/components/webgl/HeroCanvas').then((m) => m.HeroCanvas),
-  {
-    ssr: false,
-  },
-);
 
 function Chars({ text }: { text: string }) {
   return (
@@ -44,7 +35,6 @@ export function Hero() {
       if (!ready) {
         gsap.set(chars, { yPercent: 115 });
         gsap.set(fades, { autoAlpha: 0, y: 24 });
-        gsap.set('[data-pill]', { width: 0 });
         gsap.set('[data-hero-canvas]', { autoAlpha: 0, scale: 1.08 });
         return;
       }
@@ -53,7 +43,6 @@ export function Hero() {
         .timeline({ defaults: { ease: 'expo.out' } })
         .to('[data-hero-canvas]', { autoAlpha: 1, scale: 1, duration: 2.2 }, 0)
         .to(chars, { yPercent: 0, duration: 1.4, stagger: 0.045 }, 0.1)
-        .to('[data-pill]', { width: '1.15em', duration: 1.4, ease: 'expo.inOut' }, 0.7)
         .to(fades, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08 }, 0.8);
 
       // Parallax de saída: o título sobe e some enquanto a página rola.
@@ -84,10 +73,10 @@ export function Hero() {
       id="top"
       className="px-gutter relative flex min-h-svh flex-col justify-between overflow-hidden pt-28 pb-8"
     >
-      <div data-hero-canvas className="bg-ink absolute inset-0 -z-10">
-        <HeroCanvas className="size-full" />
-        <div className="from-ink to-ink/60 absolute inset-0 bg-gradient-to-t via-transparent" />
-      </div>
+      <div
+        data-hero-canvas
+        className="from-ink to-ink/50 pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t via-transparent"
+      />
 
       <div data-hero-meta className="label-mono flex items-start justify-between gap-6">
         <p data-hero-fade className="text-muted max-w-56">
@@ -107,21 +96,7 @@ export function Hero() {
         aria-label={site.name}
       >
         <span aria-hidden="true" className="block">
-          <Chars text="ANT" />
-          <span
-            data-pill
-            className="ring-paper/25 relative mx-[0.08em] inline-block h-[0.62em] w-[1.15em] overflow-hidden rounded-full align-baseline ring-1"
-          >
-            <Image
-              src={site.ogImage}
-              alt=""
-              fill
-              priority
-              sizes="(min-width: 768px) 20vw, 40vw"
-              className="object-cover"
-            />
-          </span>
-          <Chars text="762" />
+          <Chars text="ANT762" />
         </span>
       </h1>
 

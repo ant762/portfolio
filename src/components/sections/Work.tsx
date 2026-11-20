@@ -165,9 +165,11 @@ export function Work() {
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="Open"
-            className="group border-line hover:bg-accent hover:text-ink flex shrink-0 flex-col justify-between gap-16 rounded-sm border p-8 transition-colors duration-500 md:h-[62svh] md:w-[28vw]"
+            className="group border-line hover:bg-accent hover:text-on-accent flex shrink-0 flex-col justify-between gap-16 rounded-sm border p-8 transition-colors duration-500 md:h-[62svh] md:w-[28vw]"
           >
-            <span className="label-mono text-muted group-hover:text-ink/60">More on GitHub</span>
+            <span className="label-mono text-muted group-hover:text-on-accent/70">
+              More on GitHub
+            </span>
             <span className="text-display-md font-bold uppercase">
               See all
               <br />

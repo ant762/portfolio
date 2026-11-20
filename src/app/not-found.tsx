@@ -11,7 +11,7 @@ export default function NotFound() {
       <TransitionLink
         href="/"
         label="Home"
-        className="label-mono bg-accent text-ink rounded-full px-6 py-3 transition-transform hover:scale-105"
+        className="label-mono bg-accent text-on-accent rounded-full px-6 py-3 transition-transform hover:scale-105"
       >
         Back home ↗
       </TransitionLink>

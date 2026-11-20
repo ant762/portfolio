@@ -214,8 +214,8 @@ export function ProjectView({ project, next, position, total }: ProjectViewProps
           aria-hidden="true"
           className="bg-accent ease-expo absolute inset-0 origin-bottom scale-y-0 transition-transform duration-700 group-hover:scale-y-100"
         />
-        <span className="group-hover:text-ink relative block transition-colors duration-500">
-          <span className="label-mono text-muted group-hover:text-ink/60 transition-colors duration-500">
+        <span className="group-hover:text-on-accent relative block transition-colors duration-500">
+          <span className="label-mono text-muted group-hover:text-on-accent/70 transition-colors duration-500">
             Next project
           </span>
           <span className="text-display-lg mt-6 block font-bold uppercase">{next.title}</span>

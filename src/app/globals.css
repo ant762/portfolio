@@ -2,14 +2,18 @@
 @import 'lenis/dist/lenis.css';
 
 @theme {
-  --color-ink: #0b0b0c;
-  --color-ink-soft: #141416;
-  --color-paper: #f0eee8;
-  --color-accent: #d7ff3f;
-  --color-muted: #8b8b86;
-  --color-line: rgb(240 238 232 / 0.14);
+  --color-ink: #09090a;
+  --color-ink-soft: #111113;
+  --color-paper: #e4dfdc;
+  --color-accent: #dc2430;
+  --color-blood: #7a0f17;
+  --color-on-accent: #f6f0ec;
+  --color-muted: #8c8688;
+  --color-line: rgb(228 223 220 / 0.14);
 
-  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Cinzel Variable', Georgia, 'Times New Roman', serif;
+  --font-gothic: 'UnifrakturCook', 'Cinzel Variable', Georgia, serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -29,21 +33,31 @@
 }
 
 @utility text-display-xl {
+  font-family: var(--font-display);
   font-size: clamp(3.5rem, 17vw, 21rem);
   line-height: 0.82;
   letter-spacing: -0.045em;
 }
 
 @utility text-display-lg {
+  font-family: var(--font-display);
   font-size: clamp(2.75rem, 9vw, 9.5rem);
   line-height: 0.9;
   letter-spacing: -0.04em;
 }
 
 @utility text-display-md {
+  font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 5rem);
   line-height: 0.98;
   letter-spacing: -0.03em;
+}
+
+@utility font-gothic {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 @utility label-mono {
@@ -63,9 +77,8 @@ html.is-locked body {
 }
 
 body {
-  background: var(--color-ink);
   color: var(--color-paper);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
@@ -124,10 +137,10 @@ html.has-cursor [data-cursor] {
 @keyframes pulse-dot {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgb(215 255 63 / 0.55);
+    box-shadow: 0 0 0 0 rgb(220 36 48 / 0.6);
   }
   50% {
-    box-shadow: 0 0 0 8px rgb(215 255 63 / 0);
+    box-shadow: 0 0 0 8px rgb(220 36 48 / 0);
   }
 }
 

@@ -123,7 +123,7 @@ export function Contact() {
             <a
               data-cta
               href={`mailto:${site.email}`}
-              className="group bg-accent text-ink ease-expo flex size-[clamp(10rem,22vw,18rem)] flex-col items-center justify-center gap-2 rounded-full transition-transform duration-700 hover:scale-105"
+              className="group bg-accent text-on-accent ease-expo flex size-[clamp(10rem,22vw,18rem)] flex-col items-center justify-center gap-2 rounded-full transition-transform duration-700 hover:scale-105"
             >
               <span className="text-[clamp(1.2rem,2.2vw,2rem)] font-bold tracking-tight uppercase">
                 Get in touch
