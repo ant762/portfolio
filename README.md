@@ -1,13 +1,92 @@
-# This is the source code for my personal portfolio website.
+# ant762.dev — Portfolio
 
-### I used a mix of basic web tools and some pretty cool animation libraries to make everything feel "alive":
+Personal portfolio of **Maik Antunes** (`ant762`) — Fullstack Developer & Level Designer.
+Rebuilt from a static HTML/CSS/JS site into a **Next.js + TypeScript** application with a WebGL hero,
+inertial scrolling, scroll-driven GSAP animation and animated route transitions.
 
-- HTML5, CSS3 (with lots of glassmorphism), and Vanilla JavaScript.
+[![CI](https://github.com/ant762/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/ant762/portfolio/actions/workflows/ci.yml)
 
-- That interactive polygon net in the back? That's Three.js and Vanta.js.
+**Links:** [GitHub](https://github.com/ant762) · [LinkedIn](https://www.linkedin.com/in/maik-antunes-6062aa355/) · [Discord](https://discord.gg/EnuYKVdGru) · [Email](mailto:maik.antunes07@gmail.com)
 
-- I used AOS (Animate On Scroll) so things pop up as you scroll, and GSAP for the smooth transitions.
+## Highlights
 
-- Font Awesome for the social/tech icons and Inter from Google Fonts for that clean look.
+- **Preloader** with progress counter and curved exit transition
+- **WebGL hero** — a procedural topographic map (GLSL simplex noise + contour lines) that reacts to the cursor and scroll
+- **Smooth scrolling** (Lenis) wired into GSAP's ticker and ScrollTrigger
+- **Pinned horizontal showcase** for code projects, with per-card image parallax
+- **Editorial environment list** with a cursor-following, velocity-tilted preview
+- **Route transitions** — staggered bars cover the screen while Next.js swaps the page
+- **Custom cursor** with contextual labels (`data-cursor="View"`), magnetic buttons, scroll-velocity marquee
+- Statically generated project pages (`/projects/[slug]`), typed content layer, SEO (metadata, Open Graph, JSON-LD, sitemap, robots)
+- Accessible by default: skip link, semantic landmarks, `prefers-reduced-motion` support, keyboard-friendly menu
 
-- Most of these libraries are pulled from CDNs (like Cloudflare and JSDelivr) so the site stays snappy.
+## Stack
+
+| Area      | Tools                                            |
+| --------- | ------------------------------------------------ |
+| Framework | Next.js (App Router, Turbopack), React 19        |
+| Language  | TypeScript (strict, `noUncheckedIndexedAccess`)  |
+| Styling   | Tailwind CSS v4 (design tokens in `globals.css`) |
+| Motion    | GSAP + ScrollTrigger, `@gsap/react`, Lenis       |
+| WebGL     | three.js (single full-screen shader)             |
+| Quality   | ESLint, Prettier, Vitest, GitHub Actions         |
+
+## Getting started
+
+Requirements: Node.js `>= 20.9` (see `.nvmrc`).
+
+```bash
+npm install
+npm run dev        # http://localhost:3000
+```
+
+| Script              | Description                                  |
+| ------------------- | -------------------------------------------- |
+| `npm run dev`       | Start the dev server                         |
+| `npm run build`     | Production build                             |
+| `npm start`         | Serve the production build                   |
+| `npm run lint`      | ESLint                                       |
+| `npm run typecheck` | `tsc --noEmit`                               |
+| `npm test`          | Vitest (content integrity + utilities)       |
+| `npm run format`    | Prettier (write)                             |
+| `npm run check`     | Format check + lint + typecheck + tests (CI) |
+
+Copy `.env.example` to `.env.local` to override `NEXT_PUBLIC_SITE_URL`.
+
+## Project structure
+
+```
+src/
+├── app/                  # Routes, layout, metadata, sitemap, robots
+│   └── projects/[slug]/  # Statically generated project pages
+├── components/
+│   ├── layout/           # Preloader, Navbar (+ fullscreen menu)
+│   ├── providers/        # SmoothScroll (Lenis), TransitionProvider
+│   ├── sections/         # Hero, Marquee, Work, Environments, About, Credentials, Contact
+│   ├── project/          # Project page view
+│   ├── ui/               # Cursor, Magnetic, SplitWords, TransitionLink
+│   └── webgl/            # HeroCanvas (three.js shader)
+├── data/                 # Typed content: site.ts, projects.ts
+├── hooks/                # useSiteReady, useLocalTime
+├── lib/                  # gsap setup, scroll lock/Lenis bridge, ready store, utils
+└── types/                # Shared domain types
+tests/                    # Vitest suites
+docs/                     # Architecture & animation notes
+```
+
+See [`docs/architecture.md`](docs/architecture.md) for how the animation pipeline fits together and
+[`docs/content-guide.md`](docs/content-guide.md) for adding projects.
+
+## Adding a project
+
+Add an entry to [`src/data/projects.ts`](src/data/projects.ts) and drop the images in `public/images/`
+(WebP recommended). The home page, project route, sitemap and tests pick it up automatically.
+
+## Deployment
+
+Any Next.js-compatible host works (Vercel, Netlify, Cloudflare, a Node server). Set
+`NEXT_PUBLIC_SITE_URL` to the production origin so canonical URLs, Open Graph and the sitemap are correct.
+
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). AI coding agents should read [`AGENTS.md`](AGENTS.md) first.
