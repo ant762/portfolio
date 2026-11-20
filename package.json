@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "2.0.0",
   "private": true,
-  "description": "Portfolio de Maik Antunes (ant762) — Next.js, TypeScript, GSAP e WebGL.",
+  "description": "Portfolio de ant762 — Next.js, TypeScript, GSAP e WebGL.",
   "engines": {
     "node": ">=20.9.0"
   },

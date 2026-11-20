@@ -107,7 +107,7 @@ export function Hero() {
         aria-label={site.name}
       >
         <span aria-hidden="true" className="block">
-          <Chars text="MAIK" />
+          <Chars text="ANT" />
           <span
             data-pill
             className="ring-paper/25 relative mx-[0.08em] inline-block h-[0.62em] w-[1.15em] overflow-hidden rounded-full align-baseline ring-1"
@@ -121,9 +121,7 @@ export function Hero() {
               className="object-cover"
             />
           </span>
-        </span>
-        <span aria-hidden="true" className="block text-right">
-          <Chars text="ANTUNES" />
+          <Chars text="762" />
         </span>
       </h1>
 
@@ -132,7 +130,7 @@ export function Hero() {
         className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
       >
         <p data-hero-fade className="text-paper/80 max-w-sm text-lg leading-snug md:text-xl">
-          {site.tagline}
+          <span className="text-paper">Hi, I&apos;m {site.firstName}.</span> {site.tagline}
         </p>
 
         <div data-hero-fade className="label-mono text-muted flex items-center gap-4">

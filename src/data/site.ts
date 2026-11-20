@@ -3,10 +3,11 @@ import type { Credential, SocialLink } from '@/types';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ant762.page.gd';
 
 export const site = {
-  name: 'Maik Antunes',
+  name: 'ant762',
+  firstName: 'Maik',
   handle: 'ant762',
   role: 'Fullstack Developer',
-  title: 'Maik Antunes — Fullstack Developer & Level Designer',
+  title: 'ant762 — Fullstack Developer & Level Designer',
   tagline: 'Transforming your ideas into high-impact experiences.',
   description:
     'Systems Development Technician focused on robust, logical and complex solutions with intuitive interfaces. Specialist in Luau, JavaScript, Node.js and Level Design.',
@@ -23,7 +24,7 @@ export const socials: readonly SocialLink[] = [
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/maik-antunes-6062aa355/',
-    handle: 'maik-antunes',
+    handle: 'Connect on LinkedIn',
   },
   { label: 'GitHub', href: 'https://github.com/ant762', handle: '@ant762' },
   { label: 'Discord', href: 'https://discord.gg/EnuYKVdGru', handle: 'Join the server' },

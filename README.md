@@ -1,6 +1,6 @@
 # ant762.dev — Portfolio
 
-Personal portfolio of **Maik Antunes** (`ant762`) — Fullstack Developer & Level Designer.
+Personal portfolio of **ant762** — Fullstack Developer & Level Designer.
 Rebuilt from a static HTML/CSS/JS site into a **Next.js + TypeScript** application with a WebGL hero,
 inertial scrolling, scroll-driven GSAP animation and animated route transitions.
 

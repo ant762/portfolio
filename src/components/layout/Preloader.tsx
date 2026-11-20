@@ -88,7 +88,7 @@ export function Preloader() {
       <div className="label-mono flex items-start justify-between">
         <span className="overflow-hidden">
           <span data-pre-line className="block">
-            Maik Antunes — Portfolio
+            ant762 — Portfolio
           </span>
         </span>
         <span className="overflow-hidden">
