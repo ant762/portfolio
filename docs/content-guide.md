@@ -9,7 +9,7 @@
 ```ts
 {
   slug: 'my-project',                 // lowercase-kebab, unique, becomes /projects/my-project
-  category: 'programming',            // 'programming' → horizontal showcase, 'environment' → list
+  category: 'programming',            // 'programming' → Work section; add playground: true for the fidgets page
   title: 'My Project',                // short title (cards/lists)
   headline: 'My Project: Long Title', // page title
   summary: 'One line.',
@@ -21,8 +21,12 @@
 }
 ```
 
-3. `npm test` validates slugs, links and image paths. `npm run dev` to preview.
+3. Add its Spanish and Portuguese copy (headline, summary, description) under the same slug in `src/i18n/projects.ts`.
+4. `npm test` validates slugs, links, image paths and that every project is translated. `npm run dev` to preview.
 
 ## Edit site info
 
-`src/data/site.ts` holds name, tagline, about text, email, social links (including LinkedIn), skills and credentials.
+`src/data/site.ts` holds name, tagline, about text, email, social links (including LinkedIn), skill groups (`skillGroups`).
+Interface text (all languages) lives in `src/i18n/dictionaries.ts`; career entries are in its `professional.timeline`.
+
+**Source of truth for profile data:** the README of github.com/ant762 (skills, experience, education, social links). Do not add certifications, languages or roles that are not published there. Roblox projects and level-design studies are kept as extras.

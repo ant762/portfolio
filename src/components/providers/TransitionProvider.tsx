@@ -12,6 +12,7 @@ import {
 } from 'react';
 import { gsap, prefersReducedMotion, ScrollTrigger } from '@/lib/gsap';
 import { setSiteReady } from '@/lib/ready';
+import { playSfx } from '@/lib/sound';
 import { getLenis, lockScroll, scrollToTarget, unlockScroll } from '@/lib/scroll';
 
 interface NavigateOptions {
@@ -122,14 +123,18 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
 
       busy.current = true;
       pendingHash.current = url.hash;
-      setSiteReady(false);
       lockScroll('transition');
       labelEl.textContent = label;
+      playSfx('whoosh');
 
       // Se por algum motivo a rota não trocar, não deixa a tela presa.
       safetyTimer.current = window.setTimeout(reveal, SAFETY_TIMEOUT_MS);
 
-      const go = () => router.push(`${url.pathname}${url.search}`);
+      // O "palco" só é escondido quando as barras já cobriram a tela inteira.
+      const go = () => {
+        setSiteReady(false);
+        router.push(`${url.pathname}${url.search}`);
+      };
 
       if (prefersReducedMotion()) {
         go();
@@ -176,12 +181,12 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
       >
         <div ref={barsRef} className="absolute inset-0 flex">
           {Array.from({ length: BAR_COUNT }, (_, i) => (
-            <div key={i} className="bg-paper h-full flex-1" />
+            <div key={i} className="bg-accent h-full flex-1" />
           ))}
         </div>
         <p
           ref={labelRef}
-          className="text-display-md px-gutter text-ink absolute inset-0 flex items-center justify-center text-center font-bold tracking-tight uppercase opacity-0"
+          className="text-display-md px-gutter text-on-accent absolute inset-0 flex items-center justify-center text-center font-bold tracking-tight uppercase opacity-0"
         />
       </div>
     </TransitionContext.Provider>

@@ -2,14 +2,18 @@
 @import 'lenis/dist/lenis.css';
 
 @theme {
-  --color-ink: #0b0b0c;
-  --color-ink-soft: #141416;
-  --color-paper: #f0eee8;
-  --color-accent: #d7ff3f;
-  --color-muted: #8b8b86;
-  --color-line: rgb(240 238 232 / 0.14);
+  --color-ink: #09090a;
+  --color-ink-soft: #111113;
+  --color-paper: #e4dfdc;
+  --color-accent: #dc2430;
+  --color-blood: #7a0f17;
+  --color-on-accent: #f6f0ec;
+  --color-muted: #8c8688;
+  --color-line: rgb(228 223 220 / 0.14);
 
-  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Cinzel Variable', Georgia, 'Times New Roman', serif;
+  --font-gothic: 'UnifrakturCook', 'Cinzel Variable', Georgia, serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -29,21 +33,31 @@
 }
 
 @utility text-display-xl {
-  font-size: clamp(3.5rem, 17vw, 21rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 16vw, 21rem);
   line-height: 0.82;
   letter-spacing: -0.045em;
 }
 
 @utility text-display-lg {
-  font-size: clamp(2.75rem, 9vw, 9.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 8.2vw, 9.5rem);
   line-height: 0.9;
   letter-spacing: -0.04em;
 }
 
 @utility text-display-md {
-  font-size: clamp(2rem, 5vw, 5rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 5vw, 5rem);
   line-height: 0.98;
   letter-spacing: -0.03em;
+}
+
+@utility font-gothic {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 @utility label-mono {
@@ -57,15 +71,19 @@ html {
   background: var(--color-ink);
 }
 
+html {
+  /* evita reflow (texto reformatando) quando o scroll é travado e a barra some */
+  scrollbar-gutter: stable;
+}
+
 html.is-locked,
 html.is-locked body {
   overflow: hidden;
 }
 
 body {
-  background: var(--color-ink);
   color: var(--color-paper);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
@@ -124,10 +142,10 @@ html.has-cursor [data-cursor] {
 @keyframes pulse-dot {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgb(215 255 63 / 0.55);
+    box-shadow: 0 0 0 0 rgb(220 36 48 / 0.6);
   }
   50% {
-    box-shadow: 0 0 0 8px rgb(215 255 63 / 0);
+    box-shadow: 0 0 0 8px rgb(220 36 48 / 0);
   }
 }
 
@@ -168,6 +186,79 @@ html.has-cursor [data-cursor] {
   .grain,
   .pulse-dot,
   .scroll-line {
+    animation: none;
+  }
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    height: 3px;
+  }
+  50% {
+    height: 12px;
+  }
+}
+
+.eq-bar {
+  animation: eq 0.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eq-bar {
+    animation: none;
+    height: 8px;
+  }
+}
+
+/* Glitch do título principal: rajada curta a cada ~5s e ao passar o mouse/tocar. */
+@keyframes glitch-burst {
+  0%,
+  86%,
+  100% {
+    transform: none;
+    text-shadow: none;
+    clip-path: none;
+  }
+  88% {
+    transform: translate(-0.02em, 0.01em) skewX(-6deg);
+    text-shadow:
+      0.04em 0 var(--color-accent),
+      -0.04em 0 var(--color-paper);
+    clip-path: inset(10% 0 55% 0);
+  }
+  90% {
+    transform: translate(0.03em, -0.01em) skewX(5deg);
+    text-shadow:
+      -0.05em 0 var(--color-accent),
+      0.04em 0 var(--color-paper);
+    clip-path: inset(55% 0 8% 0);
+  }
+  92% {
+    transform: translate(-0.015em, 0) skewX(-3deg);
+    text-shadow:
+      0.03em 0.01em var(--color-accent),
+      -0.03em -0.01em var(--color-paper);
+    clip-path: inset(25% 0 30% 0);
+  }
+  94% {
+    transform: translate(0.02em, 0.01em);
+    text-shadow: -0.03em 0 var(--color-accent);
+    clip-path: none;
+  }
+}
+
+.glitch {
+  animation: glitch-burst 5s steps(1, end) infinite;
+}
+
+.glitch:hover,
+.glitch:active {
+  animation-duration: 0.9s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch {
     animation: none;
   }
 }

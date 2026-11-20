@@ -25,12 +25,10 @@ describe('projects', () => {
     },
   );
 
-  it('separa programação e ambientes', () => {
-    expect(getProjectsByCategory('programming').length).toBeGreaterThan(0);
-    expect(getProjectsByCategory('environment').length).toBeGreaterThan(0);
-    expect(
-      getProjectsByCategory('programming').length + getProjectsByCategory('environment').length,
-    ).toBe(projects.length);
+  it('mantém só o projeto deste site com a seção playground', () => {
+    expect(projects.map((p) => p.slug)).toEqual(['personal-portfolio']);
+    expect(getProject('personal-portfolio')?.playground).toBe(true);
+    expect(getProjectsByCategory('programming')).toHaveLength(1);
   });
 
   it('getProject e getNextProject funcionam de forma circular', () => {
@@ -44,5 +42,55 @@ describe('socials', () => {
   it('inclui o LinkedIn', () => {
     const linkedin = socials.find((s) => s.label === 'LinkedIn');
     expect(linkedin?.href).toContain('linkedin.com/in/maik-antunes');
+  });
+});
+
+describe('skills e redes (fonte: README do GitHub)', () => {
+  it('grupos de skills não têm itens vazios nem repetidos dentro do grupo', async () => {
+    const { skillGroups } = await import('@/data/site');
+    expect(skillGroups.length).toBe(5);
+    for (const group of skillGroups) {
+      expect(group.items.length).toBeGreaterThan(0);
+      expect(new Set(group.items).size).toBe(group.items.length);
+      for (const item of group.items) expect(item.trim()).not.toBe('');
+    }
+  });
+
+  it('links sociais são https e incluem GitHub e LinkedIn (sem Discord/Instagram)', () => {
+    const hrefs = socials.map((s) => s.href);
+    expect(hrefs).toContain('https://github.com/ant762');
+    expect(hrefs.some((h) => h.includes('linkedin.com/in/maik-antunes'))).toBe(true);
+    expect(hrefs.some((h) => /discord|instagram/.test(h))).toBe(false);
+  });
+
+  it('não lista PHP e inclui a stack usada neste site', async () => {
+    const { skillGroups } = await import('@/data/site');
+    const all = skillGroups.flatMap((g) => g.items);
+    expect(all).not.toContain('PHP');
+    for (const tech of ['Next.js', 'TypeScript', 'Tailwind CSS', 'React', 'GSAP', 'Three.js']) {
+      expect(all).toContain(tech);
+    }
+  });
+});
+
+describe('segurança', () => {
+  it('next.config e public/_headers aplicam CSP restritiva e anti-clickjacking', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { securityHeaders } = await import('../next.config');
+    const names = securityHeaders.map((h) => h.key);
+    for (const key of [
+      'Content-Security-Policy',
+      'X-Content-Type-Options',
+      'Strict-Transport-Security',
+      'Permissions-Policy',
+    ]) {
+      expect(names).toContain(key);
+    }
+    const csp = securityHeaders.find((h) => h.key === 'Content-Security-Policy')?.value ?? '';
+    expect(csp).toContain("object-src 'none'");
+    expect(csp).toContain("frame-ancestors 'none'");
+    expect(csp).not.toMatch(/https?:\/\/\*|\s\*[;\s]/);
+    const file = readFileSync(join(process.cwd(), 'public/_headers'), 'utf8');
+    expect(file).toContain("frame-ancestors 'none'");
   });
 });

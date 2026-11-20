@@ -23,15 +23,12 @@ export interface Project {
   /** Imagem de detalhe (relativa a /public) */
   detail: string;
   links: ProjectLink[];
+  /** Mostra a seção "Playground" (explicação + fidgets) na página do projeto. */
+  playground?: boolean;
 }
 
 export interface SocialLink {
   label: string;
   href: string;
   handle: string;
-}
-
-export interface Credential {
-  label: string;
-  detail: string;
 }

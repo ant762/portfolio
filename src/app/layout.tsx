@@ -1,14 +1,20 @@
 import '@fontsource-variable/bricolage-grotesque';
 import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/cinzel';
+import '@fontsource/unifrakturcook/700.css';
 import './globals.css';
 
+import { AtmosphereLoader } from '@/components/webgl/AtmosphereLoader';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Preloader } from '@/components/layout/Preloader';
 import { SmoothScroll } from '@/components/providers/SmoothScroll';
 import { TransitionProvider } from '@/components/providers/TransitionProvider';
+import { LocaleSync } from '@/components/providers/LocaleSync';
+import { SoundProvider } from '@/components/providers/SoundProvider';
 import { Cursor } from '@/components/ui/Cursor';
+import { SkipLink } from '@/components/ui/SkipLink';
 import { SITE_URL, site, socials } from '@/data/site';
 
 export const metadata: Metadata = {
@@ -18,16 +24,7 @@ export const metadata: Metadata = {
   applicationName: `${site.handle}.dev`,
   authors: [{ name: site.name, url: SITE_URL }],
   creator: site.name,
-  keywords: [
-    'Fullstack Developer',
-    'Luau',
-    'Roblox',
-    'JavaScript',
-    'TypeScript',
-    'Next.js',
-    'Level Design',
-    'Portfolio',
-  ],
+  keywords: ['Fullstack Developer', 'Luau', 'JavaScript', 'TypeScript', 'Next.js', 'Portfolio'],
   alternates: { canonical: '/' },
   icons: { icon: site.ogImage, apple: site.ogImage },
   openGraph: {
@@ -48,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0b0c',
+  themeColor: '#09090a',
   colorScheme: 'dark',
 };
 
@@ -73,15 +70,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </noscript>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, '\\u003c'),
+          }}
         />
-        <a
-          href="#main"
-          className="label-mono bg-accent text-ink fixed top-3 left-3 z-[300] -translate-y-20 rounded-full px-4 py-2 focus:translate-y-0"
-        >
-          Skip to content
-        </a>
+        <SkipLink />
 
+        <LocaleSync />
+        <SoundProvider />
+        <AtmosphereLoader />
         <SmoothScroll>
           <TransitionProvider>
             <Preloader />

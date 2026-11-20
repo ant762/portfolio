@@ -1,12 +1,16 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { Magnetic } from '@/components/ui/Magnetic';
+import { SoundControls } from '@/components/ui/SoundControls';
 import { TransitionLink } from '@/components/ui/TransitionLink';
 import { useLocalTime } from '@/hooks/useLocalTime';
+import { useI18n } from '@/i18n/useI18n';
 import { navLinks, site, socials } from '@/data/site';
 import { gsap, prefersReducedMotion, ScrollTrigger, useGSAP } from '@/lib/gsap';
 import { lockScroll, unlockScroll } from '@/lib/scroll';
+import { playSfx } from '@/lib/sound';
 import { padIndex } from '@/lib/utils';
 
 export function Navbar() {
@@ -15,6 +19,7 @@ export function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null);
   const timeline = useRef<gsap.core.Timeline | null>(null);
   const time = useLocalTime(site.timezone);
+  const { t } = useI18n();
 
   // Esconde ao rolar para baixo, mostra ao rolar para cima.
   useGSAP(
@@ -65,6 +70,7 @@ export function Navbar() {
 
   const setMenu = (next: boolean) => {
     setOpen(next);
+    playSfx(next ? 'hit' : 'whoosh');
     if (next) lockScroll('menu');
     else unlockScroll('menu');
 
@@ -98,41 +104,46 @@ export function Navbar() {
       >
         <TransitionLink
           href="/"
-          label="Home"
+          label={t.ui.home}
           onClick={() => open && setMenu(false)}
           className="font-display text-base font-bold tracking-tight normal-case"
-          aria-label={`${site.name} — home`}
+          aria-label={`${site.name} — ${t.ui.home}`}
         >
           {site.handle}
           <span className="opacity-60">.dev</span>
         </TransitionLink>
 
-        <p className="hidden items-center gap-3 md:flex" aria-label="Local time">
+        <p className="hidden items-center gap-3 md:flex" aria-label={t.ui.localTime}>
           <span className="size-1.5 rounded-full bg-white" />
           São Paulo, BRA — {time}
         </p>
 
-        <Magnetic strength={0.25}>
-          <button
-            type="button"
-            onClick={() => setMenu(!open)}
-            aria-expanded={open}
-            aria-controls="site-menu"
-            className="flex items-center gap-3 py-1"
-          >
-            <span className="relative block h-3 w-6" aria-hidden="true">
-              <span
-                className="ease-expo absolute inset-x-0 h-px bg-white transition-all duration-500"
-                style={{ top: open ? '50%' : '0%', rotate: open ? '45deg' : '0deg' }}
-              />
-              <span
-                className="ease-expo absolute inset-x-0 h-px bg-white transition-all duration-500"
-                style={{ top: open ? '50%' : '100%', rotate: open ? '-45deg' : '0deg' }}
-              />
-            </span>
-            {open ? 'Close' : 'Menu'}
-          </button>
-        </Magnetic>
+        <div className="flex items-center gap-3.5 sm:gap-6 md:gap-8">
+          <SoundControls className="gap-3 sm:gap-4" />
+          <LanguageSwitcher className="gap-2 sm:gap-3" />
+          <Magnetic strength={0.25}>
+            <button
+              type="button"
+              onClick={() => setMenu(!open)}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              aria-label={open ? t.ui.close : t.ui.menu}
+              className="flex items-center gap-3 py-1"
+            >
+              <span className="relative block h-3 w-6" aria-hidden="true">
+                <span
+                  className="ease-expo absolute inset-x-0 h-px bg-white transition-all duration-500"
+                  style={{ top: open ? '50%' : '0%', rotate: open ? '45deg' : '0deg' }}
+                />
+                <span
+                  className="ease-expo absolute inset-x-0 h-px bg-white transition-all duration-500"
+                  style={{ top: open ? '50%' : '100%', rotate: open ? '-45deg' : '0deg' }}
+                />
+              </span>
+              <span className="hidden sm:inline">{open ? t.ui.close : t.ui.menu}</span>
+            </button>
+          </Magnetic>
+        </div>
       </header>
 
       <div
@@ -147,7 +158,7 @@ export function Navbar() {
               <li key={link.href} className="overflow-hidden">
                 <TransitionLink
                   href={link.href}
-                  label={link.label}
+                  label={t.nav[link.key]}
                   onClick={() => setMenu(false)}
                   data-menu-line
                   className="group flex items-baseline gap-5 py-1 font-bold tracking-tighter uppercase"
@@ -155,7 +166,7 @@ export function Navbar() {
                 >
                   <span className="label-mono text-muted font-normal">{padIndex(i + 1)}</span>
                   <span className="ease-expo group-hover:text-accent transition-all duration-500 group-hover:translate-x-4">
-                    {link.label}
+                    {t.nav[link.key]}
                   </span>
                 </TransitionLink>
               </li>
@@ -165,7 +176,7 @@ export function Navbar() {
 
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div data-menu-fade>
-            <p className="label-mono text-muted">Get in touch</p>
+            <p className="label-mono text-muted">{t.ui.getInTouch}</p>
             <a
               href={`mailto:${site.email}`}
               className="text-xl tracking-tight underline-offset-4 hover:underline md:text-3xl"

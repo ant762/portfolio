@@ -18,7 +18,7 @@ function Group({ outline }: { outline?: boolean }) {
           >
             {skill}
           </span>
-          <span className="text-accent">✦</span>
+          <span className="text-accent">✠</span>
         </span>
       ))}
     </div>
@@ -33,30 +33,58 @@ export function Marquee() {
       if (prefersReducedMotion()) return;
 
       const tracks = gsap.utils.toArray<HTMLElement>('[data-track]');
-      const tweens = tracks.map((track, i) => {
-        const reverse = i % 2 === 1;
-        return gsap.fromTo(
-          track,
-          { xPercent: reverse ? -50 : 0 },
-          { xPercent: reverse ? 0 : -50, duration: 38, ease: 'none', repeat: -1 },
-        );
-      });
+      const BASE = 60; // px/s, independente de quantas tecnologias existem
+      const MAX_BOOST = 2.5;
+      const pos = tracks.map(() => 0);
+      const setters = tracks.map((track) => gsap.quickSetter(track, 'x', 'px'));
+      let half = 1;
+      let boost = 0;
+      let dir = 1;
+      let dirTarget = 1;
+      let visible = false;
 
-      // A velocidade do scroll acelera o marquee e a direção inverte o sentido.
-      ScrollTrigger.create({
+      const measure = () => {
+        half = Math.max(1, (tracks[0]?.scrollWidth ?? 2) / 2);
+      };
+      measure();
+      void document.fonts?.ready.then(measure);
+      window.addEventListener('resize', measure);
+
+      const tick = (_time: number, deltaMs: number) => {
+        if (!visible) return;
+        const dt = Math.min(deltaMs, 100) / 1000;
+        boost += (0 - boost) * Math.min(1, dt * 2.5); // desacelera suavemente
+        dir += (dirTarget - dir) * Math.min(1, dt * 6);
+        const step = BASE * (1 + boost) * dir * dt;
+        tracks.forEach((_, i) => {
+          const sign = i % 2 === 1 ? 1 : -1;
+          pos[i] = ((pos[i] ?? 0) + sign * step) % half;
+          const p = pos[i] ?? 0;
+          // mantém x em (-half, 0]: loop contínuo nos dois sentidos
+          setters[i]?.(p > 0 ? p - half : p <= -half ? p + half : p);
+        });
+      };
+      gsap.ticker.add(tick);
+
+      // Scroll rápido acelera o marquee; a direção do scroll define o sentido.
+      const trigger = ScrollTrigger.create({
         trigger: rootRef.current,
         start: 'top bottom',
         end: 'bottom top',
+        onToggle: (self) => {
+          visible = self.isActive;
+        },
         onUpdate: (self) => {
-          const boost = Math.min(Math.abs(self.getVelocity()) / 220, 7);
-          const dir = self.direction;
-          tweens.forEach((tween, i) => {
-            const sign = (i % 2 === 1 ? -1 : 1) * dir;
-            gsap.to(tween, { timeScale: sign * (1 + boost), duration: 0.25, overwrite: true });
-            gsap.to(tween, { timeScale: sign, duration: 1.2, delay: 0.25, overwrite: 'auto' });
-          });
+          boost = Math.max(boost, Math.min(Math.abs(self.getVelocity()) / 400, MAX_BOOST));
+          dirTarget = self.direction;
         },
       });
+
+      return () => {
+        gsap.ticker.remove(tick);
+        window.removeEventListener('resize', measure);
+        trigger.kill();
+      };
     },
     { scope: rootRef },
   );
