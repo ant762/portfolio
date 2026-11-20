@@ -35,7 +35,7 @@ Never leave the tree failing `npm run check`. Run `npm run format` to fix format
 7. **Images.** Use `next/image` with `fill` + `sizes`. Store assets as WebP in `public/images/`. Every image needs meaningful `alt` (decorative → `alt=""`).
 8. **Styling.** Tailwind utilities + the tokens/utilities in `src/app/globals.css` (`text-display-*`, `label-mono`, `px-gutter`, colors `ink`, `paper`, `accent`). Prefer extending tokens over one-off values. Custom utilities must be defined with `@utility` to work with variants.
 9. **Accessibility.** Keep semantic landmarks, visible focus, `aria-label`s on icon-only controls, and the skip link.
-10. **Sound.** Never autoplay. Audio is procedural (`src/lib/sound.ts`), on by default (started from the preloader "Enter" gesture), and must stay controllable through `SoundControls`. New interactions can call `playSfx()`.
+10. **Sound.** Never autoplay. Audio is procedural (`src/lib/sound.ts`), on by default (started from the preloader "Enter" gesture), and must stay controllable through `SoundControls`. New interactions can call `playSfx()`; elements with their own sounds get `data-sfx="own"` so the generic click/hover sounds are skipped.
 11. **Background.** The site-wide WebGL canvas sits at `-z-20`; do not add a `background` to `body` or full-width sections that would hide it.
 12. **Tests.** Add Vitest tests under `tests/` for new pure logic or data invariants.
 

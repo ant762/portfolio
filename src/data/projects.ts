@@ -10,8 +10,8 @@ export const projects: readonly Project[] = [
     description:
       'This site is the project. It was built to test the limits of modern web development: a site-wide WebGL shader, inertial scrolling, scroll-driven GSAP animation, route transitions, procedural audio, three languages and a typed content layer. Below you can read how each part works and play with small interactive experiments.',
     tags: ['Next.js', 'TypeScript', 'GSAP', 'three.js', 'Web Audio'],
-    cover: '/images/webs.webp',
-    detail: '/images/webs.webp',
+    cover: '/images/site-cover.webp',
+    detail: '/images/site-cover.webp',
     links: [{ label: 'Source on GitHub', href: 'https://github.com/ant762/portfolio' }],
     playground: true,
   },

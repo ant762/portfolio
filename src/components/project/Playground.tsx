@@ -14,6 +14,7 @@ function Tile({ title, hint, children }: { title: string; hint: string; children
   return (
     <div
       data-fidget
+      data-sfx="own"
       className="border-line bg-ink/40 relative flex min-h-72 flex-col rounded-sm border p-5 backdrop-blur-sm"
     >
       <div className="flex items-baseline justify-between gap-4">
