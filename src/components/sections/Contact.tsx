@@ -128,7 +128,7 @@ export function Contact() {
           </ul>
         </div>
 
-        <div className="md:col-span-5 md:justify-self-end">
+        <div className="justify-self-center md:col-span-5 md:justify-self-end">
           <Magnetic strength={0.4}>
             <a
               data-cta
