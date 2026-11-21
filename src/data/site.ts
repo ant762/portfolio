@@ -1,6 +1,11 @@
 import type { SocialLink } from '@/types';
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ant762.page.gd';
+// Prévia (Discord/WhatsApp) exige og:image com URL absoluta do domínio real:
+// usa a variável explícita, senão o domínio de produção da Vercel, senão o padrão.
+const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (vercelHost ? `https://${vercelHost}` : 'https://ant762.page.gd');
 
 export const site = {
   name: 'ant762',
@@ -8,13 +13,13 @@ export const site = {
   handle: 'ant762',
   role: 'Fullstack Developer',
   title: 'ant762 — Fullstack Developer',
-  tagline: 'Backend engineering, IT infrastructure and game development.',
+  tagline: 'Fullstack developer, IT infrastructure and game development.',
   description:
-    'Fullstack developer focused on backend engineering, IT infrastructure and game development (LuaU). Node.js, Python, MySQL and more.',
+    'Fullstack developer working across backend, frontend, IT infrastructure and game development (LuaU). Node.js, Python, MySQL and more.',
   location: 'Brazil',
   timezone: 'America/Sao_Paulo',
   email: 'maik.antunes07@gmail.com',
-  ogImage: '/images/A2.webp',
+  ogImage: '/og.jpg',
 } as const;
 
 export const socials: readonly SocialLink[] = [
