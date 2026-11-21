@@ -26,14 +26,14 @@ export const metadata: Metadata = {
   creator: site.name,
   keywords: ['Fullstack Developer', 'Luau', 'JavaScript', 'TypeScript', 'Next.js', 'Portfolio'],
   alternates: { canonical: '/' },
-  icons: { icon: site.ogImage, apple: site.ogImage },
+  icons: { icon: '/images/A2.webp', apple: '/images/A2.webp' },
   openGraph: {
     type: 'website',
     url: SITE_URL,
     siteName: `${site.handle}.dev`,
     title: site.title,
     description: site.tagline,
-    images: [{ url: site.ogImage, width: 800, height: 800, alt: site.name }],
+    images: [{ url: site.ogImage, width: 1200, height: 630, type: 'image/jpeg', alt: site.name }],
   },
   twitter: {
     card: 'summary_large_image',
