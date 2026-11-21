@@ -84,10 +84,6 @@ const en = {
         title: 'Typed content layer',
         text: 'Next.js App Router with strict TypeScript. Content lives in data files, separate from the UI, checked by Vitest tests and CI.',
       },
-      {
-        title: 'Accessible by default',
-        text: 'Reduced-motion support, skip link, visible focus, semantic landmarks and statically generated pages.',
-      },
     ],
     fidgetsLabel: 'Fidgets',
     fidgetsTitle: 'Play with it',
@@ -165,7 +161,7 @@ const en = {
     },
     stackLabel: 'This website',
     stackTitle: 'Stack',
-    stackBlurb: 'Libraries and tooling behind this website, read straight from its package.json.',
+    stackBlurb: 'Tools used to build this site.',
     stackRoles: {
       next: 'App Router, static generation, metadata and SEO',
       react: 'UI components and server/client boundaries',
@@ -312,10 +308,6 @@ const es: Dictionary = {
         title: 'Capa de contenido tipada',
         text: 'Next.js App Router con TypeScript estricto. El contenido vive en archivos de datos, separado de la interfaz, verificado con tests de Vitest y CI.',
       },
-      {
-        title: 'Accesible por defecto',
-        text: 'Soporte de movimiento reducido, enlace de salto, foco visible, landmarks semánticos y páginas generadas estáticamente.',
-      },
     ],
     fidgetsLabel: 'Fidgets',
     fidgetsTitle: 'Juega con él',
@@ -394,8 +386,7 @@ const es: Dictionary = {
     },
     stackLabel: 'Este sitio',
     stackTitle: 'Stack',
-    stackBlurb:
-      'Librerías y herramientas detrás de este sitio, leídas directamente de su package.json.',
+    stackBlurb: 'Herramientas usadas para construir este sitio.',
     stackRoles: {
       next: 'App Router, generación estática, metadatos y SEO',
       react: 'Componentes de UI y límites servidor/cliente',
@@ -540,10 +531,6 @@ const pt: Dictionary = {
         title: 'Camada de conteúdo tipada',
         text: 'Next.js App Router com TypeScript estrito. O conteúdo fica em arquivos de dados, separado da interface, verificado por testes Vitest e CI.',
       },
-      {
-        title: 'Acessível por padrão',
-        text: 'Suporte a movimento reduzido, link de pular, foco visível, landmarks semânticos e páginas geradas estaticamente.',
-      },
     ],
     fidgetsLabel: 'Fidgets',
     fidgetsTitle: 'Brinque com ele',
@@ -621,7 +608,7 @@ const pt: Dictionary = {
     },
     stackLabel: 'Este site',
     stackTitle: 'Stack',
-    stackBlurb: 'Bibliotecas e ferramentas por trás deste site, lidas direto do seu package.json.',
+    stackBlurb: 'Ferramentas usadas para construir este site.',
     stackRoles: {
       next: 'App Router, geração estática, metadados e SEO',
       react: 'Componentes de UI e fronteiras servidor/cliente',
