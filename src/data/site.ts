@@ -10,6 +10,8 @@ export const SITE_URL =
 export const site = {
   name: 'ant762',
   firstName: 'Maik',
+  lastName: 'Antunes',
+  portrait: '/images/maik.webp',
   handle: 'ant762',
   role: 'Fullstack Developer',
   title: 'ant762 — Fullstack Developer',
