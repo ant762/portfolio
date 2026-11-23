@@ -29,8 +29,11 @@ export function Hero() {
   const time = useLocalTime(site.timezone);
 
   useGSAP(
-    () => {
+    (_context, contextSafe) => {
       if (prefersReducedMotion()) return;
+      // contextSafe: tweens criados em eventos/timers também são revertidos na desmontagem.
+      const safe = <T extends (...args: never[]) => void>(fn: T): T =>
+        contextSafe ? contextSafe(fn) : fn;
 
       const chars = gsap.utils.toArray<HTMLElement>('[data-char]');
       const fades = gsap.utils.toArray<HTMLElement>('[data-hero-fade]');
@@ -82,20 +85,87 @@ export function Hero() {
         },
       });
 
-      // Parallax do mouse (só com ponteiro fino): retrato e nomes andam em sentidos opostos.
-      if (!hasFinePointer()) return;
+      // Glitch do retrato: fatias deslocadas + franja azul + piscada de contraste.
+      // Dispara sozinho a cada poucos segundos, ao passar o mouse e ao tocar na foto.
+      const portrait = rootRef.current?.querySelector<HTMLElement>('[data-hero-portrait]');
+      const base = '[data-glitch="base"]';
+      const ghostA = '[data-glitch="a"]';
+      const ghostB = '[data-glitch="b"]';
+      let busy = false;
+
+      const burst = safe(() => {
+        if (busy) return;
+        busy = true;
+        const band = () => {
+          const top = gsap.utils.random(0, 82);
+          const height = gsap.utils.random(3, 16);
+          return `inset(${top}% 0 ${100 - top - height}% 0)`;
+        };
+        const tl = gsap.timeline({
+          onComplete: () => {
+            busy = false;
+          },
+        });
+        for (let k = 0; k < 6; k++) {
+          const at = k * 0.055;
+          tl.set(ghostA, { autoAlpha: 1, clipPath: band(), x: gsap.utils.random(14, 40) }, at)
+            .set(ghostB, { autoAlpha: 1, clipPath: band(), x: gsap.utils.random(-40, -14) }, at)
+            .set(
+              base,
+              {
+                x: gsap.utils.random(-7, 7),
+                filter:
+                  k % 2
+                    ? 'grayscale(1) contrast(1.9) brightness(1.25)'
+                    : 'grayscale(1) contrast(1.12)',
+              },
+              at,
+            );
+        }
+        tl.set([ghostA, ghostB], { autoAlpha: 0 }).set(base, { x: 0, clearProps: 'filter' });
+      });
+
+      const loop = safe(() => {
+        burst();
+        gsap.delayedCall(gsap.utils.random(3.5, 7), loop);
+      });
+      gsap.delayedCall(2.2, loop);
+
+      portrait?.addEventListener('pointerenter', burst);
+      portrait?.addEventListener('pointerdown', burst);
+      const offGlitch = () => {
+        portrait?.removeEventListener('pointerenter', burst);
+        portrait?.removeEventListener('pointerdown', burst);
+      };
+
+      // Parallax e inclinação 3D do mouse (só com ponteiro fino): retrato e nomes andam em sentidos opostos.
+      if (!hasFinePointer()) return offGlitch;
+      gsap.set('[data-hero-depth]', { transformPerspective: 900 });
       const depthX = gsap.quickTo('[data-hero-depth]', 'x', { duration: 1.4, ease: 'power3' });
       const depthY = gsap.quickTo('[data-hero-depth]', 'y', { duration: 1.4, ease: 'power3' });
+      const tiltY = gsap.quickTo('[data-hero-depth]', 'rotationY', {
+        duration: 1.4,
+        ease: 'power3',
+      });
+      const tiltX = gsap.quickTo('[data-hero-depth]', 'rotationX', {
+        duration: 1.4,
+        ease: 'power3',
+      });
       const nameX = gsap.quickTo('[data-hero-name]', 'x', { duration: 1.4, ease: 'power3' });
       const onMove = (e: PointerEvent) => {
         const nx = e.clientX / window.innerWidth - 0.5;
         const ny = e.clientY / window.innerHeight - 0.5;
         depthX(nx * 28);
         depthY(ny * 16);
+        tiltY(nx * 9);
+        tiltX(-ny * 6);
         nameX(-nx * 44);
       };
       window.addEventListener('pointermove', onMove);
-      return () => window.removeEventListener('pointermove', onMove);
+      return () => {
+        window.removeEventListener('pointermove', onMove);
+        offGlitch();
+      };
     },
     { scope: rootRef, dependencies: [ready] },
   );
@@ -153,7 +223,7 @@ export function Hero() {
         <div className="absolute inset-x-0 bottom-0 z-10 flex justify-center">
           <div
             data-hero-portrait
-            className="relative aspect-[842/1052] h-[70svh] max-w-full md:h-[74svh]"
+            className="pointer-events-auto relative aspect-[842/1052] h-[70svh] max-w-full md:h-[74svh]"
           >
             <div
               data-hero-depth
@@ -164,12 +234,45 @@ export function Hero() {
               }}
             >
               <Image
+                data-glitch="base"
                 src={site.portrait}
                 alt={t.hero.portraitAlt}
                 fill
                 priority
                 sizes="(min-width: 768px) 70svh, 80vw"
-                className="object-contain object-bottom"
+                className="object-contain object-bottom contrast-[1.12] grayscale"
+              />
+              {/* Fantasmas do glitch: ficam invisíveis até o surto. */}
+              <Image
+                data-glitch="a"
+                src={site.portrait}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 70svh, 80vw"
+                className="pointer-events-none object-contain object-bottom opacity-0 mix-blend-screen [filter:grayscale(1)_sepia(1)_hue-rotate(185deg)_saturate(2.2)_brightness(1.2)]"
+              />
+              <Image
+                data-glitch="b"
+                src={site.portrait}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 70svh, 80vw"
+                className="pointer-events-none object-contain object-bottom opacity-0 mix-blend-screen brightness-150 grayscale"
+              />
+              {/* Linhas de varredura, recortadas pela silhueta. */}
+              <div
+                aria-hidden="true"
+                className="portrait-scan pointer-events-none absolute inset-0"
+                style={{
+                  maskImage: `url(${site.portrait})`,
+                  WebkitMaskImage: `url(${site.portrait})`,
+                  maskSize: 'contain',
+                  WebkitMaskSize: 'contain',
+                  maskPosition: 'center bottom',
+                  WebkitMaskPosition: 'center bottom',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                }}
               />
             </div>
           </div>
